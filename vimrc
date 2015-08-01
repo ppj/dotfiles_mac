@@ -87,7 +87,8 @@ ActivateAddons vim-snippets snipmate
 let g:mopkai_is_not_set_normal_ctermbg = 1
 colorscheme mopkai
 
-set encoding=utf-8        " nobomb disables the Ex mode (coz' i don't know what it's really used for)
+set encoding=utf-8
+nnoremap Q <nop>          " disable ex-mode
 set showcmd               " display incomplete commands
 set laststatus=2
 set t_Co=256
@@ -100,7 +101,7 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set list                        " highlight whitespace etc.
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -127,6 +128,16 @@ noremap <leader>d :Bd<CR>
 noremap <leader>df :Bd!<CR>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
+
+" Change windows easily
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Auto-resize splits if window is resized
+autocmd VimResized * :wincmd =
+
 noremap <leader>o :CtrlP<CR>
 " <leader>-x to cut in + buffer from visual mode
 vnoremap <leader>x "+x
