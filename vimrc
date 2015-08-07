@@ -34,7 +34,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-bundler'
@@ -51,6 +50,9 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'mileszs/ack.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
+Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
+Plugin 'benmills/vimux'       " Interact with tmux from vim
+Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux (may render vim-rspec useless)
 " SnipMate Plugin
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -118,8 +120,6 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-autocmd BufWritePost ~/.vimrc so ~/.vimrc
-
 nnoremap <Space> <Nop>
 let mapleader=" "
 noremap <leader>l :bn<CR>
@@ -153,17 +153,19 @@ inoremap <C-a> <esc>:%y+"<CR>i
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
 
-" RSpec.vim mappings
-let g:rspec_command = "!clear && zeus rspec {spec}"
-map <leader>t :call RunCurrentSpecFile()<CR>
-map <leader>n :call RunNearestSpec()<CR>
-map <leader>p :call RunLastSpec()<CR>
-map <leader>a :call RunAllSpecs()<CR>
+" vim-vroom mappings
+let g:vroom_map_keys=0
+let g:vroom_use_vimux=1
+let g:vroom_use_tmux=1
+let g:vroom_use_zeus=1
+
+map <leader>tn :VroomRunTestFile<CR>
+map <leader>tt :VroomRunNearestTest<CR>
+map <leader>tl :VroomRunLastTest<CR>
 
 " mappings for running cukes
 map <leader>cf :w<cr>:!zeus cucumber %<cr>                          " current cucumber file
 map <leader>cc :w<cr>:exe "!zeus cucumber %" . ":" . line(".")<cr>  " current cucumber scenario
-
 
 let g:airline#extensions#tabline#enabled=1          " Show buffers as tabs
 " let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
@@ -200,3 +202,7 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" Search mappings
+map <C-F> y:Ack! '<C-r>0'
+vnoremap // y/<C-R>"<CR>  " search current buffer for selection
