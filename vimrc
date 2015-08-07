@@ -155,11 +155,12 @@ set guioptions+=a keymodel=startsel,stopsel
 
 " vim-vroom mappings
 let g:vroom_map_keys=0
-let g:vroom_use_vimux=1
 let g:vroom_use_tmux=1
+let g:vroom_use_vimux=1
 let g:vroom_use_zeus=1
+let g:vroom_cucumber_path='cucumber'
 
-map <leader>tn :VroomRunTestFile<CR>
+map <leader>tf :VroomRunTestFile<CR>
 map <leader>tt :VroomRunNearestTest<CR>
 map <leader>tl :VroomRunLastTest<CR>
 
@@ -204,5 +205,5 @@ endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search mappings
-map <C-F> y:Ack! '<C-r>0'
+vnoremap <C-S-f> y:Ack! '<C-r>0'
 vnoremap // y/<C-R>"<CR>  " search current buffer for selection
