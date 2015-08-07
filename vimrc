@@ -153,21 +153,16 @@ inoremap <C-a> <esc>:%y+"<CR>i
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
 
-" vim-vroom mappings
+" vim-vroom settings/mappings
 let g:vroom_map_keys=0
-let g:vroom_use_tmux=1
 let g:vroom_use_vimux=1
-let g:vroom_use_zeus=1
-let g:vroom_cucumber_path='cucumber'
+let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
 
 map <leader>tf :VroomRunTestFile<CR>
 map <leader>tt :VroomRunNearestTest<CR>
 map <leader>tl :VroomRunLastTest<CR>
 
-" mappings for running cukes
-map <leader>cf :w<cr>:!zeus cucumber %<cr>                          " current cucumber file
-map <leader>cc :w<cr>:exe "!zeus cucumber %" . ":" . line(".")<cr>  " current cucumber scenario
-
+" airline (status bar) settings
 let g:airline#extensions#tabline#enabled=1          " Show buffers as tabs
 " let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
 let g:airline_theme='powerlineish'
