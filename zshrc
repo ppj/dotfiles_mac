@@ -76,9 +76,6 @@ export VISUAL=$EDITOR
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# set aliases
-source ~/.oh-my-zsh/lib/alias.zsh
-
 # User Ctrl-z to switch back to Vim
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -101,5 +98,31 @@ bindkey '^R' history-incremental-search-backward
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# set aliases
+# clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
+alias cls='printf "\ec"'
+
+# aliases for Tmux
+alias tmux='tmux -2'
+alias ta='tmux attach -t'
+alias tnew='tmux new -s'
+alias tls='tmux ls'
+alias tkill='tmux kill-session -t'
+
+# convenience aliases for editing configs
+alias ev='vim ~/dotfiles/vimrc'
+alias et='vim ~/dotfiles/tmux.conf'
+alias ez='vim ~/dotfiles/zshrc'
+
+# zeus aliases
+alias zs='zeus start'
+alias zc='zeus console'
+alias zcu='zeus cucumber'
+
+# other custom aliases
+# alias mvim='mvim -v'
+alias fs='foreman start'
+
+#######################################################################
 # Add boxen env to the shell
 source /opt/boxen/env.sh
