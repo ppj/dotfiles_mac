@@ -129,16 +129,21 @@ noremap <leader>df :Bd!<CR>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 
-" Change windows easily
+" Change window-splits easily
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
 " Auto-resize splits if window is resized
 autocmd VimResized * :wincmd =
 
-noremap <leader>o :CtrlP<CR>
+" CtrlP mappings
+noremap <leader>oo :CtrlP<CR>         " open file in the project root
+noremap <leader>oh :CtrlP %:p:h<CR>   " open file in the current file's path
+noremap <leader>ob :CtrlPBuffer<CR>   " open a buffer in the current split
+noremap <leader>ou :CtrlPMRU<CR>      " open a Most Recently Used file
+noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
+
 " <leader>-x to cut in + buffer from visual mode
 vnoremap <leader>x "+x
 " <leader>-c to copy in + buffer from visual mode
