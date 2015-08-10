@@ -139,10 +139,12 @@ autocmd VimResized * :wincmd =
 
 " CtrlP mappings
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
-noremap <leader>oh :CtrlP %:p:h<CR>   " open file in the current file's path
-noremap <leader>ob :CtrlPBuffer<CR>   " open a buffer in the current split
-noremap <leader>ou :CtrlPMRU<CR>      " open a Most Recently Used file
+noremap <leader>oh :CtrlP %:p:h<CR>   " Open (another file) Here, i.e. in the current file's folder
+noremap <leader>ob :CtrlPBuffer<CR>   " Open (existing) Buffer
+noremap <leader>ou :CtrlPMRU<CR>      " Open Most-recently-used file
 noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
+" Open explorer in current File's folder (using vim's native explorer - netrw)
+noremap <leader>of :Explore<CR>
 
 " <leader>-x to cut in + buffer from visual mode
 vnoremap <leader>x "+x
