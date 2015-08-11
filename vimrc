@@ -129,6 +129,9 @@ noremap <leader>df :Bd!<CR>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 
+" common tasks
+noremap <leader>ee :source ~/.vimrc<CR>   " reload vimrc
+
 " Change window-splits easily
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -157,6 +160,9 @@ inoremap <C-v> <esc>"+p<CR>i
 " Ctrl-a to select all & copy in + buffer
 noremap  <C-a> :%y+"<CR>
 inoremap <C-a> <esc>:%y+"<CR>i
+
+:nmap <C-S-p> :let @* = expand('%:p')<CR>     " Copy full file path to clipboard
+
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
 
@@ -206,6 +212,8 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-" Search mappings
+" Search mappings/settings
+let g:ack_default_options =
+  \ " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ingore-dir tmp --ignore-dir log"
 vnoremap <C-S-f> y:Ack! '<C-r>0'
 vnoremap // y/<C-R>"<CR>  " search current buffer for selection
