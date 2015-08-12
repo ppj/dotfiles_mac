@@ -102,6 +102,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
 alias cls='printf "\ec"'
 
+# Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
+source ~/.bin/tmuxinator.zsh
+
 # aliases for Tmux
 alias tmux='tmux -2'
 alias ta='tmux attach -t'
