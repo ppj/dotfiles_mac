@@ -3,6 +3,7 @@ filetype plugin indent on     " required
 syntax enable
 set hidden                    " manage multiple buffers effectively
 set mouse=a                   " allow mouse to set cursor position
+set ruler
 runtime macros/matchit.vim    " extend % matching to if/elsif/else/end and more
 set wildmenu                  " file/command completion shows options...
 set wildmode=list:longest     " ...only up to the point of ambiguity
@@ -214,6 +215,6 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search mappings/settings
 let g:ack_default_options =
-  \ " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ingore-dir tmp --ignore-dir log"
+  \ " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
 vnoremap <C-S-f> y:Ack! '<C-r>0'
 vnoremap // y/<C-R>"<CR>  " search current buffer for selection
