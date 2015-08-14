@@ -54,6 +54,7 @@ Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in 
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
 Plugin 'benmills/vimux'       " Interact with tmux from vim
 Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux (may render vim-rspec useless)
+Plugin 'unblevable/quick-scope'   " Move cursor to any word quickly
 " SnipMate Plugin
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
