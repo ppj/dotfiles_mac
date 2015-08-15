@@ -12,34 +12,53 @@ call vundle#begin()
 " first, let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'tpope/vim-rails'
+
+" Functionality
+Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-repeat'         " repeat last Plugin command with '.'
+Plugin 'godlygeek/tabular'        " code alignment
+Plugin 'moll/vim-bbye'            " Close buffer without closing the window using :Bdelete
+Plugin 'tpope/vim-endwise'        " 'end' most 'do's wisely
+Plugin 'terryma/vim-multiple-cursors'
+
+" Look & Feel Plugins
 Plugin 'tpope/vim-haml'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'godlygeek/tabular'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
-Plugin 'moll/vim-bbye'            " Close buffer without closing the window using :Bdelete
-Plugin 'terryma/vim-expand-region'
-Plugin 'mileszs/ack.vim'
-Plugin 'airblade/vim-gitgutter'
+
+" Browsing & File-search
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
+Plugin 'mileszs/ack.vim'
+
+" Motion
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'unblevable/quick-scope'   " Move cursor to any word quickly
+
+" Git
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" Ruby (& Rails)
+Plugin 'tpope/vim-rails'
+Plugin 'vim-scripts/blockle.vim'        " toggle ruby block styles between {} and do/end
+Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
+
+" Tmux & co.
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
 Plugin 'benmills/vimux'       " Interact with tmux from vim
-Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux (may render vim-rspec useless)
-Plugin 'unblevable/quick-scope'   " Move cursor to any word quickly
+Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
+
 " SnipMate Plugin
+Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'terryma/vim-multiple-cursors'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " ==========================================================================================================
