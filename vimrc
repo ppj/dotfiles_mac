@@ -1,36 +1,16 @@
-set nocompatible              " choose no compatibility with legacy vi
-filetype plugin indent on     " required
-syntax enable
-set hidden                    " manage multiple buffers effectively
-set mouse=a                   " allow mouse to set cursor position
-set ruler
-runtime macros/matchit.vim    " extend % matching to if/elsif/else/end and more
-set wildmenu                  " file/command completion shows options...
-set wildmode=list:longest     " ...only up to the point of ambiguity
-set dir=/tmp                  " store swp files in this folder (it needs to exist)
-set splitbelow                " horizontal split with new window below the current window
-set splitright                " vertical split with new window to the right side of current window
-
-" clear all previous bindings
-" autocmd! "this is causing syntax highlighting issues for some reason
-
-" move cursor up/down by screen lines instead of real lines
-nmap k gk
-nmap j gj
-
+" ==========================================================================================================
+" Plugins (Vundle Stuff)
+" ==========================================================================================================
+set nocompatible              " choose no compatibility with legacy vi (required by Vundle)
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+" first, let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" MISSING
-
 " Keep Plugin commands between vundle#begin/end.
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'tpope/vim-rails'
@@ -62,6 +42,50 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'terryma/vim-multiple-cursors'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+" ==========================================================================================================
+
+filetype plugin indent on       " required
+syntax enable
+runtime macros/matchit.vim      " extend % matching to if/elsif/else/end and more
+autocmd VimResized * :wincmd =  " Auto-resize splits if window is resized
+
+set hidden                      " manage multiple buffers effectively
+set mouse=a                     " allow mouse to set cursor position
+set ruler
+set wildmenu                    " file/command completion shows options...
+set wildmode=list:longest       " ...only up to the point of ambiguity
+set dir=/tmp                    " store swp files in this folder (it needs to exist)
+set splitbelow                  " horizontal split with new window below the current window
+set splitright                  " vertical split with new window to the right side of current window
+set encoding=utf-8
+set showcmd                     " display incomplete commands
+set laststatus=2
+set t_Co=256
+set cursorline                  " highlight current line
+set number                      " show line numbers
+
+"" Whitespace
+set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set expandtab                   " use spaces, not tabs (optional)
+set backspace=indent,eol,start  " backspace through everything in insert mode
+set list                        " highlight whitespace etc.
+set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+
+" Select text with shift+arrows in insert mode
+set guioptions+=a keymodel=startsel,stopsel
+
+hi CursorLine cterm=bold ctermbg=235
+
+" move cursor up/down by screen lines instead of real lines
+nmap k gk
+nmap j gj
+
 let g:indentLine_color_term = 237
 
 fun! SetupVAM()
@@ -87,41 +111,22 @@ endfun
 call SetupVAM()
 ActivateAddons vim-snippets snipmate
 
-" set colorscheme
 let g:mopkai_is_not_set_normal_ctermbg = 1
 colorscheme mopkai
 
-set encoding=utf-8
-nnoremap Q <nop>          " disable ex-mode
-set showcmd               " display incomplete commands
-set laststatus=2
-set t_Co=256
-set cursorline                          " highlight current line
-hi CursorLine cterm=bold ctermbg=235
-set number                              " show line numbers
-
-"" Whitespace
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set list                        " highlight whitespace etc.
-set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
-
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
 
 " Delete trailing white space(s) before saving buffer
 fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+nnoremap Q <nop>          " disable ex-mode
+
+" buffer actions mappings
 nnoremap <Space> <Nop>
 let mapleader=" "
 noremap <leader>l :bn<CR>
@@ -139,47 +144,34 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" Auto-resize splits if window is resized
-autocmd VimResized * :wincmd =
 
 " CtrlP mappings
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
-noremap <leader>oh :CtrlP %:p:h<CR>   " Open (another file) Here, i.e. in the current file's folder
-noremap <leader>ob :CtrlPBuffer<CR>   " Open (existing) Buffer
-noremap <leader>ou :CtrlPMRU<CR>      " Open Most-recently-used file
+noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
+noremap <leader>ob :CtrlPBuffer<CR>   " open (existing) Buffer
+noremap <leader>ou :CtrlPMRU<CR>      " open Most-recently-used file
 noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
-" Open explorer in current File's folder (using vim's native explorer - netrw)
-noremap <leader>of :Explore<CR>
+noremap <leader>of :Explore<CR>       " open explorer in current File's folder (using vim's native explorer - netrw)
 
-" <leader>-x to cut in + buffer from visual mode
-vnoremap <leader>x "+x
-" <leader>-c to copy in + buffer from visual mode
-vnoremap <leader>c "+y
-" <leader>-v to paste from the + register in cmd mode
-noremap <leader>v "+p
-" Ctrl-v to paste from the + register while editing
-inoremap <C-v> <esc>"+p<CR>i
-" Ctrl-a to select all & copy in + buffer
-noremap  <C-a> :%y+"<CR>
-inoremap <C-a> <esc>:%y+"<CR>i
-
-:nmap <C-S-p> :let @* = expand('%:p')<CR>     " Copy full file path to clipboard
-
-" Select text with shift+arrows in insert mode
-set guioptions+=a keymodel=startsel,stopsel
+" clipboard copy/paste
+vnoremap <leader>x "+x                        " cut in visual mode
+vnoremap <leader>c "+y                        " copy in visual mode
+noremap <leader>v "+p                         " paste in command mode
+inoremap <C-v> <esc>"+p<CR>i                  " paste in insert mode
+noremap  <C-a> :%y+"<CR>                      " copy all in normal mode
+inoremap <C-a> <esc>:%y+"<CR>i                " copy all in insert mode
+nmap <C-S-p> :let @* = expand('%:p')<CR>      " copy full file path
 
 " vim-vroom settings/mappings
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
-
 map <leader>tf :VroomRunTestFile<CR>
 map <leader>tt :VroomRunNearestTest<CR>
 map <leader>tl :VroomRunLastTest<CR>
 
 " airline (status bar) settings
 let g:airline#extensions#tabline#enabled=1          " Show buffers as tabs
-" let g:airline#extensions#tabline#fnamemod = ':t'  " Show just the filename
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -190,7 +182,6 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 " Show NERDTREE automatically on opening vim
-" autocmd vimenter * NERDTree
 let NERDTreeShowHidden=1
 map <leader>nn :NERDTreeFind<CR><C-W>p    " find current file in NERDTree
 map <leader>nc :NERDTreeClose<CR>
