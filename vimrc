@@ -48,6 +48,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-scripts/blockle.vim'        " toggle ruby block styles between {} and do/end
 Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
 
 " Tmux & co.
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
@@ -70,7 +72,6 @@ autocmd VimResized * :wincmd =  " Auto-resize splits if window is resized
 
 set hidden                      " manage multiple buffers effectively
 set mouse=a                     " allow mouse to set cursor position
-set ruler
 set wildmenu                    " file/command completion shows options...
 set wildmode=list:longest       " ...only up to the point of ambiguity
 set dir=/tmp                    " store swp files in this folder (it needs to exist)
@@ -194,7 +195,6 @@ let g:airline#extensions#tabline#enabled=1          " Show buffers as tabs
 let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_section_z=''
 
 " Git-Gutter settings
 let g:gitgutter_realtime = 0
