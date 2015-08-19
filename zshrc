@@ -122,9 +122,9 @@ alias zs='zeus start'
 alias zc='zeus console'
 alias zcu='zeus cucumber'
 
-# other custom aliases
-# alias mvim='mvim -v'
+# workflow aliases
 alias fs='foreman start'
+alias syncm='git checkout master && git pull && rake db:migrate db:test:prepare'
 
 #######################################################################
 # Add boxen env to the shell
