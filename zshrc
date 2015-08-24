@@ -125,6 +125,7 @@ alias zcu='zeus cucumber'
 # workflow aliases
 alias fs='foreman start'
 alias syncm='git checkout master && git pull && rake db:migrate db:test:prepare'
+alias bk='echo y | git buildkite'
 
 #######################################################################
 # Add boxen env to the shell
