@@ -33,7 +33,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'             " replacement for 153% of the uses of Ack
 
 " Motion
 Plugin 'Lokaltog/vim-easymotion'
@@ -165,13 +166,17 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" CtrlP mappings
+" CtrlP mappings/settings
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
 noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
 noremap <leader>ob :CtrlPBuffer<CR>   " open (existing) Buffer
 noremap <leader>ou :CtrlPMRU<CR>      " open Most-recently-used file
 noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
 noremap <leader>of :Explore<CR>       " open explorer in current File's folder (using vim's native explorer - netrw)
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+" Without --hidden, it never finds .travis.yml since it starts with a dot
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
 
 " clipboard copy/paste
 vnoremap <leader>x "+x                        " cut in visual mode
@@ -180,7 +185,7 @@ noremap <leader>v "+p                         " paste in command mode
 inoremap <C-v> <esc>"+p<CR>i                  " paste in insert mode
 noremap  <C-a> :%y+"<CR>                      " copy all in normal mode
 inoremap <C-a> <esc>:%y+"<CR>i                " copy all in insert mode
-nmap <C-S-p> :let @* = expand('%:p')<CR>      " copy full file path
+nnoremap <C-S-p> :let @* = expand('%:p')<CR>  " copy full file path
 
 " vim-vroom settings/mappings
 let g:vroom_map_keys=0
@@ -225,7 +230,6 @@ endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search mappings/settings
-let g:ack_default_options =
-  \ " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
-vnoremap <C-S-f> y:Ack! '<C-r>0'
+" let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
+vnoremap <C-S-f> y:Ag! '<C-r>0'
 vnoremap // y/<C-R>"<CR>  " search current buffer for selection
