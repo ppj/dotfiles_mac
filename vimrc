@@ -92,11 +92,13 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 set list                        " highlight whitespace etc.
 set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
 
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
+"  Searching
+set hlsearch            "  highlight matches
+set incsearch           "  incremental searching
+set ignorecase          "  searches are case insensitive...
+set smartcase           "  ... unless they contain at least one capital letter
+vnoremap * y/<C-R>"<CR> "  search current buffer for selection
+vnoremap # y?<C-R>"<CR> "  search current buffer for selection
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
@@ -166,6 +168,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" who needs folding?!
+set nofoldenable
+
 " CtrlP mappings/settings
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
 noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
@@ -229,7 +234,14 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-" Search mappings/settings
+" Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
 vnoremap <C-S-f> y:Ag! '<C-r>0'
-vnoremap // y/<C-R>"<CR>  " search current buffer for selection
+
+" Some commonly used Tabular mappings
+if exists(":Tabularize")
+  map <leader>a:  :Tabularize /:\zs<CR>       " Align everything after a ':'
+  map <leader>a=  :Tabularize /=<CR>          " Align everything around '='
+  map <leader>a|  :Tabularize /|<CR>          " Align everything around '|'
+  map <leader>a=> :Tabularize /=><CR>         " Align everything around '=>'
+endif
