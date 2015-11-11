@@ -22,6 +22,7 @@ Plugin 'godlygeek/tabular'        " code alignment
 Plugin 'moll/vim-bbye'            " Close buffer without closing the window using :Bdelete
 Plugin 'tpope/vim-endwise'        " 'end' most 'do's wisely
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jiangmiao/auto-pairs'     " auto complete matching pair
 
 " Look & Feel Plugins
 Plugin 'tpope/vim-haml'
