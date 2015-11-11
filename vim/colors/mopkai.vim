@@ -240,8 +240,8 @@ else
 
 
     hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
-    hi VisualNOS                   ctermbg=238
-    hi Visual                      ctermbg=234
+    hi VisualNOS                   ctermbg=17
+    hi Visual                      ctermbg=17
     hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
     hi WildMenu        ctermfg=81  ctermbg=16
 
