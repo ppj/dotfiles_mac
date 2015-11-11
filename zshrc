@@ -127,6 +127,12 @@ alias fs='foreman start'
 alias syncm='git checkout master && git pull && bundle install && rake db:migrate db:test:prepare'
 alias bk='echo y | git buildkite'
 
+# git aliases
+alias gls='git status && git branch'
+
+# vim
+alias vime='vim -u essential.vim'
+
 #######################################################################
 # Add boxen env to the shell
 source /opt/boxen/env.sh
