@@ -8,7 +8,10 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
+
+# BROKEN BROKEN BROKEN
 files="bash_profile tmux.conf vimrc vim/colors zshrc oh-my-zsh/themes/ppj.zsh-theme"    # list of files/folders to symlink in homedir
+# BROKEN BROKEN BROKEN
 
 ##########
 
