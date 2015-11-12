@@ -86,14 +86,14 @@ set t_Co=256
 set cursorline                  " highlight current line
 set number                      " show line numbers
 
-"" Whitespace
+" Whitespace
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set list                        " highlight whitespace etc.
 set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
 
-"  Searching
+" Searching
 set hlsearch            "  highlight matches
 set incsearch           "  incremental searching
 set ignorecase          "  searches are case insensitive...
@@ -162,6 +162,7 @@ noremap <leader>q :q<CR>
 
 " common tasks
 noremap <leader>ee :source ~/.vimrc<CR>   " reload vimrc
+nnoremap : q:i
 
 " Change window-splits easily
 nnoremap <C-h> <C-w>h
@@ -197,9 +198,9 @@ nnoremap <C-S-p> :let @* = expand('%:p')<CR>  " copy full file path
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
-map <leader>tf :VroomRunTestFile<CR>
-map <leader>tt :VroomRunNearestTest<CR>
-map <leader>tl :VroomRunLastTest<CR>
+noremap <leader>tf :VroomRunTestFile<CR>
+noremap <leader>tt :VroomRunNearestTest<CR>
+noremap <leader>tl :VroomRunLastTest<CR>
 
 " airline (status bar) settings
 let g:airline#extensions#tabline#enabled=1          " Show buffers as tabs
@@ -237,12 +238,13 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
-vnoremap <C-S-f> y:Ag! '<C-r>0'
+vmap <C-S-f> y:Ag! '<C-r>0'
+nmap <C-S-f> :Ag!
 
 " Some commonly used Tabular mappings
 if exists(":Tabularize")
-  map <leader>a:  :Tabularize /:\zs<CR>       " Align everything after a ':'
-  map <leader>a=  :Tabularize /=<CR>          " Align everything around '='
-  map <leader>a|  :Tabularize /|<CR>          " Align everything around '|'
-  map <leader>a=> :Tabularize /=><CR>         " Align everything around '=>'
+  noremap <leader>a:  :Tabularize /:\zs<CR>       " Align everything after a ':'
+  noremap <leader>a=  :Tabularize /=<CR>          " Align everything around '='
+  noremap <leader>a|  :Tabularize /|<CR>          " Align everything around '|'
+  noremap <leader>a=> :Tabularize /=><CR>         " Align everything around '=>'
 endif
