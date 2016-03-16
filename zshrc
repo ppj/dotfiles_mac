@@ -7,7 +7,7 @@ export ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # TEST 'e*' and onwards - PPJ
-ZSH_THEME="ppj"
+ZSH_THEME="ppj_wedisagree"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -122,6 +122,8 @@ alias ez='vim ~/dotfiles/zshrc'
 alias zs='zeus start'
 alias zc='zeus console'
 alias zcu='zeus cucumber'
+alias zr='zeus rake'
+alias zru='zeus runner'
 
 # workflow aliases
 alias fs='foreman start'
@@ -130,6 +132,8 @@ alias bk='echo y | git buildkite'
 
 # git aliases
 alias gls='git status && git branch'
+alias use_latest_master='git fetch && git rebase origin/master'
+alias FORCE_push_and_build='git push --force && echo y | git buildkite'
 
 # vim
 alias vime='vim -u essential.vim'
