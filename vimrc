@@ -86,6 +86,8 @@ set t_Co=256
 set cursorline                  " highlight current line
 set number                      " show line numbers
 
+let mapleader=" "
+
 " Whitespace
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
@@ -100,6 +102,10 @@ set ignorecase          "  searches are case insensitive...
 set smartcase           "  ... unless they contain at least one capital letter
 vnoremap * y/<C-R>"<CR> "  search current buffer for selection
 vnoremap # y?<C-R>"<CR> "  search current buffer for selection
+
+" vim-rails
+nnoremap <leader>aa :A<CR>   "  alternate file
+nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
@@ -152,7 +158,6 @@ nnoremap Q <nop>          " disable ex-mode
 
 " buffer actions mappings
 nnoremap <Space> <Nop>
-let mapleader=" "
 noremap <leader>l :bn<CR>
 noremap <leader>h :bp<CR>
 noremap <leader>d :Bd<CR>
@@ -160,15 +165,11 @@ noremap <leader>df :Bd!<CR>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 
-" common tasks
-noremap <leader>ee :source ~/.vimrc<CR>   " reload vimrc
-nnoremap : q:i
-
 " Change window-splits easily
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " who needs folding?!
 set nofoldenable
@@ -214,8 +215,8 @@ let g:gitgutter_eager = 0
 
 " Show NERDTREE automatically on opening vim
 let NERDTreeShowHidden=1
-map <leader>nn :NERDTreeFind<CR><C-W>p    " find current file in NERDTree
-map <leader>nc :NERDTreeClose<CR>
+noremap <leader>nn :NERDTreeFind<CR>    " find current file in NERDTree
+noremap <leader>nc :NERDTreeClose<CR>
 " Close vim if only window open is NERDTREE
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -238,13 +239,23 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
-vmap <C-S-f> y:Ag! '<C-r>0'
-nmap <C-S-f> :Ag!
+vmap <C-S-f> y:Ag! '<C-r>0'<Esc>
+nmap <C-S-f> yiw:Ag! '<C-r>0'<Esc>
 
 " Some commonly used Tabular mappings
 if exists(":Tabularize")
   noremap <leader>a:  :Tabularize /:\zs<CR>       " Align everything after a ':'
   noremap <leader>a=  :Tabularize /=<CR>          " Align everything around '='
   noremap <leader>a|  :Tabularize /|<CR>          " Align everything around '|'
-  noremap <leader>a=> :Tabularize /=><CR>         " Align everything around '=>'
 endif
+
+" common tasks
+noremap <leader>ee :source ~/.vimrc<CR>   " reload vimrc
+nnoremap : q:i
+
+" easy edit
+" move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
+nnoremap ∆ :m .+1<CR>           # ∆ is Alt+j (http://stackoverflow.com/a/15399297)
+nnoremap ˚ :m .-2<CR>           # ˚ is Alt+k (http://stackoverflow.com/a/15399297)
+vnoremap ∆ :m '>+1<CR>gv
+vnoremap ˚ :m '<-2<CR>gv
