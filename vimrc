@@ -26,7 +26,8 @@ Plugin 'jiangmiao/auto-pairs'     " auto complete matching pair
 
 " Look & Feel Plugins
 Plugin 'tpope/vim-haml'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
 
@@ -57,11 +58,6 @@ Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
 Plugin 'benmills/vimux'       " Interact with tmux from vim
 Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
-
-" SnipMate Plugin
-Plugin 'garbas/vim-snipmate'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -107,6 +103,11 @@ vnoremap # y?<C-R>"<CR> "  search current buffer for selection
 nnoremap <leader>aa :A<CR>   "  alternate file
 nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 
+" fugitive
+nnoremap <leader>gg :Gsta<CR>   " git status
+nnoremap <leader>gd :Gdiff<CR>  " git diff current file
+nnoremap <leader>gr :Gread<CR>  " git checkout current file
+
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
 
@@ -117,29 +118,6 @@ nmap k gk
 nmap j gj
 
 let g:indentLine_color_term = 237
-
-fun! SetupVAM()
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
-
-  " Force your ~/.vim/after directory to be last in &rtp always:
-  " let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
-
-  " most used options you may want to use:
-  " let c.log_to_buf = 1
-  " let c.auto_install = 0
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-        \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-  endif
-
-  " This provides the VAMActivate command, you could be passing plugin names, too
-  call vam#ActivateAddons([], {})
-endfun
-call SetupVAM()
-ActivateAddons vim-snippets snipmate
 
 let g:mopkai_is_not_set_normal_ctermbg = 1
 colorscheme mopkai
@@ -164,6 +142,7 @@ noremap <leader>d :Bd<CR>
 noremap <leader>df :Bd!<CR>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
+noremap <leader>e :e<CR>    " reload file
 
 " Change window-splits easily
 noremap <C-h> <C-w>h
@@ -199,6 +178,7 @@ nnoremap <C-S-p> :let @* = expand('%:p')<CR>  " copy full file path
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
+let g:vroom_ignore_color_flag=1
 noremap <leader>tf :VroomRunTestFile<CR>
 noremap <leader>tt :VroomRunNearestTest<CR>
 noremap <leader>tl :VroomRunLastTest<CR>
@@ -213,7 +193,7 @@ let g:airline_right_sep=''
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
-" Show NERDTREE automatically on opening vim
+" NERDTREE mappings & settings
 let NERDTreeShowHidden=1
 noremap <leader>nn :NERDTreeFind<CR>    " find current file in NERDTree
 noremap <leader>nc :NERDTreeClose<CR>
