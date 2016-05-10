@@ -18,7 +18,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-repeat'         " repeat last Plugin command with '.'
-Plugin 'godlygeek/tabular'        " code alignment
+Plugin 'godlygeek/tabular'        " code alignment (this needs to come before vim-markdown)
 Plugin 'moll/vim-bbye'            " Close buffer without closing the window using :Bdelete
 Plugin 'tpope/vim-endwise'        " 'end' most 'do's wisely
 Plugin 'terryma/vim-multiple-cursors'
@@ -35,7 +35,6 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
-" Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'             " replacement for 153% of the uses of Ack
 
 " Motion
@@ -200,6 +199,9 @@ noremap <leader>nc :NERDTreeClose<CR>
 " Close vim if only window open is NERDTREE
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" vim-markdown settings
+let vim_markdown_folding_disabled=1
+let vim_markdown_conceal=0
 " v to expand selection and Shift-v to shrink selection
 vmap v <Plug>(expand_region_expand)
 vmap <S-v> <Plug>(expand_region_shrink)
