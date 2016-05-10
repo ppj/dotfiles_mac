@@ -127,6 +127,7 @@ alias zru='zeus runner'
 
 # workflow aliases
 alias fs='foreman start'
+alias sync='bundle install && rake db:migrate db:test:prepare'
 alias syncm='git checkout master && git pull && bundle install && rake db:migrate db:test:prepare'
 alias bk='echo y | git buildkite'
 
