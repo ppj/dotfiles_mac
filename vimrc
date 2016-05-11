@@ -85,6 +85,12 @@ set t_Co=256
 set cursorline                  " highlight current line
 set number                      " show line numbers
 
+" highlight lines longer than 120 chars (http://stackoverflow.com/a/10993757/3444618)
+augroup vimrc_autocmds
+  autocmd BufEnter *.*rb highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  autocmd BufEnter *.*rb match OverLength /\%>120v.\+/
+augroup END
+
 let mapleader=" "
 
 " Whitespace
