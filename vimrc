@@ -177,11 +177,12 @@ let g:ctrlp_use_caching = 0
 " clipboard copy/paste
 vnoremap <leader>x "+x                        " cut in visual mode
 vnoremap <leader>c "+y                        " copy in visual mode
-noremap <leader>v "+p                         " paste in command mode
-inoremap <C-v> <esc>"+p<CR>i                  " paste in insert mode
 noremap  <C-a> :%y+"<CR>                      " copy all in normal mode
-inoremap <C-a> <esc>:%y+"<CR>i                " copy all in insert mode
-nnoremap <C-S-p> :let @* = expand('%:p')<CR>  " copy full file path
+noremap <leader>v "+p                         " paste in command mode
+inoremap <C-v> <esc>"+pi                      " paste in insert mode
+
+" copy file path to clipboard
+nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
 
 " vim-vroom settings/mappings
 let g:vroom_map_keys=0
