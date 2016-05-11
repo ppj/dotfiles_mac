@@ -58,6 +58,10 @@ Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits wit
 Plugin 'benmills/vimux'       " Interact with tmux from vim
 Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
 
+" Elixir (& co)
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " ==========================================================================================================
