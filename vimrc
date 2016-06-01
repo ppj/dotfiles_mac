@@ -39,7 +39,6 @@ Plugin 'rking/ag.vim'             " replacement for 153% of the uses of Ack
 
 " Motion
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'unblevable/quick-scope'   " Move cursor to any word quickly
 
 " Git
 Plugin 'tpope/vim-fugitive.git'
@@ -86,10 +85,8 @@ set cursorline                  " highlight current line
 set number                      " show line numbers
 
 " highlight lines longer than 120 chars (http://stackoverflow.com/a/10993757/3444618)
-augroup vimrc_autocmds
-  autocmd BufEnter *.*rb highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-  autocmd BufEnter *.*rb match OverLength /\%>120v.\+/
-augroup END
+highlight ColorColumn ctermbg=DarkGrey
+set colorcolumn=120
 
 let mapleader=" "
 
