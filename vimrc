@@ -112,7 +112,7 @@ nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 " fugitive
 nnoremap <leader>gg :Gsta<CR>   " git status
 nnoremap <leader>gd :Gdiff<CR>  " git diff current file
-nnoremap <leader>gr :Gread<CR>  " git checkout current file
+nnoremap <leader>gb :Gblame<CR> " git blame current file
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
@@ -245,7 +245,5 @@ nnoremap : q:i
 
 " easy edit
 " move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
-nnoremap ∆ :m .+1<CR>           # ∆ is Alt+j (http://stackoverflow.com/a/15399297)
-nnoremap ˚ :m .-2<CR>           # ˚ is Alt+k (http://stackoverflow.com/a/15399297)
 vnoremap ∆ :m '>+1<CR>gv
 vnoremap ˚ :m '<-2<CR>gv
