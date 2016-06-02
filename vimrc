@@ -85,8 +85,7 @@ set cursorline                  " highlight current line
 set number                      " show line numbers
 
 " highlight lines longer than 120 chars (http://stackoverflow.com/a/10993757/3444618)
-highlight ColorColumn ctermbg=DarkGrey
-set colorcolumn=120
+set colorcolumn=121
 
 let mapleader=" "
 
@@ -116,8 +115,6 @@ nnoremap <leader>gb :Gblame<CR> " git blame current file
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
-
-hi CursorLine cterm=bold ctermbg=235
 
 " move cursor up/down by screen lines instead of real lines
 nmap k gk
