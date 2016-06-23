@@ -84,7 +84,7 @@ set t_Co=256
 set cursorline                  " highlight current line
 set number                      " show line numbers
 
-" highlight lines longer than 120 chars (http://stackoverflow.com/a/10993757/3444618)
+" highligh column # 121 (line too long)
 set colorcolumn=121
 
 let mapleader=" "

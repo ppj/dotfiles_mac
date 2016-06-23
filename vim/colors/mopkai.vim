@@ -246,7 +246,7 @@ else
     hi WildMenu        ctermfg=81  ctermbg=16
 
     hi CursorColumn                ctermbg=236
-    hi ColorColumn                 ctermbg=234
+    hi ColorColumn                 ctermbg=237
     hi LineNr          None
     hi LineNr          ctermfg=250
     hi NonText         ctermfg=59
