@@ -109,9 +109,9 @@ nnoremap <leader>aa :A<CR>   "  alternate file
 nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 
 " fugitive
-nnoremap <leader>gg :Gsta<CR>   " git status
-nnoremap <leader>gd :Gdiff<CR>  " git diff current file
-nnoremap <leader>gb :Gblame<CR> " git blame current file
+nnoremap <leader>gg :Gsta<CR>  " git status
+nnoremap <leader>gd :Gdiff<CR><C-W>p  " git diff current file & switch to working copy
+nnoremap <leader>gb :Gblame<CR>  " git blame current file
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
