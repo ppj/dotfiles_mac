@@ -193,9 +193,10 @@ let g:airline_theme='powerlineish'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" Git-Gutter settings
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
+" Git-Gutter mappings & settings
+let g:gitgutter_map_keys = 0
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 
 " NERDTREE mappings & settings
 let NERDTreeShowHidden=1
