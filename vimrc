@@ -83,6 +83,7 @@ set laststatus=2
 set t_Co=256
 set cursorline                  " highlight current line
 set number                      " show line numbers
+set relativenumber              " show relative line numbers
 
 " highligh column # 121 (line too long)
 set colorcolumn=121
@@ -116,9 +117,9 @@ nnoremap <leader>gb :Gblame<CR>  " git blame current file
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
 
-" move cursor up/down by screen lines instead of real lines
-nmap k gk
-nmap j gj
+" move cursor up/down by screen lines ONLY WHEN used without a count
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 let g:indentLine_color_term = 237
 
