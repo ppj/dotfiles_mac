@@ -35,7 +35,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
-Plugin 'rking/ag.vim'             " replacement for 153% of the uses of Ack
+Plugin 'mileszs/ack.vim'          " Frontrunner for Ag because of the config
 
 " Motion
 Plugin 'Lokaltog/vim-easymotion'
@@ -96,6 +96,16 @@ set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set list                        " highlight whitespace etc.
 set listchars=tab:▸\ ,trail:•,extends:❯,nbsp:_,precedes:❮,eol:¬ " Invisible characters
+
+" Grep
+if executable('ag')
+  " Use ag for Ack.vim
+  let g:ackprg = 'ag --nogroup --column --smart-case --nocolor --follow --vimgrep'
+
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --column\ --smart-case\ --nocolor\ --follow\ --vimgrep
+  set grepformat=%f:%l:%C:%m
+endif
 
 " Searching
 set hlsearch            "  highlight matches
@@ -228,8 +238,8 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
-vmap <C-S-f> y:Ag! '<C-r>0'<Esc>
-nmap <C-S-f> yiw:Ag! '<C-r>0'<Esc>
+vmap <C-f> y:Ack! '<C-r>0'<Esc>
+nmap <C-f> yiw:Ack! <C-r>0<Esc>
 
 " Some commonly used Tabular mappings
 if exists(":Tabularize")
