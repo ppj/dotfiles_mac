@@ -266,3 +266,13 @@ nnoremap : q:i
 " move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
 vnoremap ∆ :m '>+1<CR>gv
 vnoremap ˚ :m '<-2<CR>gv
+
+" autocomplete with tab when typing words only (http://bit.ly/29xSbgb)
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-P>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
