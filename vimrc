@@ -158,6 +158,16 @@ noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 noremap <leader>e :e<CR>    " reload file
 
+" avoid some windows when cycling thru buffers by hiding them
+augroup HideBuffer
+  autocmd!
+  " quickfix window (https://redd.it/2o9d3o)
+  autocmd FileType qf setlocal nobuflisted
+
+  " the Gstatus buffer (http://bit.ly/29xSbgb)
+  autocmd BufReadPost *.git/index  set nobuflisted
+augroup END
+
 " Change window-splits easily
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
