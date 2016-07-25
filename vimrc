@@ -260,7 +260,10 @@ endif
 
 " common tasks
 noremap <leader>ee :source ~/.vimrc<CR>   " reload vimrc
+" command history mode (default)
 nnoremap : q:i
+" simple command prompt
+nnoremap <leader>: :
 
 " easy edit
 " move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
