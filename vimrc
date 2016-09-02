@@ -114,6 +114,10 @@ set ignorecase          "  searches are case insensitive...
 set smartcase           "  ... unless they contain at least one capital letter
 vnoremap * y/<C-R>"<CR> "  search current buffer for selection
 vnoremap # y?<C-R>"<CR> "  search current buffer for selection
+" search forward in selection
+vnoremap / <ESC>/\%V
+" search backward in selection
+vnoremap ? <ESC>?\%V
 
 " vim-rails
 nnoremap <leader>aa :A<CR>   "  alternate file
