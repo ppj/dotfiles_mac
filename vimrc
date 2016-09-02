@@ -166,6 +166,9 @@ augroup HideBuffer
 
   " the Gstatus buffer (http://bit.ly/29xSbgb)
   autocmd BufReadPost *.git/index  set nobuflisted
+
+  " the Gstatus buffer (http://bit.ly/29xSbgb)
+  autocmd BufReadPost *.g/COMMIT_EDITMSG  set nobuflisted
 augroup END
 
 " Change window-splits easily
