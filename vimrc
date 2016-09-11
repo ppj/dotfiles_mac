@@ -14,7 +14,6 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 
 " Functionality
-Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-repeat'         " repeat last Plugin command with '.'
@@ -34,7 +33,6 @@ Plugin 'Yggdroot/indentLine'
 " Browsing & File-search
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'dkprice/vim-easygrep'     " Easy and customizable search and replace in multiple files
 Plugin 'mileszs/ack.vim'          " Frontrunner for Ag because of the config
 
 " Motion
@@ -237,9 +235,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " vim-markdown settings
 let vim_markdown_folding_disabled=1
 let vim_markdown_conceal=0
-" v to expand selection and Shift-v to shrink selection
-vmap v <Plug>(expand_region_expand)
-vmap <S-v> <Plug>(expand_region_shrink)
 
 " Twiddle Case: '~' to cycle between UPPER, lower & Title cases on visual selection
 function! TwiddleCase(str)
