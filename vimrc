@@ -118,6 +118,10 @@ vnoremap / <ESC>/\%V
 " search backward in selection
 vnoremap ? <ESC>?\%V
 
+" always search forward by `n` and backward by `N`
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
 " vim-rails
 nnoremap <leader>aa :A<CR>   "  alternate file
 nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
