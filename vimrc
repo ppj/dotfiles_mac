@@ -106,6 +106,7 @@ if executable('ag')
 endif
 
 " Searching
+set regexpengine=1      "  vim 7.3 + regex parser isn't great. Vim slows down with big ruby files
 set hlsearch            "  highlight matches
 set incsearch           "  incremental searching
 set ignorecase          "  searches are case insensitive...
@@ -137,7 +138,6 @@ let g:indentLine_color_term = 237
 
 let g:mopkai_is_not_set_normal_ctermbg = 1
 colorscheme mopkai
-
 
 " Delete trailing white space(s) before saving buffer
 fun! <SID>StripTrailingWhitespaces()
@@ -205,7 +205,7 @@ inoremap <C-v> <esc>"+pi                      " paste in insert mode
 " copy file path to clipboard
 nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
 
-" vim-vroom settings/mappings
+" vim-vroom mappings & settings
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
