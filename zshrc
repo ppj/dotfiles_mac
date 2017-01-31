@@ -140,3 +140,5 @@ alias vime='vim -u essential.vim'
 #######################################################################
 # Add boxen env to the shell
 source /opt/boxen/env.sh
+export PATH="$HOME/.exenv/bin:$PATH"
+eval "$(exenv init -)"
