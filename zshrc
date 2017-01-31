@@ -118,12 +118,9 @@ alias ev='vim ~/dotfiles/vimrc'
 alias et='vim ~/dotfiles/tmux.conf'
 alias ez='vim ~/dotfiles/zshrc'
 
-# zeus aliases
-alias zs='zeus start'
-alias zc='zeus console'
-alias zcu='zeus cucumber'
-alias zr='zeus rake'
-alias zru='zeus runner'
+# spring aliases
+alias sc='bin/spring rails console'
+alias sr='bin/spring rake'
 
 # workflow aliases
 alias fs='foreman start'
