@@ -212,6 +212,7 @@ nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
 " vim-vroom mappings & settings
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
+let g:vroom_use_spring=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
 let g:vroom_ignore_color_flag=1
 noremap <leader>tf :VroomRunTestFile<CR>
