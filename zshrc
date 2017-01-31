@@ -124,8 +124,8 @@ alias sr='bin/spring rake'
 
 # workflow aliases
 alias fs='foreman start'
-alias sync='bundle install && rake db:migrate db:test:prepare'
-alias syncm='git checkout master && git pull && bundle install && rake db:migrate db:test:prepare'
+alias sync='bundle install && rake db:migrate'
+alias syncm='git checkout master && git pull && bundle install && rake db:migrate'
 alias bk='echo y | git buildkite'
 
 # git aliases
