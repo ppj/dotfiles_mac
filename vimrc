@@ -199,12 +199,8 @@ noremap <leader>of :Explore<CR>       " open explorer in current File's folder (
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 
-" clipboard copy/paste
-vnoremap <leader>x "+x                        " cut in visual mode
-vnoremap <leader>c "+y                        " copy in visual mode
-noremap  <C-a> :%y+"<CR>                      " copy all in normal mode
-noremap <leader>v "+p                         " paste in command mode
-inoremap <C-v> <esc>"+pi                      " paste in insert mode
+" use system clipboard
+set clipboard=unnamed
 
 " copy file path to clipboard
 nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
