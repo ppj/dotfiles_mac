@@ -269,7 +269,9 @@ nnoremap : q:i
 " simple command prompt
 nnoremap <leader>: :
 
-" easy edit
+" do not move cursor back when exiting insert mode (misbehaves with C-v)
+inoremap <silent> <Esc> <C-O>:stopinsert<CR>
+
 " move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
 vnoremap ∆ :m '>+1<CR>gv
 vnoremap ˚ :m '<-2<CR>gv
