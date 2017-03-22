@@ -50,12 +50,12 @@ Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
 
-" Tmux & co.
+" Tmux & co
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
 Plugin 'benmills/vimux'       " Interact with tmux from vim
 Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
 
-" Elixir (& co)
+" Elixir & co
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 
