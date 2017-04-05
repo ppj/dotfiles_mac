@@ -198,6 +198,7 @@ noremap <leader>of :Explore<CR>       " open explorer in current File's folder (
 " Without --hidden, it never finds .travis.yml since it starts with a dot
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
+let g:ctrlp_mruf_relative = 1
 
 " use system clipboard
 set clipboard=unnamed
