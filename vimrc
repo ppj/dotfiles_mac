@@ -32,7 +32,7 @@ Plugin 'Yggdroot/indentLine'
 
 " Browsing & File-search
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'          " Frontrunner for Ag because of the config
 
 " Motion
