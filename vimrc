@@ -288,5 +288,5 @@ endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 " spell-check on for certain filetypes
-autocmd BufRead,BufNewFile *.md setlocal spell spellang=en_au
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_au
 autocmd FileType gitcommit setlocal spell spelllang=en_us
