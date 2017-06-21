@@ -137,6 +137,9 @@ alias delete_merged_branches='git branch --merged master | grep -v "\* master" |
 # vim
 alias vime='vim -u essential.vim'
 
+# emacs (https://superuser.com/a/317687)
+emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
+
 #######################################################################
 # Add boxen env to the shell
 source /opt/boxen/env.sh
