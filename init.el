@@ -58,3 +58,4 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(defalias 'list-buffers 'ibuffer)
