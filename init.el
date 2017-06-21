@@ -32,6 +32,7 @@
    (quote
     (auto-complete org-bullets which-key try use-package))))
 
+;; Auto added
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -39,12 +40,13 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Hide startup message
 (setq inhibit-startup-message t)
 
 ;; Look & Feel
-;;
 (set-default-font "Monaco 16")
 
+;; Packages
 (use-package try
   :ensure t)
 
@@ -71,6 +73,7 @@
     (global-auto-complete-mode t)
     ))
 
+;; Settings
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
