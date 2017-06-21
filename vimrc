@@ -74,7 +74,12 @@ runtime macros/matchit.vim      " extend % matching to if/elsif/else/end and mor
 autocmd VimResized * :wincmd =  " Auto-resize splits if window is resized
 
 set hidden                      " manage multiple buffers effectively
-set mouse=a                     " allow mouse to set cursor position
+set mouse+=a                    " allow mouse to set cursor position
+" Resize spits in vim in tmux with mouse (source: https://superuser.com/a/550482)
+if &term =~ '^screen'
+  " tmux knows the extended mouse mode
+  set ttymouse=xterm2
+endif
 set wildmenu                    " file/command completion shows options...
 set wildmode=list:longest       " ...only up to the point of ambiguity
 set dir=/tmp                    " store swp files in this folder (it needs to exist)
