@@ -147,5 +147,5 @@ emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 #######################################################################
 # Add boxen env to the shell
 source /opt/boxen/env.sh
-export PATH="$HOME/.exenv/bin:$PATH"
-eval "$(exenv init -)"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
