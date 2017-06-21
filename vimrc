@@ -59,6 +59,11 @@ Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 
+" JavaScript & co
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'mattn/emmet-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " ==========================================================================================================
@@ -250,6 +255,9 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" vim-jsx settings
+let g:jsx_ext_required = 0
 
 " Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
