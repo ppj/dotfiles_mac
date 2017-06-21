@@ -10,7 +10,9 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes (quote (deeper-blue)))
- '(package-selected-packages (quote (org-bullets which-key try use-package))))
+ '(package-selected-packages
+   (quote
+    (auto-complete org-bullets which-key try use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -55,8 +57,15 @@
   :config
     (evil-mode 1)
     (setq evil-overriding-maps nil)
-    (setq evil-intercept-maps nil)
-)
+    (setq evil-intercept-maps nil))
+
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
 
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
