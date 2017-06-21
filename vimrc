@@ -140,6 +140,7 @@ nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 nnoremap <leader>gg :Gsta<CR>  " git status
 nnoremap <leader>gd :Gdiff<CR><C-W>p  " git diff current file & switch to working copy
 nnoremap <leader>gb :Gblame<CR>  " git blame current file
+nnoremap <leader>go :Gbrowse<CR> " git browse current file
 
 " Select text with shift+arrows in insert mode
 set guioptions+=a keymodel=startsel,stopsel
