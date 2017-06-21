@@ -99,6 +99,10 @@ bindkey '^R' history-incremental-search-backward
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+. "/opt/boxen/homebrew/opt/nvm/nvm.sh"
+
 # set aliases
 # clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
 alias cls='printf "\ec"'
