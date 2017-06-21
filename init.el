@@ -1,5 +1,23 @@
-;; Auto added stuff
-;;
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Evil Mode Always
+(use-package evil
+  :ensure t
+  :config
+    (evil-mode 1)
+    (setq evil-overriding-maps nil)
+    (setq evil-intercept-maps nil))
+
+;; Auto added
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,25 +39,11 @@
  ;; If there is more than one, they won't work right.
  )
 
-
-;; My settings below
-;;
 (setq inhibit-startup-message t)
 
 ;; Look & Feel
 ;;
 (set-default-font "Monaco 16")
-
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/"))
-
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 
 (use-package try
   :ensure t)
