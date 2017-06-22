@@ -1,3 +1,10 @@
+;; Hide startup message
+(setq inhibit-startup-message t)
+
+;; Look & Feel
+(set-default-font "Monaco 16")
+
+;; Packages
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -13,40 +20,11 @@
 (use-package evil
   :ensure t
   :config
-    (evil-mode 1)
-    (setq evil-overriding-maps nil)
-    (setq evil-intercept-maps nil))
+    (evil-mode 1))
 
-;; Auto added
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (deeper-blue)))
- '(package-selected-packages
-   (quote
-    (auto-complete org-bullets which-key try use-package))))
+(setq evil-overriding-maps nil)
+(setq evil-intercept-maps nil)
 
-;; Auto added
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; Hide startup message
-(setq inhibit-startup-message t)
-
-;; Look & Feel
-(set-default-font "Monaco 16")
-
-;; Packages
 (use-package try
   :ensure t)
 
@@ -73,9 +51,34 @@
     (global-auto-complete-mode t)
     ))
 
+;;
 ;; Settings
+;;
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
 (defalias 'list-buffers 'ibuffer)
+
+;; Auto added
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(custom-enabled-themes (quote (deeper-blue)))
+ '(package-selected-packages
+   (quote
+    (evil-leader auto-complete org-bullets which-key try use-package))))
+
+;; Auto added
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
