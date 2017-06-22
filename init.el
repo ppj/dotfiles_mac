@@ -53,6 +53,11 @@
     (global-auto-complete-mode t)
     ))
 
+(use-package evil-leader
+  :ensure t
+  :config
+    (global-evil-leader-mode))
+
 ;;
 ;; Settings
 ;;
@@ -61,6 +66,14 @@
 (ido-mode 1)
 
 (defalias 'list-buffers 'ibuffer)
+
+(evil-leader/set-leader "<SPC>")
+
+(evil-leader/set-key
+  "e" 'find-file
+  "w" 'save-buffer
+  "d" 'kill-this-buffer
+  "q" 'save-buffers-kill-terminal)
 
 ;; Auto added
 (custom-set-variables
