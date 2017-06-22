@@ -4,6 +4,8 @@
 ;; Look & Feel
 (set-default-font "Monaco 16")
 
+(linum-mode t)
+
 ;; Packages
 (require 'package)
 (setq package-enable-at-startup nil)
