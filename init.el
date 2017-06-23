@@ -1,5 +1,6 @@
 ;; Hide startup message
 (setq inhibit-startup-message t)
+(setq ring-bell-function 'ignore)
 
 ;; Look & Feel
 (linum-mode t) ;; line numbers on
