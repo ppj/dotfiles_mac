@@ -49,6 +49,14 @@
   :config
   (global-evil-leader-mode))
 
+(evil-leader/set-leader "<SPC>")
+
+(use-package magit
+  :ensure t)
+
+(evil-leader/set-key
+  "gg" 'magit-status)
+
 ;;
 ;; Settings
 ;;
