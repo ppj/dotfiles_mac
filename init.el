@@ -2,9 +2,7 @@
 (setq inhibit-startup-message t)
 
 ;; Look & Feel
-(set-default-font "Monaco 16")
-
-(linum-mode t)
+(linum-mode t) ;; line numbers on
 
 ;; Packages
 (require 'package)
@@ -22,7 +20,7 @@
 (use-package evil
   :ensure t
   :config
-    (evil-mode 1))
+  (evil-mode 1))
 
 (setq evil-overriding-maps nil)
 (setq evil-intercept-maps nil)
@@ -38,13 +36,6 @@
   :ensure t
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(use-package evil
-  :ensure t
-  :config
-    (evil-mode 1)
-    (setq evil-overriding-maps nil)
-    (setq evil-intercept-maps nil))
-
 (use-package auto-complete
   :ensure t
   :init
@@ -56,18 +47,15 @@
 (use-package evil-leader
   :ensure t
   :config
-    (global-evil-leader-mode))
+  (global-evil-leader-mode))
 
 ;;
 ;; Settings
 ;;
-(setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
 (defalias 'list-buffers 'ibuffer)
-
-(evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
   "e" 'find-file
