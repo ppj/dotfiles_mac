@@ -76,9 +76,14 @@
 
 (evil-leader/set-key
   "e" 'find-file
+  "q" 'save-buffers-kill-terminal)
+
+(evil-leader/set-key
   "w" 'save-buffer
   "d" 'kill-this-buffer
-  "q" 'save-buffers-kill-terminal)
+  "b" 'switch-to-buffer
+  "l" 'next-buffer
+  "h" 'previous-buffer)
 
 ;; Auto added
 (custom-set-variables
