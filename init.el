@@ -1,18 +1,8 @@
-;; Hide startup message
-(setq inhibit-startup-message t)
-(setq ring-bell-function 'ignore)
-
-;; Look & Feel
-(set-default-font
- "-*-Ubuntu Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-
-(linum-mode t) ;; line numbers on
-
 ;; Packages
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/"))
+       '("melpa" . "http://melpa.org/packages/"))
 
 (package-initialize)
 
@@ -112,3 +102,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; General behavior
+(setq inhibit-startup-message t)
+(setq ring-bell-function 'ignore)
+
+;; Look & Feel
+(set-default-font
+ "-*-Ubuntu Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+
+(linum-mode t) ;; line numbers on
+
