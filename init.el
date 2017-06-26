@@ -24,7 +24,17 @@
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+
+  (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode)))
 
 (setq evil-overriding-maps nil)
 (setq evil-intercept-maps nil)
@@ -51,11 +61,6 @@
     (ac-config-default)
     (global-auto-complete-mode t)
     ))
-
-(use-package evil-leader
-  :ensure t
-  :config
-  (global-evil-leader-mode))
 
 (evil-leader/set-leader "<SPC>")
 
