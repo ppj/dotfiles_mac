@@ -66,14 +66,17 @@
 ;;
 ;; Settings
 ;;
+
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
+; A better way of listing buffers
 (defalias 'list-buffers 'ibuffer)
 
 (evil-leader/set-key
-  "e" 'find-file
+  "e" 'revert-buffer
+  "o" 'find-file
   "q" 'save-buffers-kill-terminal)
 
 (evil-leader/set-key
