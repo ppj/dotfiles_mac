@@ -35,10 +35,7 @@
 ;; Auto start emacs-keybound buffers in evil-motion state instead
 ;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
 ;(setq evil-emacs-state-modes nil)
-(dolist (mode '(ag-mode
-		flycheck-error-list-mode
-		git-rebase-mode))
-  (add-to-list 'evil-emacs-state-modes mode))
+(add-to-list 'evil-emacs-state-modes 'git-rebase-mode)
 
 (use-package try
   :ensure t)
