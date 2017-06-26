@@ -95,8 +95,10 @@
   "h" 'previous-buffer)
 
 ;; General behavior
-(setq inhibit-startup-message t)
-(setq ring-bell-function 'ignore)
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t
+      inhibit-splash-screen t
+      ring-bell-function 'ignore)
 
 ;; Don't litter my init file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
