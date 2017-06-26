@@ -33,8 +33,8 @@
 (evil-select-search-module 'evil-search-module 'evil-search)
 
 ;; Auto start emacs-keybound buffers in evil-motion state instead
-(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
-(setq evil-emacs-state-modes nil)
+;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
+;(setq evil-emacs-state-modes nil)
 
 (use-package try
   :ensure t)
