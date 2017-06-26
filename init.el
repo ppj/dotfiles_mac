@@ -103,6 +103,13 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 
+;; Delete trailing whitespace while saving in prog mode
+(defun delete-trailing-whitespace-in-prog-files ()
+  "Delete trailing whitespace if the buffer is in `prog-mode`."
+  (if (derived-mode-p 'prog-mode)
+      (delete-trailing-whitespace)))
+(add-to-list 'write-file-functions 'delete-trailing-whitespace-in-prog-files)
+
 ;; Don't litter my init file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
