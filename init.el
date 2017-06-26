@@ -35,6 +35,10 @@
 ;; Auto start emacs-keybound buffers in evil-motion state instead
 ;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
 ;(setq evil-emacs-state-modes nil)
+(dolist (mode '(ag-mode
+		flycheck-error-list-mode
+		git-rebase-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
 
 (use-package try
   :ensure t)
@@ -102,7 +106,7 @@
     ("a632c5ce9bd5bcdbb7e22bf278d802711074413fd5f681f39f21d340064ff292" default)))
  '(package-selected-packages
    (quote
-    (evil-leader auto-complete org-bullets which-key try use-package))))
+    (evil-surround evil-leader auto-complete org-bullets which-key try use-package))))
 
 ;; Auto added
 (custom-set-faces
