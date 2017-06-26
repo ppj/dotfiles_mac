@@ -100,6 +100,9 @@
       inhibit-splash-screen t
       ring-bell-function 'ignore)
 
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+
 ;; Don't litter my init file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
