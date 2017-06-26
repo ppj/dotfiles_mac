@@ -106,7 +106,12 @@
 (set-default-font
  "-*-Ubuntu Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
 
-(linum-mode t) ;; line numbers on
+(use-package nlinum-relative
+  :ensure t
+  :config
+  (nlinum-relative-setup-evil)
+  (setq nlinum-relative-redisplay-delay 0)
+  (add-hook 'prog-mode-hook #'nlinum-relative-mode))
 
 ;; change mode-line color by evil state
 (eval-when-compile (require 'cl))
