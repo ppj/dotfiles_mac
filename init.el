@@ -63,6 +63,10 @@
 (evil-leader/set-key
   "gg" 'magit-status)
 
+;; Theme(s)
+(use-package seti-theme
+  :ensure t)
+
 ;;
 ;; Settings
 ;;
@@ -92,11 +96,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (deeper-blue)))
+ '(custom-enabled-themes (quote (seti)))
+ '(custom-safe-themes
+   (quote
+    ("a632c5ce9bd5bcdbb7e22bf278d802711074413fd5f681f39f21d340064ff292" default)))
  '(package-selected-packages
    (quote
     (evil-leader auto-complete org-bullets which-key try use-package))))
