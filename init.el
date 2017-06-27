@@ -29,6 +29,27 @@
     :config
     (global-evil-surround-mode))
 
+  (use-package neotree
+    :ensure t
+    :config
+    (evil-leader/set-key
+    "nn" 'neotree-find
+    "nc" 'neotree-hide)
+
+    (setq projectile-switch-project-action 'neotree-projectile-action)
+
+    (add-hook 'neotree-mode-hook
+              (lambda ()
+                (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+                (define-key evil-normal-state-local-map (kbd "I") 'neotree-hidden-file-toggle)
+                (define-key evil-normal-state-local-map (kbd "a") 'neotree-stretch-toggle)
+                (define-key evil-normal-state-local-map (kbd "R") 'neotree-refresh)
+                (define-key evil-normal-state-local-map (kbd "m") 'neotree-rename-node)
+                (define-key evil-normal-state-local-map (kbd "c") 'neotree-create-node)
+                (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
+                (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+  )
+)
 
 ;; use vim search behavior (enables use of `cgn` to replace search-object & jump to next)
 (evil-select-search-module 'evil-search-module 'evil-search)
