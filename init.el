@@ -15,6 +15,8 @@
   :ensure t
   :config
   (evil-mode 1)
+  (setq evil-overriding-maps nil)
+  (setq evil-intercept-maps nil)
 
   (use-package evil-leader
     :ensure t
@@ -25,10 +27,8 @@
   (use-package evil-surround
     :ensure t
     :config
-    (global-evil-surround-mode)))
+    (global-evil-surround-mode))
 
-(setq evil-overriding-maps nil)
-(setq evil-intercept-maps nil)
 
 ;; use vim search behavior (enables use of `cgn` to replace search-object & jump to next)
 (evil-select-search-module 'evil-search-module 'evil-search)
@@ -57,13 +57,12 @@
     (global-auto-complete-mode t)
     ))
 
-
-
 (use-package magit
-  :ensure t)
-
-(evil-leader/set-key
-  "gg" 'magit-status)
+  :ensure t
+  :config
+  (evil-leader/set-key
+    "gg" 'magit-status)
+)
 
 ;; Theme(s)
 (use-package seti-theme
