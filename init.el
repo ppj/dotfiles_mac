@@ -19,7 +19,8 @@
   (use-package evil-leader
     :ensure t
     :config
-    (global-evil-leader-mode))
+    (global-evil-leader-mode)
+    (evil-leader/set-leader "<SPC>"))
 
   (use-package evil-surround
     :ensure t
@@ -56,7 +57,7 @@
     (global-auto-complete-mode t)
     ))
 
-(evil-leader/set-leader "<SPC>")
+
 
 (use-package magit
   :ensure t)
