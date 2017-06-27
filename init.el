@@ -85,6 +85,13 @@
     "gg" 'magit-status)
 )
 
+(use-package projectile
+  :ensure t
+  :defer t
+  :config
+  (projectile-global-mode)
+)
+
 ;; Theme(s)
 (use-package seti-theme
   :ensure t)

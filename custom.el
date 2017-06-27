@@ -10,7 +10,7 @@
     ("a632c5ce9bd5bcdbb7e22bf278d802711074413fd5f681f39f21d340064ff292" default)))
  '(package-selected-packages
    (quote
-    (evil-surround evil-leader auto-complete org-bullets which-key try use-package))))
+    (projectile evil-surround evil-leader auto-complete org-bullets which-key try use-package))))
 
 ;; Auto added
 (custom-set-faces
