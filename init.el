@@ -15,8 +15,14 @@
   :ensure t
   :config
   (evil-mode 1)
+
+  ;; do not override/intercept evil-state
   (setq evil-overriding-maps nil)
   (setq evil-intercept-maps nil)
+
+  ;; use vim search behavior (enables use of `cgn` to replace search-object & jump to next)
+  (evil-select-search-module 'evil-search-module 'evil-search)
+
 
   (use-package evil-leader
     :ensure t
@@ -50,9 +56,6 @@
                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
   )
 )
-
-;; use vim search behavior (enables use of `cgn` to replace search-object & jump to next)
-(evil-select-search-module 'evil-search-module 'evil-search)
 
 ;; Auto start emacs-keybound buffers in evil-motion state instead
 ;(setq evil-motion-state-modes (append evil-emacs-state-modes evil-motion-state-modes))
