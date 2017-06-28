@@ -8,6 +8,7 @@
  '(custom-safe-themes
    (quote
     ("a632c5ce9bd5bcdbb7e22bf278d802711074413fd5f681f39f21d340064ff292" default)))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
     (projectile evil-surround evil-leader auto-complete org-bullets which-key try use-package))))

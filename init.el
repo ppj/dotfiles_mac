@@ -23,7 +23,6 @@
   ;; use vim search behavior (enables use of `cgn` to replace search-object & jump to next)
   (evil-select-search-module 'evil-search-module 'evil-search)
 
-
   (use-package evil-leader
     :ensure t
     :config
@@ -138,6 +137,10 @@
 (load custom-file 'noerror)
 
 ;; Look & Feel
+(custom-set-variables '(initial-frame-alist (quote ((fullscreen . maximized))))) ;; start maximized
+
+(when window-system (global-hl-line-mode)) ;; highlight current line
+
 (set-default-font
  "-*-Ubuntu Mono-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
 
