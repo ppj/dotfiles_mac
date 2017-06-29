@@ -11,7 +11,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (projectile evil-surround evil-leader auto-complete org-bullets which-key try use-package))))
+    (diff-hl projectile evil-surround evil-leader auto-complete org-bullets which-key try use-package))))
 
 ;; Auto added
 (custom-set-faces

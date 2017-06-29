@@ -87,6 +87,15 @@
     "gg" 'magit-status)
 )
 
+(use-package diff-hl
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (define-key evil-normal-state-map (kbd "]c") 'diff-hl-next-hunk)
+  (define-key evil-normal-state-map (kbd "[c") 'diff-hl-previous-hunk)
+)
+
 (use-package projectile
   :ensure t
   :defer t
