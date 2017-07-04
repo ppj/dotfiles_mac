@@ -54,6 +54,15 @@
                 (define-key evil-normal-state-local-map (kbd "d") 'neotree-delete-node)
                 (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
   )
+
+  (use-package evil-rails
+    :ensure t
+    :config
+    (use-package projectile-rails
+      :ensure t
+      :config (projectile-rails-global-mode)
+    )
+  )
 )
 
 ;; Auto start emacs-keybound buffers in evil-motion state instead
