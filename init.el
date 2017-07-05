@@ -62,6 +62,18 @@
       :ensure t
       :config (projectile-rails-global-mode)
     )
+    (evil-leader/set-key
+      "aa" 'projectile-toggle-between-implementation-and-test
+      "av" '(lambda ()
+              (projectile-toggle-between-implementation-and-test)
+              (interactive)
+              (evil-window-vsplit)
+              (windmove-right))
+      "as" '(lambda ()
+              (projectile-toggle-between-implementation-and-test)
+              (interactive)
+              (evil-window-split)
+              (windmove-down)))
   )
 )
 
