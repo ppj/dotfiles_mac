@@ -194,3 +194,10 @@
                                             (t default-color))))
                            (set-face-background 'mode-line (car color))
                            (set-face-foreground 'mode-line (cdr color))))))
+
+;; display full file path in the frame title
+(setq frame-title-format
+      '(:eval
+        (if (buffer-file-name)
+            (abbreviate-file-name (buffer-file-name))
+          "%b")))
