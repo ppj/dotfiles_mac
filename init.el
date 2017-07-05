@@ -124,6 +124,11 @@
   (projectile-global-mode)
 )
 
+(use-package tabbar
+  :ensure t
+  :config (tabbar-mode t)
+)
+
 ;; Theme(s)
 (use-package seti-theme
   :ensure t)
