@@ -129,6 +129,17 @@
   :config (tabbar-mode t)
 )
 
+(use-package telephone-line
+  :ensure t
+  :config
+  (setq telephone-line-primary-left-separator 'telephone-line-gradient
+        telephone-line-secondary-left-separator 'telephone-line-nil
+        telephone-line-primary-right-separator 'telephone-line-gradient
+        telephone-line-secondary-right-separator 'telephone-line-nil
+        telephone-line-evil-use-short-tag t)
+  (telephone-line-evil-config)
+)
+
 ;; Theme(s)
 (use-package seti-theme
   :ensure t)
