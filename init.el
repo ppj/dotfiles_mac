@@ -198,8 +198,8 @@
   (add-hook 'prog-mode-hook #'nlinum-relative-mode))
 
 ;; display full file path in the frame title
-(setq frame-title-format
-      '(:eval
-        (if (buffer-file-name)
-            (abbreviate-file-name (buffer-file-name))
-          "%b")))
+(setq-default frame-title-format
+              '(:eval
+                (if (buffer-file-name)
+                  (abbreviate-file-name (buffer-file-name))
+                  "%b")))
