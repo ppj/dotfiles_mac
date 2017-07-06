@@ -203,3 +203,9 @@
                 (if (buffer-file-name)
                   (abbreviate-file-name (buffer-file-name))
                   "%b")))
+
+(setq-default mode-line-buffer-identification
+              '(:eval
+                (if (buffer-file-name)
+                  (abbreviate-file-name (buffer-file-name))
+                  "%b")))
