@@ -241,6 +241,8 @@ nmap [c <Plug>GitGutterPrevHunk
 
 " NERDTREE mappings & settings
 let NERDTreeShowHidden=1
+let NERDTreeMapJumpNextSibling="L"
+let NERDTreeMapJumpPreviousSibling="H"
 noremap <leader>nn :NERDTreeFind<CR>    " find current file in NERDTree
 noremap <leader>nc :NERDTreeClose<CR>
 " Close vim if only window open is NERDTREE
