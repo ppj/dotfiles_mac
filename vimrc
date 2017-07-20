@@ -40,6 +40,7 @@ Plugin 'Lokaltog/vim-easymotion'
 
 " Git
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-rhubarb.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
