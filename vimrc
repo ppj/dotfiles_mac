@@ -40,6 +40,7 @@ Plugin 'Lokaltog/vim-easymotion'
 
 " Git
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-rhubarb.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
@@ -220,7 +221,6 @@ nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
 " vim-vroom mappings & settings
 let g:vroom_map_keys=0
 let g:vroom_use_vimux=1
-let g:vroom_use_spring=1
 let g:vroom_cucumber_path='cucumber'  " default: './script/cucumber'
 let g:vroom_ignore_color_flag=1
 noremap <leader>tf :VroomRunTestFile<CR>
@@ -240,6 +240,8 @@ nmap [c <Plug>GitGutterPrevHunk
 
 " NERDTREE mappings & settings
 let NERDTreeShowHidden=1
+let NERDTreeMapJumpNextSibling="L"
+let NERDTreeMapJumpPreviousSibling="H"
 noremap <leader>nn :NERDTreeFind<CR>    " find current file in NERDTree
 noremap <leader>nc :NERDTreeClose<CR>
 " Close vim if only window open is NERDTREE
