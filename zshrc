@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/dotfiles/oh-my-zsh/custom
+export ZSH_CUSTOM=$HOME/dotfiles_mac/oh-my-zsh/custom
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -118,9 +118,9 @@ alias tls='tmux ls'
 alias tkill='tmux kill-session -t'
 
 # convenience aliases for editing configs
-alias ev='vim ~/dotfiles/vimrc'
-alias et='vim ~/dotfiles/tmux.conf'
-alias ez='vim ~/dotfiles/zshrc'
+alias ev='vim ~/dotfiles_mac/vimrc'
+alias et='vim ~/dotfiles_mac/tmux.conf'
+alias ez='vim ~/dotfiles_mac/zshrc'
 
 # spring aliases
 alias sc='bin/spring rails console'
