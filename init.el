@@ -209,3 +209,37 @@
                 (if (buffer-file-name)
                   (abbreviate-file-name (buffer-file-name))
                   "%b")))
+
+;; UTF-8 Thanks
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq org-export-coding-system 'utf-8)
+(set-charset-priority 'unicode)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+
+;; do not auto-scroll jerkily
+(setq scroll-conservatively 110)
+
+;; Use right alt for extended character insertion
+(setq mac-right-option-modifier nil)
+
+;; Get rid of All The Bars™
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+
+;; Enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Slower mouse scroll
+(setq mouse-wheel-scroll-amount '(1))
+
+;; Follow symlinks by default
+(setq vc-follow-symlinks t)
+
+;; Use system trash
+(setq delete-by-moving-to-trash t)
+
+;; Make files with the same name have unique buffer names
+(setq uniquify-buffer-name-style 'forward)
