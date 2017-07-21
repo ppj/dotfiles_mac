@@ -101,7 +101,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Node Version Manager
 export NVM_DIR="$HOME/.nvm"
-. "/opt/boxen/homebrew/opt/nvm/nvm.sh"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # set aliases
 # clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
@@ -144,8 +144,3 @@ alias vime='vim -u essential.vim'
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 
-#######################################################################
-# Add boxen env to the shell
-source /opt/boxen/env.sh
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
