@@ -125,6 +125,7 @@ alias syncm='git checkout master && git pull && bundle install && rake db:migrat
 alias bk='echo y | git buildkite'
 
 # git aliases
+alias git=hub
 alias gls='git status && git branch'
 alias use_latest_master='git fetch && git rebase origin/master'
 alias FORCE_push_and_build='git push --force && echo y | git buildkite'
