@@ -137,3 +137,6 @@ alias vime='vim -u essential.vim'
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 
+export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
