@@ -49,14 +49,12 @@ ZSH_THEME="ppj_wedisagree"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git bundler zsh-syntax-highlighting history-substring-search)
 
-# User configuration
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+# source ~/.rbenv/completions/rbenv.zsh
+eval "$(rbenv init -)"
 
-# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-# export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-
+# oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -70,12 +68,6 @@ export EDITOR='vim'
 # fi
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # User Ctrl-z to switch back to Vim
 fancy-ctrl-z () {
