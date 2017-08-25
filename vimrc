@@ -133,6 +133,9 @@ vnoremap ? <ESC>?\%V
 nnoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
 
+" search count in buffer
+nnoremap <leader>sc :%s///gn<CR>
+
 " vim-rails
 nnoremap <leader>aa :A<CR>   "  alternate file
 nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
