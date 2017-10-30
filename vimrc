@@ -92,6 +92,7 @@ set showcmd                     " display incomplete commands
 set laststatus=2
 set t_Co=256
 set cursorline                  " highlight current line
+set cursorcolumn                " highlight current column
 set number                      " show line numbers
 set relativenumber              " show relative line numbers
 
