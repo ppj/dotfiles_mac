@@ -22,6 +22,7 @@ Plugin 'moll/vim-bbye'            " Close buffer without closing the window usin
 Plugin 'tpope/vim-endwise'        " 'end' most 'do's wisely
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'jiangmiao/auto-pairs'     " auto complete matching pair
+Plugin 'w0rp/ale'                 " async syntax checking
 
 " Look & Feel Plugins
 Plugin 'tpope/vim-haml'
