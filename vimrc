@@ -23,6 +23,7 @@ Plugin 'tpope/vim-endwise'        " 'end' most 'do's wisely
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'jiangmiao/auto-pairs'     " auto complete matching pair
 Plugin 'w0rp/ale'                 " async syntax checking
+Plugin 'henrik/vim-indexed-search'  " search count display & more search customisations
 
 " Look & Feel Plugins
 Plugin 'tpope/vim-haml'
@@ -131,12 +132,12 @@ vnoremap / <ESC>/\%V
 " search backward in selection
 vnoremap ? <ESC>?\%V
 
-" always search forward by `n` and backward by `N`
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
-
-" search count in buffer
-nnoremap <leader>sc :%s///gn<CR>
+" vim-indexed-search settings
+let g:indexed_search_dont_move = 1
+let g:indexed_search_colors = 0
+let g:indexed_search_shortmess = 1
+let g:indexed_search_numbered_only = 1
+let g:indexed_search_n_always_searches_forward = 1
 
 " vim-rails
 nnoremap <leader>aa :A<CR>   "  alternate file
