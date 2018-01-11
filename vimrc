@@ -125,12 +125,12 @@ set hlsearch            "  highlight matches
 set incsearch           "  incremental searching
 set ignorecase          "  searches are case insensitive...
 set smartcase           "  ... unless they contain at least one capital letter
-vnoremap * y/<C-R>"<CR> "  search current buffer for selection
-vnoremap # y?<C-R>"<CR> "  search current buffer for selection
+vmap * y/<C-R>"<CR> "  search current buffer for selection
+vmap # y?<C-R>"<CR> "  search current buffer for selection
 " search forward in selection
-vnoremap / <ESC>/\%V
+vmap / <ESC>/\%V
 " search backward in selection
-vnoremap ? <ESC>?\%V
+vmap ? <ESC>?\%V
 
 " vim-indexed-search settings
 let g:indexed_search_dont_move = 1
