@@ -248,8 +248,8 @@ nmap [c <Plug>GitGutterPrevHunk
 let NERDTreeShowHidden=1
 let NERDTreeMapJumpNextSibling="L"
 let NERDTreeMapJumpPreviousSibling="H"
-noremap <leader>nn :NERDTreeFind<CR>    " find current file in NERDTree
-noremap <leader>nc :NERDTreeClose<CR>
+noremap <leader>nn :NERDTreeToggle<CR>  " toggle NERDTree window
+noremap <leader>nf :NERDTreeFind<CR>    " find current file in NERDTree
 " Close vim if only window open is NERDTREE
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
