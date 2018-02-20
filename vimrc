@@ -254,6 +254,12 @@ noremap <leader>nf :NERDTreeFind<CR>    " find current file in NERDTree
 " Close vim if only window open is NERDTREE
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" ale mappings & settings
+let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+
 " vim-markdown settings
 let vim_markdown_folding_disabled=1
 let vim_markdown_conceal=0
