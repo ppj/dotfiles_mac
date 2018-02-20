@@ -131,6 +131,7 @@ vmap # y?<C-R>"<CR> "  search current buffer for selection
 vmap / <ESC>/\%V
 " search backward in selection
 vmap ? <ESC>?\%V
+nnoremap <CR> :noh<CR><CR> " turn off search highlighting on Enter
 
 " vim-indexed-search settings
 let g:indexed_search_dont_move = 1
