@@ -53,6 +53,7 @@ Plugin 'vim-scripts/blockle.vim'        " toggle ruby block styles between {} an
 Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
+Plugin 'ruby-formatter/rufo-vim.git'
 
 " Tmux & co
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
@@ -62,11 +63,13 @@ Plugin 'skalnik/vim-vroom'    " Ruby test runner that works well with tmux
 " Elixir & co
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
+Plugin 'mhinz/vim-mix-format'
 
 " JavaScript & co
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
+Plugin 'prettier/vim-prettier'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
