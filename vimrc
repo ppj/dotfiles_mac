@@ -210,9 +210,6 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-b> <C-w>p
 
-" who needs folding?!
-set nofoldenable
-
 " CtrlP mappings/settings
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
 noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
