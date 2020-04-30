@@ -36,6 +36,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'          " Frontrunner for Ag because of the config
+Plugin 'diepm/vim-rest-console'
 
 " Motion
 Plugin 'Lokaltog/vim-easymotion'
