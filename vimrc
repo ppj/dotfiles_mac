@@ -284,6 +284,14 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " vim-jsx settings
 let g:jsx_ext_required = 0
 
+" rufo-vim settings
+let g:rufo_auto_formatting = 1
+
+" vim-mix-format settings
+let g:mix_format_options = '--check-equivalent'
+noremap <leader>mm :MixFormat<CR>
+noremap <leader>md :MixFormatDiff<CR>
+
 " Search in files mappings/settings
 " let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow --ignore-dir .bundle --ignore-dir tmp --ignore-dir log"
 vmap <C-f> y:Ack! '<C-r>0'<Esc>
