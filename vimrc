@@ -246,8 +246,8 @@ let g:airline_right_sep=''
 
 " Git-Gutter mappings & settings
 let g:gitgutter_map_keys = 0
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
 
 " NERDTREE mappings & settings
 let NERDTreeShowHidden=1
