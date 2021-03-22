@@ -128,7 +128,6 @@ alias vime='vim -u essential.vim'
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 
-export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
@@ -136,3 +135,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # postgres
 export PG_USER=${USER}
+
+# fuzzy finder fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
