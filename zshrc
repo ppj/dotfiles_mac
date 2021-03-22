@@ -91,7 +91,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 alias cls='printf "\ec"'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
-source ~/.bin/tmuxinator.zsh
+source /usr/local/share/zsh/site-functions/_tmuxinator
 
 # aliases for Tmux
 alias tmux='tmux -2'
