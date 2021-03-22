@@ -49,11 +49,6 @@ ZSH_THEME="ppj_wedisagree"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git bundler zsh-syntax-highlighting history-substring-search)
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-# source ~/.rbenv/completions/rbenv.zsh
-eval "$(rbenv init -)"
-
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -90,10 +85,6 @@ bindkey '^R' history-incremental-search-backward
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-### Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
 
 # set aliases
 # clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
