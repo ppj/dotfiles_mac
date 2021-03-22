@@ -141,3 +141,6 @@ export PG_USER=${USER}
 
 # zsh-syntax-highlighting
 source /Users/ppj/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# brew path
+export PATH="/usr/local/sbin:$PATH"
