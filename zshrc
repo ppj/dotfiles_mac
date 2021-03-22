@@ -138,3 +138,6 @@ export PG_USER=${USER}
 
 # fuzzy finder fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zsh-syntax-highlighting
+source /Users/ppj/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
