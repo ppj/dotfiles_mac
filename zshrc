@@ -128,6 +128,9 @@ alias vime='vim -u essential.vim'
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 
+# hub
+eval "$(hub alias -s)"
+
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 

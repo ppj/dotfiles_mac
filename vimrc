@@ -54,6 +54,7 @@ Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
 Plugin 'ruby-formatter/rufo-vim.git'
+Plugin 'slim-template/vim-slim'         " For slim templates
 
 " Tmux & co
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
@@ -70,19 +71,20 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'prettier/vim-prettier'
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " ==========================================================================================================
 
 filetype plugin indent on       " required
-syntax enable
+syntax on
 runtime macros/matchit.vim      " extend % matching to if/elsif/else/end and more
 autocmd VimResized * :wincmd =  " Auto-resize splits if window is resized
 
 set hidden                      " manage multiple buffers effectively
 set mouse+=a                    " allow mouse to set cursor position
-" Resize spits in vim in tmux with mouse (source: https://superuser.com/a/550482)
+" Resize splits in vim in tmux with mouse (source: https://superuser.com/a/550482)
 if &term =~ '^screen'
   " tmux knows the extended mouse mode
   set ttymouse=xterm2
@@ -101,7 +103,7 @@ set cursorcolumn                " highlight current column
 set number                      " show line numbers
 set relativenumber              " show relative line numbers
 
-" highligh column # 121 (line too long)
+" highlight column # 121 (line too long)
 set colorcolumn=121
 
 let mapleader=" "
@@ -124,7 +126,8 @@ if executable('ag')
 endif
 
 " Searching
-set regexpengine=1      "  vim 7.3 + regex parser isn't great. Vim slows down with big ruby files
+" set regexpengine=1    "  vim 7.3 + regex parser isn't great. Vim slows down with big ruby files
+set regexpengine=0      "  auto-select (1 causing problems for TypeScript syntax highlighting) Ref: https://bit.ly/2V1w5y7
 set hlsearch            "  highlight matches
 set incsearch           "  incremental searching
 set ignorecase          "  searches are case insensitive...
@@ -149,9 +152,9 @@ nnoremap <leader>aa :A<CR>   "  alternate file
 nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 
 " fugitive
-nnoremap <leader>gg :Gsta<CR>  " git status
+nnoremap <leader>gg :Git<CR> " git status
 nnoremap <leader>gd :Gdiff<CR> " git diff current file
-nnoremap <leader>gb :Gblame<CR>  " git blame current file
+nnoremap <leader>gb :Git blame<CR> " git blame current file
 nnoremap <leader>go :Gbrowse<CR> " git browse current file
 nnoremap <leader>gl :Gpull<CR> " git pull
 nmap <leader>gc :Git checkout<space>
