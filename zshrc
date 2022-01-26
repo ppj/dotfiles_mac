@@ -47,7 +47,7 @@ ZSH_THEME="ppj_wedisagree"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler zsh-syntax-highlighting history-substring-search)
+plugins=(git bundler zsh-syntax-highlighting history-substring-search asdf)
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -131,9 +131,6 @@ emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
 # hub
 eval "$(hub alias -s)"
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # postgres
@@ -143,7 +140,7 @@ export PG_USER=${USER}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zsh-syntax-highlighting
-source /Users/ppj/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # brew path
 export PATH="/usr/local/sbin:$PATH"
