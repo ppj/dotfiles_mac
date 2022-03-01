@@ -4,7 +4,10 @@
 1. Clone the repo in the home folder
 
 2. Symlink (force to remove existing files) the required files
-   `ln -sf ~/dotfiles_mac/zshrc ~/.zshrc` and so on
+   
+   `ln -sf ~/dotfiles_mac/zshrc ~/.zshrc` 
+   
+   and so on
    
 ### Note
 
