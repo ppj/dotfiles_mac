@@ -159,7 +159,7 @@ nnoremap <leader>av :AV<CR>  "  alternate file in vertical split
 nnoremap <leader>gg :Git<CR> " git status
 nnoremap <leader>gd :Gdiff<CR> " git diff current file
 nnoremap <leader>gb :Git blame<CR> " git blame current file
-nnoremap <leader>go :Gbrowse<CR> " git browse current file
+nnoremap <leader>go :GBrowse<CR> " git browse current file
 nnoremap <leader>gl :Gpull<CR> " git pull
 nmap <leader>gc :Git checkout<space>
 nmap <leader>gp :Gpush<space>
