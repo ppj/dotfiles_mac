@@ -1,0 +1,3 @@
+**/*.luarc.json
+**/*.*.toml
+**/lazy-lock.json
