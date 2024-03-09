@@ -56,7 +56,7 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler zsh-syntax-highlighting history-substring-search asdf)
+plugins=(git bundler zsh-syntax-highlighting history-substring-search asdf z zsh-autosuggestions)
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
