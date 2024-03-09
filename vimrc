@@ -26,10 +26,8 @@ Plugin 'w0rp/ale'                 " async syntax checking
 Plugin 'henrik/vim-indexed-search'  " search count display & more search customisations
 
 " Look & Feel Plugins
-Plugin 'tpope/vim-haml'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
 
 " Browsing & File-search
@@ -53,8 +51,8 @@ Plugin 'vim-scripts/blockle.vim'        " toggle ruby block styles between {} an
 Plugin 'ecomba/vim-ruby-refactoring'    " use-cases - https://goo.gl/fYyNnD
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-cucumber'             " cucumber syntax highlighting
-Plugin 'ruby-formatter/rufo-vim.git'
 Plugin 'slim-template/vim-slim'         " For slim templates
+Plugin 'tpope/vim-haml'                 " For haml templates
 
 " Tmux & co
 Plugin 'christoomey/vim-tmux-navigator' " Navigate Vim and Tmux panes/splits with the same key bindings
@@ -72,6 +70,12 @@ Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'prettier/vim-prettier'
 Plugin 'leafgarland/typescript-vim'
+
+" Markdown & co
+Plugin 'plasticboy/vim-markdown'
+
+" OpenAPI & co
+Plugin 'hsanson/vim-openapi'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -262,14 +266,14 @@ let NERDTreeMapJumpNextSibling="L"
 let NERDTreeMapJumpPreviousSibling="H"
 noremap <leader>nn :NERDTreeToggle<CR>  " toggle NERDTree window
 noremap <leader>nf :NERDTreeFind<CR>    " find current file in NERDTree
-" Close vim if only window open is NERDTREE
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " ale mappings & settings
-let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['standardrb']}
+let g:ale_fixers = {'ruby': ['standardrb']}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
 
 " vim-markdown settings
 let vim_markdown_folding_disabled=1
@@ -291,8 +295,8 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " vim-jsx settings
 let g:jsx_ext_required = 0
 
-" rufo-vim settings
-let g:rufo_auto_formatting = 1
+" ruby autoformatting settings
+let g:ruby_indent_assignment_style = 'variable'
 
 " vim-mix-format settings
 let g:mix_format_options = '--check-equivalent'
