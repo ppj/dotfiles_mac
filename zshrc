@@ -125,9 +125,8 @@ alias bk='echo y | git buildkite'
 # git aliases
 alias git=hub
 alias gls='git status && git branch'
-alias use_latest_master='git fetch && git rebase origin/master'
-alias FORCE_push_and_build='git push --force && echo y | git buildkite'
-alias delete_merged_branches='git branch --merged master | grep -v "master" | xargs git branch -d'
+alias use_latest_master='git fetch && git rebase origin/$(git_main_branch)'
+alias delete_merged_branches='git branch --merged $(git_main_branch) | grep -v "$(git_main_branch)" | xargs git branch -d'
 
 # vim
 alias vime='vim -u essential.vim'
