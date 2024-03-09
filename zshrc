@@ -93,8 +93,8 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 # set aliases
-# clear screen AND the scroll-back buffer (equivalent to Windows 'cls' command)
-alias cls='printf "\ec"'
+# colorful ls
+alias cls='colorls'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
 source /usr/local/share/zsh/site-functions/_tmuxinator
