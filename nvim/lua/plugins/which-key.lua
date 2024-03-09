@@ -21,6 +21,7 @@ return { -- Useful plugin to show you pending keybinds.
       ["<leader>a"] = { name = "[A]lt file", _ = "which_key_ignore" },
       ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
       ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
+      ["<leader>o"] = { name = "[O]pen file", _ = "which_key_ignore" },
       ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
       ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
       ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
