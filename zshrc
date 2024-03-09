@@ -98,6 +98,7 @@ alias cls='colorls'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
 source /usr/local/share/zsh/site-functions/_tmuxinator
+alias mux=tmuxinator
 
 # aliases for Tmux
 alias tmux='tmux -2'
@@ -150,5 +151,8 @@ source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.
 
 # brew path
 export PATH="/usr/local/sbin:$PATH"
+# tmuxifier path
+export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
