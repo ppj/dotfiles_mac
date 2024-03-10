@@ -7,7 +7,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/dotfiles_mac/oh-my-zsh/custom
+export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
