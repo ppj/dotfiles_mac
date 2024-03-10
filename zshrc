@@ -14,7 +14,8 @@ export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # TEST 'e*' and onwards - PPJ
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Installation: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
+ZSH_THEME="powerlevel10k/powerlevel10k" 
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -93,7 +94,7 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 # set aliases
-# colorful ls
+# colorful ls (install with `sudo gem install colorls` assuming ruby is pre-installed)
 alias cls='colorls'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
