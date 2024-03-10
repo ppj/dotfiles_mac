@@ -15,7 +15,7 @@ export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 # time that oh-my-zsh is loaded.
 # TEST 'e*' and onwards - PPJ
 # Installation: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh
-ZSH_THEME="powerlevel10k/powerlevel10k" 
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -112,16 +112,6 @@ alias tkill='tmux kill-session -t'
 alias ev='vim ~/dotfiles_mac/vimrc'
 alias et='vim ~/dotfiles_mac/tmux.conf'
 alias ez='vim ~/dotfiles_mac/zshrc'
-
-# spring aliases
-alias sc='bin/spring rails console'
-alias sr='bin/spring rake'
-
-# workflow aliases
-alias fs='foreman start'
-alias sync='bundle install && rake db:migrate'
-alias syncm='git checkout master && git pull && bundle install && rake db:migrate'
-alias bk='echo y | git buildkite'
 
 # git aliases
 alias git=hub
