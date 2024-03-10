@@ -1,18 +1,20 @@
 
-## Setup
+## Installation
 
-1. Clone the repo in the home folder
+### :warning: Caution: Overwrites existing symlinks and files
 
-2. Symlink (force to remove existing files) the required files
-   
-   `ln -sf ~/dotfiles_mac/zshrc ~/.zshrc` 
-   
-   and so on
-   
-### Note
+### Clone this repo to the $HOME folder
+```shell
+git clone git@github.com:ppj/dotfiles_mac.git $HOME/dotfiles_mac
+```
 
-1. Neovim config
-   ```shell
-   mkdir ~/.config/nvim
-   ln -sf ~/dotfiles_mac/init.vim ~/.config/nvim/init.vim
-   ```
+### Create basic symlinks to the config files and nvim files
+```
+$HOME/dotfiles_mac/scripts/symlinks.sh
+```
+
+### Vim setup
+```
+$HOME/dotfiles_mac/scripts/vim_setup.sh
+```
+
