@@ -66,14 +66,27 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- See `:help telescope.builtin`
     local builtin = require "telescope.builtin"
+    local utils = require "telescope.utils"
 
     -- Find files
-    vim.keymap.set("n", "<leader>or", builtin.oldfiles, { desc = "[R]ecent Files" })
+    vim.keymap.set("n", "<leader>or", function()
+      builtin.oldfiles { only_cwd = true, hidden = true }
+    end, { desc = "[R]ecent Files" })
+
+    vim.keymap.set("n", "<leader>oo", function()
+      -- See :help telescope.builtin.git_files() for more options
+      builtin.git_files { show_untracked = true, hidden = true }
+    end, { desc = "Project Files" })
+
+    vim.keymap.set("n", "<leader>oh", function()
+      builtin.find_files { cwd = utils.buffer_dir(), hidden = true }
+    end, { desc = "[H]ere" })
+
+    vim.keymap.set("n", "<leader>od", function() -- Shortcut for searching my dotfiles repo
+      builtin.find_files { cwd = "$HOME/dotfiles_mac" }
+    end, { desc = "[D]otfiles" })
+
     vim.keymap.set("n", "<leader>ob", builtin.buffers, { desc = "[B]uffers" })
-    vim.keymap.set("n", "<leader>op", builtin.git_files, { desc = "[P]roject Files" })
-    vim.keymap.set("n", "<leader>on", function() -- Shortcut for searching your neovim configuration files
-      builtin.find_files { cwd = vim.fn.stdpath "config" }
-    end, { desc = "[N]eovim files" })
 
     -- Fuzzy find other things
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search [K]eymaps" })
