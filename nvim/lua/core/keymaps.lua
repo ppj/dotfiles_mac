@@ -25,6 +25,9 @@ vim.keymap.set("n", "<leader>:", ":", { desc = "Simple command prompt" })
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv")
 
+-- Plugin management
+vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "O[p]en" })
+
 -------------------------------------------------------------------------------
 -- From https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 -------------------------------------------------------------------------------
