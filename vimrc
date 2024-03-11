@@ -225,7 +225,7 @@ noremap <C-b> <C-w>p
 noremap <leader>oo :CtrlP<CR>         " open file in the project root
 noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
 noremap <leader>ob :CtrlPBuffer<CR>   " open (existing) Buffer
-noremap <leader>ou :CtrlPMRU<CR>      " open Most-recently-used file
+noremap <leader>or :CtrlPMRU<CR>      " open Most-recently-used file
 noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
 noremap <leader>of :Explore<CR>       " open explorer in current File's folder (using vim's native explorer - netrw)
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
