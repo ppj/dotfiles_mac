@@ -5,25 +5,18 @@ return {
   ------------------------------------------------------------------------------
   -- From my vimrc (replace with better alternatives when discovered)
   ------------------------------------------------------------------------------
-  "tpope/vim-repeat", -- use . to repeat last command for plugins
-
   "moll/vim-bbye", -- Close buffer without closing the window using :Bdelete
-
-  "tpope/vim-endwise", -- "end" most "do"s wisely
-
+  "tpope/vim-repeat", -- use . to repeat last command for plugins
   "terryma/vim-multiple-cursors",
-
-  "jiangmiao/auto-pairs", -- auto complete matching pair
-
-  "christoomey/vim-tmux-navigator", -- Navigate Vim and Tmux panes/splits with the same key bindings
-
   -- "tpope/vim-rhubarb", -- Try gitlinker instead for GBrowse etc.
 
-  -- "airblade/vim-gitgutter", -- show git changes in the margin (REPLACED BY Gitsigns)
+  -- Ruby & co.
+  "tpope/vim-endwise", -- "end" most "do"s wisely
+  "jiangmiao/auto-pairs", -- auto complete matching pair
 
   -- Tmux & co.
+  "christoomey/vim-tmux-navigator", -- Navigate Vim and Tmux panes/splits with the same key bindings
   "benmills/vimux", -- Interact with tmux from vim
-
   ------------------------------------------------------------------------------
 
   -- NOTE: Plugins can also be added by using a table,
