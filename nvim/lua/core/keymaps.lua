@@ -22,8 +22,8 @@ vim.keymap.set("n", ":", "q:i") -- command history mode (default)
 vim.keymap.set("n", "<leader>:", ":", { desc = "Simple command prompt" })
 
 -- move line(s) up/down with Shift+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
-vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Plugin management
 vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "O[p]en" })
