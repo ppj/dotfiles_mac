@@ -323,8 +323,8 @@ nnoremap : q:i
 nnoremap <leader>: :
 
 " move line(s) up/down with Alt+k/j (http://vim.wikia.com/wiki/Moving_lines_up_or_down)
-vnoremap ∆ :m '>+1<CR>gv
-vnoremap ˚ :m '<-2<CR>gv
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " autocomplete with tab when typing words only (http://bit.ly/29xSbgb)
 function! Tab_Or_Complete()
