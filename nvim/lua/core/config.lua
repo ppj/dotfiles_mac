@@ -30,15 +30,17 @@ vim.opt.timeoutlen = 300
 
 -- TODO: Hide some quickfix and git buffers when cycling through buffers
 -- WARN: The below from my vimrc doesn't work
+--[[
 vim.cmd [[
   augroup HideBuffer
-    autocmd!
-    autocmd FileType qf setlocal nobuflisted
-    autocmd FileType gitcommit setlocal nobuflisted
-    autocmd BufReadPost *.git/index set nobuflisted
-    autocmd BufReadPost *.g/COMMIT_EDITMSG set nobuflisted
+  autocmd!
+  autocmd FileType qf setlocal nobuflisted
+  autocmd FileType gitcommit setlocal nobuflisted
+  autocmd BufReadPost *.git/index set nobuflisted
+  autocmd BufReadPost *.g/COMMIT_EDITMSG set nobuflisted
   augroup END
 ]]
+--]]
 
 -- spell-check on for certain filetypes
 vim.cmd "autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_au"
