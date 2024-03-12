@@ -11,9 +11,10 @@ return {
   {
     "linrongbin16/gitlinker.nvim", -- GBrowse and links
     config = function()
+      require("gitlinker").setup()
       vim.keymap.set({ "n", "v" }, "<leader>gy", ":GitLink default_branch<CR>", { desc = "[G]it cop[y] URL  main-branch" })
       vim.keymap.set({ "n", "v" }, "<leader>gm", ":GitLink! default_branch<CR>", { desc = "[G]it browse [m]ain-branch" })
-      vim.keymap.set({ "n", "v" }, "<leader>gc", ":GitLink default_branch<CR>", { desc = "[G]it cop[y] URL blob" })
+      vim.keymap.set({ "n", "v" }, "<leader>gc", ":GitLink<CR>", { desc = "[G]it cop[y] URL blob" })
       vim.keymap.set({ "n", "v" }, "<leader>go", ":GitLink!<CR>", { desc = "[G]it br[o]wse blob" })
     end,
   },
