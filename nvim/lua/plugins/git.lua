@@ -5,7 +5,7 @@ return {
       vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "[G]it Status" }) -- git status
       vim.keymap.set("n", "<leader>gd", ":Gdiff<CR>", { desc = "[G]it [D]iff current file" }) -- git diff current file
       vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "[G]it [B]lame" }) -- git blame current file
-      vim.keymap.set("n", "<leader>gl", ":Gpull<CR>", { desc = "[G]it [P]ull" }) -- git pull
+      vim.keymap.set("n", "<leader>gl", ":Git pull<CR>", { desc = "[G]it [P]ull" }) -- git pull
     end,
   },
   {
