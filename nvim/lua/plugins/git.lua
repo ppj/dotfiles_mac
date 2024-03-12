@@ -59,8 +59,8 @@ return {
         end, { expr = true })
 
         -- Actions
-        map("n", "<leader>gp", gs.preview_hunk)
-        map("n", "<leader>gt", gs.toggle_current_line_blame)
+        map("n", "<leader>gp", gs.preview_hunk, { desc = "[P]review hunk" })
+        map("n", "<leader>gt", gs.toggle_current_line_blame, { desc = "[T]oggle line blame" })
       end,
     },
   },
