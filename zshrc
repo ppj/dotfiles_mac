@@ -95,7 +95,7 @@ bindkey '^R' history-incremental-search-backward
 
 # set aliases
 # colorful ls (install with `sudo gem install colorls` assuming ruby is pre-installed)
-alias cls='colorls'
+alias els='eza --tree'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
 source /usr/local/share/zsh/site-functions/_tmuxinator

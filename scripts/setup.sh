@@ -32,7 +32,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 display_banner "Installing zsh-autosuggestions custom plugin"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-
-display_banner "Installing colorls (a colourful ls) (REQUIRES RUBY PRE-INSTALLED)"
-sudo gem install colorls
+display_banner "Installing eza (for tree mode and colourful ls)"
+brew install eza
 
