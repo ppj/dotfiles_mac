@@ -88,6 +88,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set("n", "<leader>ob", builtin.buffers, { desc = "[B]uffers" })
 
+    vim.keymap.set("n", "<leader>of", function()
+      builtin.find_files { only_cwd = true, hidden = true }
+    end, { desc = "[F]iles in PWD" })
+
     -- Fuzzy find other things
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search [K]eymaps" })
     vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Search [T]elescope" })
