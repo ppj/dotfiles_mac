@@ -121,6 +121,23 @@ alias delete_merged_branches='git branch --merged $(git_main_branch) | grep -v "
 
 # vim
 alias vime='vim -u essential.vim'
+# Multiple Neovim distros (needs fzf)
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim" # git clone https://github.com/LazyVim/starter "{XDG_CONFIG_HOME:-$HOME/.config}"/LazyVim
+alias nvim-kick="NVIM_APPNAME=kickstart nvim" # git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/kickstart
+
+function nvims() {
+  items=("default" "kickstart" "LazyVim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n" # convenience shortcut to launch different distros of nvim using Ctrl+a
 
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
