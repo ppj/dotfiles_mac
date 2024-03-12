@@ -12,10 +12,16 @@ return {
     "linrongbin16/gitlinker.nvim", -- GBrowse and links
     config = function()
       require("gitlinker").setup()
-      vim.keymap.set({ "n", "v" }, "<leader>gy", ":GitLink default_branch<CR>", { desc = "[G]it cop[y] URL  main-branch" })
-      vim.keymap.set({ "n", "v" }, "<leader>gm", ":GitLink! default_branch<CR>", { desc = "[G]it browse [m]ain-branch" })
-      vim.keymap.set({ "n", "v" }, "<leader>gc", ":GitLink<CR>", { desc = "[G]it cop[y] URL blob" })
-      vim.keymap.set({ "n", "v" }, "<leader>go", ":GitLink!<CR>", { desc = "[G]it br[o]wse blob" })
+      vim.keymap.set({ "n", "v" }, "<leader>gm", ":GitLink default_branch<CR>", { desc = "Copy [m]ain branch URL" })
+      vim.keymap.set({ "n", "v" }, "<leader>gc", ":GitLink current_branch<CR>", { desc = "Copy [c]urrent branch URL" })
+      vim.keymap.set({ "n", "v" }, "<leader>bm", ":GitLink! default_branch<CR>", { desc = "... [m]ain branch" })
+      vim.keymap.set({ "n", "v" }, "<leader>bc", ":GitLink! current_branch<CR>", { desc = "... [c]urrent branch URL" })
+    end,
+  },
+  {
+    "tpope/vim-rhubarb",
+    config = function()
+      vim.keymap.set({ "n", "v" }, "<leader>go", ":GBrowse<CR>", { desc = "Br[o]wse in GitHub" })
     end,
   },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
