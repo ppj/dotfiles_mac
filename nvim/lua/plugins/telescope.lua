@@ -39,6 +39,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       end,
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
+    { "kelly-lin/telescope-ag" },
 
     -- Useful for getting pretty icons, but requires special font.
     --  If you already have a Nerd Font, or terminal set up with fallback fonts
@@ -63,6 +64,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Enable telescope extensions, if they are installed
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
+    pcall(require("telescope").load_extension, "ag")
 
     -- See `:help telescope.builtin`
     local builtin = require "telescope.builtin"
@@ -91,6 +93,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set("n", "<leader>of", function()
       builtin.find_files { only_cwd = true, hidden = true }
     end, { desc = "[F]iles in PWD" })
+
+    -- Search in project using telescope-ag extension
+    vim.keymap.set("v", "<C-s>", "y:Ag <C-r>0<Esc>", { remap = true, desc = "Search selected in project" })
+    vim.keymap.set("n", "<C-s>", "yiw:Ag <C-r>0<Esc>", { remap = true, desc = "Search word in project" })
 
     -- Fuzzy find other things
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search [K]eymaps" })
