@@ -8,11 +8,6 @@ return {
   "moll/vim-bbye", -- Close buffer without closing the window using :Bdelete
   "tpope/vim-repeat", -- use . to repeat last command for plugins
   "terryma/vim-multiple-cursors",
-  -- "tpope/vim-rhubarb", -- Try gitlinker instead for GBrowse etc.
-
-  -- Ruby & co.
-  "tpope/vim-endwise", -- "end" most "do"s wisely
-  "jiangmiao/auto-pairs", -- auto complete matching pair
 
   -- Tmux & co.
   "christoomey/vim-tmux-navigator", -- Navigate Vim and Tmux panes/splits with the same key bindings
