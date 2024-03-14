@@ -13,7 +13,6 @@ end, { desc = "Copy [p]ath" })
 vim.keymap.set("n", "<leader>l", vim.cmd.bn, { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>h", vim.cmd.bp, { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>d", vim.cmd.Bd, { desc = "Close buffer (not window)" })
--- vim.keymap.set("n", "<leader>b", vim.cmd.ls<cr>:b<space>
 vim.keymap.set("n", "<leader>e", vim.cmd.e, { desc = "Reload file" }) -- reload file
 
 -- Move to split window easily
@@ -68,7 +67,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank { on_visual = false, timeout = 250 }
   end,
 })
 
