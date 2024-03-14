@@ -84,12 +84,16 @@ vim.keymap.set("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true, silent = tr
 -------------------------------------------------------------------------------
 -- From https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/remap.lua
 -------------------------------------------------------------------------------
-vim.keymap.set("n", "J", "mzJ`z")
--- keep cursor in the middle of the window when scrolling or searching
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- keep cursor in the current place when ...
+vim.keymap.set("n", "J", "mzJ`z") -- ... joining next line
+vim.keymap.set("n", "*", "mz*`z") -- ... starting to search down
+vim.keymap.set("n", "#", "mz#`z") -- ... starting to search up
+-- keep cursor in the middle of the window when ...
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- ... scrolling down
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- ... scrolling up
+vim.keymap.set("n", "n", "nzzzv") -------- ... searching down
+vim.keymap.set("n", "N", "Nzzzv") -------- ... searching up
+
 -- keep visually copied string in buffer after pasting visually selected string replaced by <leader>p
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "" })
 -- copy to system clipboard by pre-using <leader> to yank
