@@ -222,12 +222,11 @@ noremap <C-l> <C-w>l
 noremap <C-b> <C-w>p
 
 " CtrlP mappings/settings
-noremap <leader>oo :CtrlP<CR>         " open file in the project root
-noremap <leader>oh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
-noremap <leader>ob :CtrlPBuffer<CR>   " open (existing) Buffer
-noremap <leader>or :CtrlPMRU<CR>      " open Most-recently-used file
-noremap <leader>om :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
-noremap <leader>of :Explore<CR>       " open explorer in current File's folder (using vim's native explorer - netrw)
+noremap <leader>ff :CtrlP<CR>         " open file in the project root
+noremap <leader>fh :CtrlP %:p:h<CR>   " open (another file) Here, i.e. in the current file's folder
+noremap <leader>fb :CtrlPBuffer<CR>   " open (existing) Buffer
+noremap <leader>fr :CtrlPMRU<CR>      " open Most-recently-used file
+noremap <leader>fm :CtrlPMixed<CR>    " MRU/Buffer/Normal modes mixed
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 " Without --hidden, it never finds .travis.yml since it starts with a dot
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -238,7 +237,7 @@ let g:ctrlp_mruf_relative = 1
 set clipboard=unnamed
 
 " copy file path to clipboard
-nnoremap <leader>ff :let @* = expand('%:p')<CR>  " copy full file path
+nnoremap <leader>fp :let @* = expand('%:p')<CR>  " copy full file path
 
 " vim-vroom mappings & settings
 let g:vroom_map_keys=0

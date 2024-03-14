@@ -71,28 +71,30 @@ return { -- Fuzzy Finder (files, lsp, etc)
     local utils = require "telescope.utils"
 
     -- Find files
-    vim.keymap.set("n", "<leader>or", function()
+    vim.keymap.set("n", "<leader>fr", function()
       builtin.oldfiles { only_cwd = true, hidden = true }
     end, { desc = "[R]ecent Files" })
 
-    vim.keymap.set("n", "<leader>oo", function()
+    -- Most commonly used (so repeating key makes it easier)
+    vim.keymap.set("n", "<leader>ff", function()
       -- See :help telescope.builtin.git_files() for more options
       builtin.git_files { show_untracked = true, hidden = true }
     end, { desc = "Project Files" })
 
-    vim.keymap.set("n", "<leader>oh", function()
+    -- Can also use the native vim.fs.dirname(vim.api.nvim_buf_get_name(0) api instead of telescope.utils
+    vim.keymap.set("n", "<leader>fh", function()
       builtin.find_files { cwd = utils.buffer_dir(), hidden = true }
     end, { desc = "[H]ere" })
 
-    vim.keymap.set("n", "<leader>od", function() -- Shortcut for searching my dotfiles repo
+    vim.keymap.set("n", "<leader>fd", function() -- Shortcut for searching my dotfiles repo
       builtin.find_files { cwd = "$HOME/dotfiles_mac" }
     end, { desc = "[D]otfiles" })
 
-    vim.keymap.set("n", "<leader>ob", builtin.buffers, { desc = "[B]uffers" })
+    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[B]uffers currently open" })
 
-    vim.keymap.set("n", "<leader>of", function()
+    vim.keymap.set("n", "<leader>fa", function()
       builtin.find_files { only_cwd = true, hidden = true }
-    end, { desc = "[F]iles in PWD" })
+    end, { desc = "[A]ll files in PWD" })
 
     -- Search in project using telescope-ag extension
     vim.keymap.set("v", "<C-s>", "y:Ag <C-r>0<Esc>", { remap = true, desc = "Search selected in project" })
