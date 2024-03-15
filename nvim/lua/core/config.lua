@@ -29,7 +29,8 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 -- TODO: Hide some quickfix and git buffers when cycling through buffers
--- WARN: The below from my vimrc doesn't work
+-- WARN: The below from my vimrc prevents the git index from reloading after
+-- causing a commit to not reflect in there
 --[[
 vim.cmd [[
   augroup HideBuffer
@@ -40,7 +41,6 @@ vim.cmd [[
   autocmd BufReadPost *.g/COMMIT_EDITMSG set nobuflisted
   augroup END
 ]]
---]]
 
 -- spell-check on for certain filetypes
 vim.cmd "autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_au"
