@@ -48,6 +48,19 @@ vim.cmd "autocmd FileType gitcommit setlocal spell spelllang=en_us"
 
 vim.cmd "autocmd VimResized * :wincmd =" -- Auto-resize splits if window is resized
 
+-- Use Ag for grep
+vim.opt.grepprg = "ag --nogroup --smart-case --follow --vimgrep --hidden --ignore '**.git/*'"
+vim.opt.grepformat = "%f:%l:%c:%m"
+-- Auto-open quickfix list post grep
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  desc = "Auto-open QF list post grep",
+  group = vim.api.nvim_create_augroup("quickfix", { clear = true }),
+  pattern = "[^l]*",
+  callback = function()
+    vim.cmd.cwindow()
+  end,
+})
+
 -------------------------------------------------------------------------------
 -- Better UI
 -------------------------------------------------------------------------------
