@@ -2,8 +2,6 @@
 
 source ./scripts/display_banner.sh
 
-# TODO: Install all basic tools (and update README.md)
-
 display_banner "Installing basics for terminal (zsh, tmux)"
 brew install zsh tmux
 
@@ -13,7 +11,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 display_banner "Installing tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-display_banner "Installing git and hub "
+display_banner "Installing git and hub"
 brew install git hub 
 
 display_banner "Installing editors (vim, neovim)"
@@ -25,6 +23,7 @@ brew install fzf ag
 display_banner "Installing hack-nerd-font"
 brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
+echo "Add the HackNerdFont to your iTerm2 profile (Text tab)"
 
 display_banner "Installing powerlevel10k zsh custom theme"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
