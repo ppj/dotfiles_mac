@@ -17,8 +17,9 @@ brew install git hub
 display_banner "Installing editors (vim, neovim)"
 brew install vim nvim
 
-display_banner "Installing search tools (fzf, ag)"
-brew install fzf ag
+display_banner "Installing search tools (fzf, ag, ripgrep, fd)"
+echo "(ripgrep and fd are required for telescope.nvim's grep)"
+brew install fzf ag ripgrep fd
 
 display_banner "Installing hack-nerd-font"
 brew tap homebrew/cask-fonts
