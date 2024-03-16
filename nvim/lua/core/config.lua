@@ -28,19 +28,16 @@ vim.opt.undofile = true -- Save undo history
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
--- TODO: Hide some quickfix and git buffers when cycling through buffers
--- WARN: The below from my vimrc prevents the git index from reloading after
--- causing a commit to not reflect in there
---[[
-vim.cmd [[
-  augroup HideBuffer
-  autocmd!
-  autocmd FileType qf setlocal nobuflisted
-  autocmd FileType gitcommit setlocal nobuflisted
-  autocmd BufReadPost *.git/index set nobuflisted
-  autocmd BufReadPost *.g/COMMIT_EDITMSG set nobuflisted
-  augroup END
-]]
+-- Hide some quickfix and git buffers when cycling through buffers
+vim.api.nvim_create_augroup("HideBuffer", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType", "BufReadPre", "BufReadPost" }, {
+  group = "HideBuffer",
+  pattern = { "qf", "*.git/index", "*.g/COMMIT_EDITMSG" },
+  callback = function()
+    vim.opt.buflisted = false
+    vim.opt_local.buflisted = false
+  end,
+})
 
 -- spell-check on for certain filetypes
 vim.cmd "autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_au"
