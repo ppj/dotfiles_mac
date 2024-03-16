@@ -71,6 +71,15 @@ vim.opt.showmode = false -- mode is already shown in the status line
 vim.opt.breakindent = true -- word-wrapped line-breaks respect indentation
 vim.opt.mouse = "a" -- mouse to resize splits etc.
 
+-- Disable relative numbering when not the active buffer (from my vimrc)
+vim.cmd [[
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+  augroup END
+]]
+
 vim.opt.signcolumn = "yes:2" -- Keep signcolumn on with 2-char width
 vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
 
