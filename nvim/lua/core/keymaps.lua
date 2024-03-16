@@ -76,8 +76,8 @@ vim.keymap.set("v", "*", 'y/<C-R>"<CR>', { remap = true })
 vim.keymap.set("v", "#", 'y?<C-R>"<CR>', { remap = true })
 
 -- Search in project
-vim.keymap.set("n", "<C-s>", "yiw:silent grep! <C-R>0<Esc>", { remap = true, desc = "Search word in project" })
-vim.keymap.set("v", "<C-s>", "y:silent grep! '<C-R>0'<Esc>", { remap = true, desc = "Search selection in project" })
+vim.keymap.set("n", "<C-s>", "yiw:silent grep! <C-R>0 | copen<Esc>F|h", { remap = true, desc = "Search word in project" })
+vim.keymap.set("v", "<C-s>", "y:silent grep! '<C-R>0' | copen<Esc>F'h", { remap = true, desc = "Search selection in project" })
 
 -- move cursor up/down by screen lines ONLY WHEN used without a count
 vim.keymap.set("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
