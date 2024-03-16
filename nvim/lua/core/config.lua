@@ -40,8 +40,17 @@ vim.api.nvim_create_autocmd({ "FileType", "BufReadPre", "BufReadPost" }, {
 })
 
 -- spell-check on for certain filetypes
-vim.cmd "autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_au"
-vim.cmd "autocmd FileType gitcommit setlocal spell spelllang=en_us"
+vim.api.nvim_create_augroup("SpellCheck", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "SpellCheck",
+  pattern = "gitcommit",
+  command = "setlocal spell spelllang=en_au",
+})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = "SpellCheck",
+  pattern = "*.md",
+  command = "setlocal spell spelllang=en_us",
+})
 
 vim.cmd "autocmd VimResized * :wincmd =" -- Auto-resize splits if window is resized
 
