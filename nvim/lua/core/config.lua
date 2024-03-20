@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.cmd "autocmd VimResized * :wincmd =" -- Auto-resize splits if window is resized
 
 -- Use Ag for grep
-vim.opt.grepprg = "ag --nogroup --smart-case --follow --vimgrep --hidden --ignore '**.git/*'"
+vim.opt.grepprg = "ag --nogroup --smart-case --follow --vimgrep --hidden --skip-vcs-ignores --ignore '**.git/*'"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
 -------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ vim.opt.showmode = false -- mode is already shown in the status line
 vim.opt.breakindent = true -- word-wrapped line-breaks respect indentation
 vim.opt.mouse = "a" -- mouse to resize splits etc.
 
--- Disable relative numbering when not the active buffer (from my vimrc)
+-- Disable relative numbering in insert mode or when not the active buffer (from my vimrc)
 vim.cmd [[
   augroup numbertoggle
     autocmd!
