@@ -24,6 +24,24 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
 
+    -- Clone the default Telescope configuration
+    local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
+    -- I want to search in hidden/dot files.
+    table.insert(vimgrep_arguments, "--hidden")
+    table.insert(vimgrep_arguments, "--no-ignore-vcs")
+
+    require("telescope").setup {
+      defaults = {
+        file_ignore_patterns = {
+          ".*node_modules/.*",
+          ".*Gemfile.lock",
+          ".*yarn.lock",
+          ".git/.*",
+        },
+        vimgrep_arguments = vimgrep_arguments,
+      },
+    }
+
     local builtin = require "telescope.builtin"
     local utils = require "telescope.utils"
 
