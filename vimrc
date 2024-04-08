@@ -195,7 +195,7 @@ nnoremap Q <nop>          " disable ex-mode
 nnoremap <Space> <Nop>
 noremap <leader>l :bn<CR>
 noremap <leader>h :bp<CR>
-noremap <leader>d :Bd<CR>
+noremap <leader>x :Bd<CR>
 noremap <leader>b :ls<cr>:b<space>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>

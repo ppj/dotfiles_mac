@@ -12,7 +12,7 @@ end, { desc = "Copy [p]ath" })
 
 vim.keymap.set("n", "<leader>l", vim.cmd.bn, { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>h", vim.cmd.bp, { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>d", vim.cmd.Bd, { desc = "Close buffer (not window)" })
+vim.keymap.set("n", "<leader>x", vim.cmd.Bd, { desc = "Close buffer (not window)" })
 vim.keymap.set("n", "<leader>e", vim.cmd.e, { desc = "Reload file" }) -- reload file
 
 -- Move to split window easily
