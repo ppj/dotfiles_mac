@@ -6,8 +6,8 @@
   "doubleTapSwitchLayerTimeout": 250,
   "iconsAndLayerTextsBrightness": 30,
   "alphanumericSegmentsBrightness": 30,
-  "keyBacklightBrightness": 80,
-  "ledsFadeTimeout": 0,
+  "keyBacklightBrightness": 140,
+  "ledsFadeTimeout": 300,
   "perKeyRgbPresent": false,
   "backlightingMode": "FunctionalBacklighting",
   "backlightingNoneActionColor": {
