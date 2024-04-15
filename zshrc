@@ -94,7 +94,7 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 # set aliases
-# colorful ls (install with `sudo gem install colorls` assuming ruby is pre-installed)
+# colorful ls (install with `brew install eza`)
 alias els='eza --tree'
 
 # Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
@@ -152,9 +152,6 @@ export PG_USER=${USER}
 
 # fuzzy finder fzf
 eval "$(fzf --zsh)"
-
-# zsh-syntax-highlighting
-source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # brew path
 export PATH="/usr/local/sbin:$PATH"
