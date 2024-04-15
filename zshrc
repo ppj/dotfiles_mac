@@ -85,7 +85,7 @@ fancy-ctrl-z () {
   fi
 }
 zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+bindkey -M viins '^Z' fancy-ctrl-z
 
 # Vim mode for shell
 bindkey -v
