@@ -32,6 +32,9 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 display_banner "Installing zsh-autosuggestions custom plugin"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+display_banner "Installing zsh-syntax-highlighting custom plugin"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 display_banner "Installing eza (for tree mode and colourful ls)"
 brew install eza
 
