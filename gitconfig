@@ -1,5 +1,4 @@
 [core]
-	excludesfile = /Users/prasanna.joshi/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -8,7 +7,7 @@
 	trustExitCode = true
 [user]
 	name = Prasanna Joshi
-	email = prasanna.joshi@cultureamp.com
+	email = prasanna_3003@yahoo.com
 [pull]
 	rebase = false
 [push]
@@ -17,7 +16,5 @@
 	branch = false
 	diff = false
 	log = true
-[commit]
-	template = /Users/prasanna.joshi/.stCommitMsg
 [init]
 	defaultBranch = main
