@@ -95,8 +95,8 @@ vim.keymap.set("n", "#", "mz#`z") -- ... starting to search up
 -- keep cursor in the middle of the window when ...
 vim.keymap.set("n", "<C-d>", "<C-d>zz") -- ... scrolling down
 vim.keymap.set("n", "<C-u>", "<C-u>zz") -- ... scrolling up
-vim.keymap.set("n", "n", "nzzzv") -------- ... searching down
-vim.keymap.set("n", "N", "Nzzzv") -------- ... searching up
+-- vim.keymap.set("n", "n", "nzzzv") -------- ... searching down
+-- vim.keymap.set("n", "N", "Nzzzv") -------- ... searching up
 
 -- keep visually copied string in buffer after pasting visually selected string replaced by <leader>p
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "" })
