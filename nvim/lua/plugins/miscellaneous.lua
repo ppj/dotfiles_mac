@@ -63,4 +63,10 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  { -- Add indentation lines even on blank lines
+    "lukas-reineke/indent-blankline.nvim",
+    -- See `:help ibl`
+    main = "ibl",
+    opts = {},
+  },
 }
