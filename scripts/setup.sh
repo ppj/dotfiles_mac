@@ -26,9 +26,6 @@ brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
 echo "Add the HackNerdFont to your iTerm2 profile (Text tab)"
 
-display_banner "Installing powerlevel10k zsh custom theme"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
 display_banner "Installing zsh-autosuggestions custom plugin"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
