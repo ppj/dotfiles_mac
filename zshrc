@@ -89,10 +89,6 @@ bindkey '^R' history-incremental-search-backward
 # colorful ls (install with `brew install eza`)
 alias els='eza --tree'
 
-# Tmuxinator (https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh)
-source /usr/local/share/zsh/site-functions/_tmuxinator
-alias mux=tmuxinator
-
 # aliases for Tmux
 alias tmux='tmux -2'
 alias ta='tmux attach -t'
