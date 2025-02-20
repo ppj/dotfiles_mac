@@ -150,3 +150,6 @@ export PATH="/usr/local/sbin:$PATH"
 # tmuxifier path
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
+
+# Set up oh-my-posh first: https://www.ohmyposh.dev/docs/installation/macos
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/tokyonight_storm.omp.json)"

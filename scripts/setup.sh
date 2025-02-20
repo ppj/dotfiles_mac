@@ -26,6 +26,9 @@ brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
 echo "Add the HackNerdFont to your iTerm2 profile (Text tab)"
 
+display_banner "Installing ohmyposh prompt"
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+
 display_banner "Installing zsh-autosuggestions custom plugin"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
