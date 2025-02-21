@@ -6,7 +6,7 @@ source_dir=$(dirname "$script_dir") # go up one level
 source_dir_absolute=$(readlink -f $source_dir) # absolute path of source_dir
 
 # List of files to symlink
-files_to_symlink=("gitconfig" "vimrc" "zshrc" "tmux.conf")
+files_to_symlink=("gitconfig" "vimrc" "zshrc" "tmux.conf" "starship.toml")
 echo "Symlinking ... "
 
 # Create symbolic links for specified files (using the absolute path of the source file)
