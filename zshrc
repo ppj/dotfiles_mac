@@ -107,14 +107,17 @@ alias gls='git status && git branch'
 alias use_latest_master='git fetch && git rebase origin/$(git_main_branch)'
 alias delete_merged_branches='git branch --merged $(git_main_branch) | grep -v "$(git_main_branch)" | xargs git branch -d'
 
-# vim
+# vim & nvim (Neovim)
 alias vime='vim -u essential.vim'
-# Multiple Neovim distros (needs fzf)
+alias nvim_reset='rm -rf ~/.local/state/nvim ~/.local/share/nvim ~/.config/nvim/lazy-lock.json'
+
+# Multiple Neovim distros (needs fzf - brew install fzf)
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim" # git clone https://github.com/LazyVim/starter "{XDG_CONFIG_HOME:-$HOME/.config}"/LazyVim
 alias nvim-kick="NVIM_APPNAME=kickstart nvim" # git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/kickstart
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim" # git clone https://github.com/AstroNvim/template "${XDG_CONFIG_HOME:-$HOME/.config}"/AstroNvim
 
 function nvims() {
-  items=("default" "kickstart" "LazyVim")
+  items=("default" "kickstart" "LazyVim" "AstroNvim")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
