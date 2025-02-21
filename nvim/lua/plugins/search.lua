@@ -34,8 +34,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         file_ignore_patterns = {
           ".*node_modules/.*",
-          ".*Gemfile.lock",
-          ".*yarn.lock",
           ".git/.*",
         },
         vimgrep_arguments = vimgrep_arguments,
