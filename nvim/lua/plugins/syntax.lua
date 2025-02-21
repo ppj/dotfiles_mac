@@ -6,8 +6,7 @@ return { -- Highlight, edit, and navigate code
 
     ---@diagnostic disable-next-line: missing-fields
     ensure_installed = { "bash", "lua", "markdown", "vim", "vimdoc", "ruby", "typescript" }
-    -- Autoinstall languages that are not installed
-    auto_install = true
+    auto_install = true -- Autoinstall languages that are not installed
     highlight = { enable = true }
     indent = { enable = true }
 
