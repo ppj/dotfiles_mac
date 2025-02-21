@@ -141,9 +141,8 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {},
+      ts_ls = {},
       --
-
       lua_ls = {
         -- cmd = {...},
         -- filetypes { ...},
@@ -202,6 +201,8 @@ return { -- LSP Configuration & Plugins
           require("lspconfig")[server_name].setup(server)
         end,
       },
+      ensure_installed = ensure_installed,
+      automatic_installation = true,
     }
   end,
 }
