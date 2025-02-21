@@ -143,9 +143,6 @@ eval "$(fzf --zsh)"
 
 # brew path
 export PATH="/usr/local/sbin:$PATH"
-# tmuxifier path
-export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
-eval "$(tmuxifier init -)"
 
 # Setup starship prompt
 eval "$(starship init zsh)"
