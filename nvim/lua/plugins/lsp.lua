@@ -201,7 +201,7 @@ return { -- LSP Configuration & Plugins
           require("lspconfig")[server_name].setup(server)
         end,
       },
-      ensure_installed = ensure_installed,
+      ensure_installed = { "ts_ls", "lua_ls" },
       automatic_installation = true,
     }
   end,
