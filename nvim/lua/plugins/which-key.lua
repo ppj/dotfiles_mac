@@ -17,16 +17,25 @@ return { -- Useful plugin to show you pending keybinds.
   event = "VimEnter", -- Sets the loading event to "VimEnter"
   config = function()
     -- Document existing key chains
-    require("which-key").register {
-      ["<leader>a"] = { name = "[A]lt file", _ = "which_key_ignore" },
-      ["<leader>b"] = { name = "[B]rowse", _ = "which_key_ignore" },
-      ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-      ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-      ["<leader>f"] = { name = "[F]ile", _ = "which_key_ignore" },
-      ["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-      ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-      ["<leader>t"] = { name = "Run [T]est", _ = "which_key_ignore" },
-      ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+    require("which-key").add {
+      { "<leader>a", group = "[A]lt file" },
+      { "<leader>a_", hidden = true },
+      { "<leader>b", group = "[B]rowse" },
+      { "<leader>b_", hidden = true },
+      { "<leader>c", group = "[C]ode" },
+      { "<leader>c_", hidden = true },
+      { "<leader>d", group = "[D]ocument" },
+      { "<leader>d_", hidden = true },
+      { "<leader>f", group = "[F]ile" },
+      { "<leader>f_", hidden = true },
+      { "<leader>g", group = "[G]it" },
+      { "<leader>g_", hidden = true },
+      { "<leader>s", group = "[S]earch" },
+      { "<leader>s_", hidden = true },
+      { "<leader>t", group = "Run [T]est" },
+      { "<leader>t_", hidden = true },
+      { "<leader>w", group = "[W]orkspace" },
+      { "<leader>w_", hidden = true },
     }
   end,
 }
