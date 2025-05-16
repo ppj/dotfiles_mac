@@ -4,14 +4,6 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
-# [character] # The name of the module we are configuring is 'character'
-# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
-# Disable the package module, hiding it from the prompt completely
-# [package]
-# disabled = true
-
 format = """
 [  ](bg:#a3aed2 fg:#090c0c)\
 [](bg:#769ff0 fg:#a3aed2)\
@@ -20,10 +12,22 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
+$direnv\
 [](fg:#212736 bg:#1d2230)\
 $time\
 [ ](fg:#1d2230)\
 \n$character"""
+
+# Replace the vim-cmd symbols
+[character] # The name of the module we are configuring is 'character'
+vimcmd_symbol = '[◀︎](bold red)'
+vimcmd_replace_one_symbol = '[⌘](bold red)'
+vimcmd_replace_symbol = '[♡](bold red)'
+vimcmd_visual_symbol = '[ஃ](bold red)'
+
+# Disable the package module, hiding it from the prompt completely
+# [package]
+# disabled = true
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
@@ -60,6 +64,14 @@ format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
 [time]
 disabled = false
-time_format = "%T" # Hour:Minute:Second Format
+time_format = "%T, %a %d/%h" # "Sun, 01-Jul, 07:03:31" as per https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[direnv]
+disabled = false
+format = '[ $symbol $allowed $loaded ](bg:#212736 fg:#a3aed2)'
+loaded_msg = '👌'
+unloaded_msg = '👎'
+allowed_msg = '✅'
+denied_msg = '❌'
