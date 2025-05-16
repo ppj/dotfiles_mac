@@ -55,7 +55,8 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.cmd "autocmd VimResized * :wincmd =" -- Auto-resize splits if window is resized
 
 -- Use Ag for grep
-vim.opt.grepprg = "ag --nogroup --smart-case --follow --vimgrep --hidden --skip-vcs-ignores --ignore={'**.git/*','**node_modules/*','**.devbox/*'}"
+vim.opt.grepprg =
+  "ag --nogroup --smart-case --follow --vimgrep --hidden --skip-vcs-ignores --ignore={'**.git/*','**node_modules/*','**.devbox/*','**log/*','**__snapshots__/*'}"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
 -------------------------------------------------------------------------------
