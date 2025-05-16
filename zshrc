@@ -7,7 +7,7 @@ export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # TEST 'e*' and onwards - PPJ
-ZSH_THEME="wedisagree"
+ZSH_THEME="random"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
