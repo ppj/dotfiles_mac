@@ -24,6 +24,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'jiangmiao/auto-pairs'     " auto complete matching pair
 Plugin 'w0rp/ale'                 " async syntax checking
 Plugin 'henrik/vim-indexed-search'  " search count display & more search customisations
+Plugin 'liuchengxu/vim-which-key'
 
 " Look & Feel Plugins
 Plugin 'vim-airline/vim-airline'
@@ -157,6 +158,10 @@ let g:indexed_search_colors = 0
 let g:indexed_search_shortmess = 1
 let g:indexed_search_numbered_only = 1
 let g:indexed_search_n_always_searches_forward = 1
+
+" vim-whick-key settings
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+set timeoutlen=500 " defaults to 1000ms
 
 " vim-rails
 nnoremap <leader>aa :A<CR>   "  alternate file
