@@ -29,6 +29,9 @@ vim.keymap.set("n", "<leader>:", ":", { desc = "Simple command prompt" })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- toggle relative line numbering
+vim.keymap.set("n", "<leader>rr", ":set rnu!<CR>", { desc = "Toggle [r]elative line [n]umbering" })
+
 -- Plugin management
 vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "O[p]en" })
 
@@ -37,11 +40,12 @@ vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "O[p]en" })
 -------------------------------------------------------------------------------
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- clear highlight on pressing <Esc> in normal mode
 
--- Diagnostic keymaps (NOT SURE WHAT THESE ARE. ENABLE IF USEFUL LATER)
+-- Diagnostic keymaps
+-- The next two now come out of the box with Neovim 0.10+. (https://neovim.io/doc/user/diagnostic.html#_defaults)
 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
--- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>dm", vim.diagnostic.open_float, { desc = "Show diagnostic [M]essages" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic [L]ocation list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

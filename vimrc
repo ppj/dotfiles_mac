@@ -90,6 +90,7 @@ syntax on
 runtime macros/matchit.vim      " extend % matching to if/elsif/else/end and more
 autocmd VimResized * :wincmd =  " Auto-resize splits if window is resized
 
+let mapleader=" "
 set hidden                      " manage multiple buffers effectively
 set mouse+=a                    " allow mouse to set cursor position
 " Resize splits in vim in tmux with mouse (source: https://superuser.com/a/550482)
@@ -114,11 +115,10 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
+nnoremap <leader>rr :set rnu!<CR> " toggle relative line numbers
 
 " highlight column # 121 (line too long)
 set colorcolumn=121
-
-let mapleader=" "
 
 " Whitespace
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
