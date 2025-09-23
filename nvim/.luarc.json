@@ -1,0 +1,9 @@
+{
+    "diagnostics.globals": [
+        "ensure_installed",
+        "auto_install",
+        "highlight",
+        "indent",
+        "extensions"
+    ]
+}
