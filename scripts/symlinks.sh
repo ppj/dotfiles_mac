@@ -30,6 +30,7 @@ old_dir=$(PWD)
 cd $source_dir_absolute # set the present working directory
 
 create_deep_symlink "nvim"
+create_deep_symlink "ghostty"
 
 cd $old_dir # cd back to the previous working directory
 

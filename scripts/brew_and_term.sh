@@ -7,3 +7,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/inst
 
 display_banner "Installing iTerm2"
 brew install iterm2
+
+display_banner "Installing ghostty"
+brew install ghostty
