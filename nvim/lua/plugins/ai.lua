@@ -82,4 +82,38 @@ return {
       },
     },
   },
+  {
+    "coder/claudecode.nvim",
+    dependencies = {
+      "folke/snacks.nvim",
+      -- To retain tmux navigation from the terminal mode of the claude-code Nvim terminal window
+      -- https://github.com/coder/claudecode.nvim/issues/53#issuecomment-3166352715
+      keys = {
+        { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", mode = "t" },
+        { "<C-l>", "<cmd>TmuxNavigateRight<cr>", mode = "t" },
+        { "<C-j>", "<cmd>TmuxNavigateDown<cr>", mode = "t" },
+        { "<C-l>", "<cmd>TmuxNavigateUp<cr>", mode = "t" },
+      },
+    },
+    config = true,
+    keys = {
+      { "<leader>c", nil, desc = "AI/Claude Code" },
+      { "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      -- { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" }, -- Doesn't work
+      { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {
+        "<leader>cs",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
+      },
+      -- Diff management
+      { "<leader>ca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>cd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+    },
+  },
 }
