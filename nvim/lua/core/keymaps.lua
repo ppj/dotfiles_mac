@@ -6,9 +6,8 @@ vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close window" })
 -- vim.keymap.set("n", "<leader>ss", ":source %<CR>")
 
 -- copy full file path to clipboard
-vim.keymap.set("n", "<leader>fp", function()
-  vim.fn.setreg("+", vim.api.nvim_buf_get_name(0))
-end, { desc = "Copy [p]ath" })
+vim.keymap.set("n", "<leader>pp", ":let @* = expand('%:+')<CR>", { desc = "Copy relative [p]ath" })
+vim.keymap.set("n", "<leader>pf", ":let @* = expand('%:p')<CR>", { desc = "Copy full [p]ath" })
 
 vim.keymap.set("n", "<leader>l", vim.cmd.bn, { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>h", vim.cmd.bp, { desc = "Previous buffer" })
@@ -33,7 +32,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>rr", ":set rnu!<CR>", { desc = "Toggle [r]elative line [n]umbering" })
 
 -- Plugin management
-vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "O[p]en" })
+vim.keymap.set("n", "<C-p>", ":Lazy<CR>", { desc = "[P]lugins open" })
 
 -------------------------------------------------------------------------------
 -- From https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua

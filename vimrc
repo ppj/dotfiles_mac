@@ -245,7 +245,8 @@ let g:ctrlp_mruf_relative = 1
 set clipboard=unnamed
 
 " copy file path to clipboard
-nnoremap <leader>fp :let @* = expand('%:p')<CR>  " copy full file path
+nnoremap <leader>pp :let @* = expand('%:+')<CR>  " copy relative file path
+nnoremap <leader>pf :let @* = expand('%:p')<CR>  " copy full file path
 
 " vim-vroom mappings & settings
 let g:vroom_map_keys=0
