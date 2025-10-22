@@ -110,11 +110,11 @@ set t_Co=256
 set cursorline                  " highlight current line
 set cursorcolumn                " highlight current column
 set number                      " show line numbers
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-augroup END
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+"   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+" augroup END
 nnoremap <leader>rr :set rnu!<CR> " toggle relative line numbers
 
 " highlight column # 121 (line too long)
