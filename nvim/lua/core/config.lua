@@ -65,7 +65,7 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.termguicolors = true -- enable 24-bit colour
 vim.opt.number = true
 vim.opt.numberwidth = 3
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "121"
 vim.opt.showmode = false -- mode is already shown in the status line
@@ -73,13 +73,13 @@ vim.opt.breakindent = true -- word-wrapped line-breaks respect indentation
 vim.opt.mouse = "a" -- mouse to resize splits etc.
 
 -- Disable relative numbering in insert mode or when not the active buffer (from my vimrc)
-vim.cmd [[
-  augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-  augroup END
-]]
+-- vim.cmd [[
+--   augroup numbertoggle
+--     autocmd!
+--     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+--     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+--   augroup END
+-- ]]
 
 vim.opt.signcolumn = "yes:2" -- Keep signcolumn on with 2-char width
 vim.opt.inccommand = "split" -- Preview substitutions live, as you type!
