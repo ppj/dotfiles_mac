@@ -48,4 +48,9 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+font-family = Monaco
 font-size = 15
+foreground = #afafaf
+cursor-color = #c7c7c7
+background = #161616
+keybind = shift+enter=text:\n
