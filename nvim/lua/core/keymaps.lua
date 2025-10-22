@@ -6,8 +6,8 @@ vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close window" })
 -- vim.keymap.set("n", "<leader>ss", ":source %<CR>")
 
 -- copy full file path to clipboard
-vim.keymap.set("n", "<leader>pp", ":let @* = expand('%:+')<CR>", { desc = "Copy relative [p]ath" })
-vim.keymap.set("n", "<leader>pf", ":let @* = expand('%:p')<CR>", { desc = "Copy full [p]ath" })
+vim.keymap.set("n", "<leader>pp", ":let @+ = expand('%:.')<CR>", { desc = "Copy relative [p]ath" })
+vim.keymap.set("n", "<leader>pf", ":let @+ = expand('%:p')<CR>", { desc = "Copy full [p]ath" })
 
 vim.keymap.set("n", "<leader>l", vim.cmd.bn, { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>h", vim.cmd.bp, { desc = "Previous buffer" })
