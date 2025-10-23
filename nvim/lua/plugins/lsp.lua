@@ -135,6 +135,9 @@ return { -- LSP Configuration & Plugins
         local original_on_new_config = config.on_new_config
 
         config.on_new_config = function(new_config, root_dir)
+          -- Debug logging
+          vim.notify(string.format("[DEBUG] on_new_config called for %s with root_dir: %s", server_name, root_dir or "nil"), vim.log.levels.INFO)
+
           -- First call original callback if it exists
           if original_on_new_config then
             original_on_new_config(new_config, root_dir)
@@ -142,10 +145,15 @@ return { -- LSP Configuration & Plugins
 
           -- Check if this is a devbox project AND the package is available in devbox
           if root_dir and is_package_in_devbox(root_dir, devbox_package) then
-            -- Use devbox run to execute the LSP
-            local cmd = { "devbox", "run", "--cwd", root_dir, devbox_package }
-            -- Append any additional args from original cmd
-            if original_cmd and type(original_cmd) == "table" then
+            -- Use devbox run to execute the LSP (cd to root_dir first for devbox < 0.16)
+            -- Special handling for solargraph which needs "stdio" argument
+            local run_cmd = devbox_package
+            if devbox_package == "solargraph" then
+              run_cmd = devbox_package .. " stdio"
+            end
+            local cmd = { "bash", "-c", string.format('cd "%s" && devbox run %s', root_dir, run_cmd) }
+            -- Append any additional args from original cmd (but not for solargraph since we handle it above)
+            if original_cmd and type(original_cmd) == "table" and devbox_package ~= "solargraph" then
               for i = 2, #original_cmd do
                 table.insert(cmd, original_cmd[i])
               end
@@ -157,6 +165,16 @@ return { -- LSP Configuration & Plugins
             new_config.cmd = find_command(devbox_package, original_cmd, root_dir)
             local source = new_config.cmd[1]:match("mason") and "Mason" or "system"
             require("fidget").notify(string.format("%s: %s", server_name, source), vim.log.levels.INFO)
+          end
+        end
+
+        -- Set a temporary cmd that will be replaced by on_new_config when a buffer is opened
+        -- Without this, vim.lsp.config will reject the configuration
+        -- Use a function that returns nil to defer cmd resolution to on_new_config
+        if not config.cmd then
+          config.cmd = function(dispatchers, ctx)
+            -- This function allows the config to be accepted but defers actual command setup
+            return nil
           end
         end
       end
@@ -283,17 +301,7 @@ return { -- LSP Configuration & Plugins
         root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
       },
 
-      ruby_lsp = {
-        devbox_package = "ruby-lsp",
-        filetypes = { "ruby" },
-        root_markers = { "Gemfile", ".git" },
-      },
-
-      pylsp = {
-        devbox_package = "python-lsp-server",
-        filetypes = { "python" },
-        root_markers = { "pyproject.toml", ".git" },
-      },
+      -- ruby_lsp and pylsp are configured separately below (can't use cmd as function with vim.lsp.config)
 
       lua_ls = {
         devbox_package = "lua-language-server",
@@ -350,13 +358,90 @@ return { -- LSP Configuration & Plugins
 
     -- Setup LSPs with devbox auto-detection
     for server_name, server_config in pairs(servers) do
+      vim.notify(string.format("[DEBUG] Setting up %s", server_name), vim.log.levels.INFO)
       setup_lsp_with_devbox(server_name, server_config, capabilities)
     end
 
     -- Enable all configured LSPs
     -- They will auto-attach to buffers based on their configured filetypes
     for server_name, _ in pairs(servers) do
+      vim.notify(string.format("[DEBUG] Enabling %s", server_name), vim.log.levels.INFO)
       vim.lsp.enable(server_name)
     end
+
+    -- Setup ruby_lsp separately (needs dynamic cmd based on project root)
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "ruby",
+      callback = function(args)
+        local root_dir = vim.fs.root(args.buf, { "Gemfile", ".git" })
+        if not root_dir then
+          return
+        end
+
+        -- Build the command based on whether this is a devbox project
+        local cmd
+        if vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
+          -- Devbox project: run bundle exec within devbox shell environment
+          cmd = { "bash", "-c", string.format('cd "%s" && eval "$(devbox shellenv)" && bundle exec ruby-lsp', root_dir) }
+        else
+          -- Not a devbox project: use bundle exec directly
+          cmd = { "bundle", "exec", "ruby-lsp" }
+        end
+
+        vim.lsp.start({
+          name = "ruby_lsp",
+          cmd = cmd,
+          root_dir = root_dir,
+          capabilities = capabilities,
+        })
+      end,
+    })
+
+    -- Setup pyright separately (needs dynamic cmd based on project root)
+    -- Pyright is the open-source equivalent to VS Code's Pylance
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "python",
+      callback = function(args)
+        local root_dir = vim.fs.root(args.buf, { "pyproject.toml", "setup.py", ".git" })
+        if not root_dir then
+          return
+        end
+
+        -- Build the command based on whether this is a devbox project
+        local cmd
+        -- Check for .venv/bin/pyright-langserver first (most common for Poetry projects)
+        local venv_pyright = root_dir .. "/.venv/bin/pyright-langserver"
+        if vim.fn.executable(venv_pyright) == 1 then
+          -- Use .venv's pyright directly
+          cmd = { venv_pyright, "--stdio" }
+        elseif vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
+          -- Devbox project without venv: try within devbox shell environment
+          cmd = {
+            "bash",
+            "-c",
+            string.format('cd "%s" && eval "$(devbox shellenv)" && pyright-langserver --stdio', root_dir),
+          }
+        else
+          -- Not a devbox project and no venv: use system pyright
+          cmd = { "pyright-langserver", "--stdio" }
+        end
+
+        vim.lsp.start({
+          name = "pyright",
+          cmd = cmd,
+          root_dir = root_dir,
+          capabilities = capabilities,
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "workspace",
+              },
+            },
+          },
+        })
+      end,
+    })
   end,
 }
