@@ -1,14 +1,10 @@
 return { -- LSP Configuration & Plugins
-  "neovim/nvim-lspconfig",
+  -- Using Neovim 0.11+ native LSP configuration (vim.lsp.config)
+  -- No longer needs nvim-lspconfig or mason-lspconfig plugins
+  "williamboman/mason.nvim",
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for neovim
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-
     -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
-    { "j-hui/fidget.nvim", opts = {} },
+    { "j-hui/fidget.nvim", opts = {} }, -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
   },
   config = function()
     -- Brief Aside: **What is LSP?**
@@ -35,6 +31,139 @@ return { -- LSP Configuration & Plugins
     --
     -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
     -- and elegantly composed help section, `:help lsp-vs-treesitter`
+
+    -- Helper function to check if a package is available in devbox
+    local function is_package_in_devbox(devbox_root, package_name)
+      local devbox_json = devbox_root .. "/devbox.json"
+      if vim.fn.filereadable(devbox_json) ~= 1 then
+        return false
+      end
+
+      -- Read and parse devbox.json
+      local ok, content = pcall(vim.fn.readfile, devbox_json)
+      if not ok then
+        return false
+      end
+
+      local json_str = table.concat(content, "\n")
+      local ok_decode, data = pcall(vim.json.decode, json_str)
+      if not ok_decode then
+        return false
+      end
+
+      -- Check if package is in the packages list
+      if data.packages then
+        for _, pkg in ipairs(data.packages) do
+          -- Package can be "name" or "name@version"
+          local pkg_name = pkg:match "^([^@]+)"
+          if pkg_name == package_name then
+            return true
+          end
+        end
+      end
+
+      return false
+    end
+
+    -- Helper function to find the command to execute (Mason, system PATH, etc.)
+    local function find_command(package_name, original_cmd, root_dir)
+      -- If original_cmd is specified, use it
+      if original_cmd and type(original_cmd) == "table" then
+        return original_cmd
+      end
+
+      -- Check if we're in a devbox project (even if package isn't in devbox.json)
+      local has_devbox = root_dir and vim.fn.filereadable(root_dir .. "/devbox.json") == 1
+
+      -- Check Mason's bin directory
+      local mason_bin = vim.fn.stdpath "data" .. "/mason/bin/" .. package_name
+      if vim.fn.executable(mason_bin) == 1 then
+        -- If this is a devbox project, wrap Mason's LSP to run with devbox environment
+        -- This gives the LSP access to the project's dependencies and environment
+        if has_devbox then
+          -- Use bash to load devbox environment and run the LSP
+          return {
+            "bash",
+            "-c",
+            string.format('cd "%s" && eval "$(devbox shellenv)" && exec "%s"', root_dir, mason_bin),
+          }
+        else
+          return { mason_bin }
+        end
+      end
+
+      -- Check if it's in system PATH
+      if vim.fn.executable(package_name) == 1 then
+        if has_devbox then
+          return {
+            "bash",
+            "-c",
+            string.format('cd "%s" && eval "$(devbox shellenv)" && exec "%s"', root_dir, package_name),
+          }
+        else
+          return { package_name }
+        end
+      end
+
+      -- Last resort: just use the package name and hope it's in PATH
+      return { package_name }
+    end
+
+    -- Wrapper function to setup LSP with devbox detection using native vim.lsp.config
+    local function setup_lsp_with_devbox(server_name, server_config, capabilities)
+      local config = vim.tbl_deep_extend("force", {}, server_config)
+      config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+
+      -- Convert root_markers to root_dir function if specified
+      if config.root_markers then
+        local markers = config.root_markers
+        config.root_dir = function(fname)
+          return vim.fs.root(fname, markers)
+        end
+        config.root_markers = nil -- Remove custom field before passing to vim.lsp.config
+      end
+
+      -- Check if server has devbox_package specified
+      local devbox_package = config.devbox_package
+      config.devbox_package = nil -- Remove from config before passing to vim.lsp.config
+
+      if devbox_package then
+        -- Store original cmd if exists
+        local original_cmd = config.cmd
+
+        -- Create a custom on_new_config callback to adjust cmd based on devbox detection
+        local original_on_new_config = config.on_new_config
+
+        config.on_new_config = function(new_config, root_dir)
+          -- First call original callback if it exists
+          if original_on_new_config then
+            original_on_new_config(new_config, root_dir)
+          end
+
+          -- Check if this is a devbox project AND the package is available in devbox
+          if root_dir and is_package_in_devbox(root_dir, devbox_package) then
+            -- Use devbox run to execute the LSP
+            local cmd = { "devbox", "run", "--cwd", root_dir, devbox_package }
+            -- Append any additional args from original cmd
+            if original_cmd and type(original_cmd) == "table" then
+              for i = 2, #original_cmd do
+                table.insert(cmd, original_cmd[i])
+              end
+            end
+            new_config.cmd = cmd
+            require("fidget").notify(string.format("%s: devbox run", server_name), vim.log.levels.INFO)
+          else
+            -- Not a devbox project OR package not in devbox - look for Mason or system installation
+            new_config.cmd = find_command(devbox_package, original_cmd, root_dir)
+            local source = new_config.cmd[1]:match("mason") and "Mason" or "system"
+            require("fidget").notify(string.format("%s: %s", server_name, source), vim.log.levels.INFO)
+          end
+        end
+      end
+
+      -- Set the config using vim.lsp.config
+      vim.lsp.config(server_name, config)
+    end
 
     --  This function gets run when an LSP attaches to a particular buffer.
     --    That is to say, every time a new file is opened that is associated with
@@ -122,33 +251,59 @@ return { -- LSP Configuration & Plugins
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     -- Enable the following language servers
-    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
     --
     --  Add any additional override configuration in the following tables. Available keys are:
+    --  - devbox_package (string): Name of the devbox package (enables auto-detection for devbox projects)
     --  - cmd (table): Override the default command used to start the server
     --  - filetypes (table): Override the default list of associated filetypes for the server
+    --  - root_markers (table): List of files/dirs to identify project root (e.g., {"Gemfile", ".git"})
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+    --
+    -- Note: When devbox_package is specified:
+    --   - Projects WITH the package in devbox.json: Uses `devbox run <package>`
+    --   - Projects with devbox.json but WITHOUT the package: Wraps Mason/system LSP with `devbox shellenv`
+    --   - Projects without devbox.json: Uses Mason or system PATH directly
     local servers = {
-      -- clangd = {},
-      -- gopls = {},
-      -- pyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+      -- Example configurations:
+      -- clangd = { devbox_package = "clang-tools" },
+      -- gopls = { devbox_package = "gopls" },
+      -- pyright = { devbox_package = "pyright" },
+      -- rust_analyzer = { devbox_package = "rust-analyzer" },
+      -- ... etc. Add any LSP server you need with its corresponding devbox package name
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      ts_ls = {},
-      --
+      ts_ls = {
+        devbox_package = "typescript-language-server",
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+      },
+
+      ruby_lsp = {
+        devbox_package = "ruby-lsp",
+        filetypes = { "ruby" },
+        root_markers = { "Gemfile", ".git" },
+      },
+
+      pylsp = {
+        devbox_package = "python-lsp-server",
+        filetypes = { "python" },
+        root_markers = { "pyproject.toml", ".git" },
+      },
+
       lua_ls = {
-        -- cmd = {...},
-        -- filetypes { ...},
-        -- capabilities = {},
+        devbox_package = "lua-language-server",
+        filetypes = { "lua" },
+        root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
         settings = {
           Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
             runtime = { version = "LuaJIT" },
             workspace = {
               checkThirdParty = false,
@@ -171,38 +326,37 @@ return { -- LSP Configuration & Plugins
       },
     }
 
-    -- Ensure the servers and tools above are installed
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
+    -- Mason is still available for manual tool management
+    --  To manually install tools, you can run:
     --    :Mason
     --
     --  You can press `g?` for help in this menu
     require("mason").setup()
 
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua", -- Lua linter and formatter
-      "standardrb", -- Ruby linter and formatter
-      "prettier", -- JavaScript formatter
-      "eslint_d", -- Javascript Linter
-    })
-    require("mason-tool-installer").setup { ensure_installed = ensure_installed }
+    -- Note: Mason automatic installation is disabled.
+    -- For devbox projects WITH LSP in devbox.json: Uses `devbox run <package>`
+    -- For devbox projects WITHOUT LSP in devbox.json: Uses Mason/system LSP wrapped with `devbox shellenv`
+    -- For non-devbox projects: Uses Mason/system LSP directly (install via :Mason, system package manager, or PATH)
+    --
+    -- Optional: Uncomment below to have Mason auto-install specific tools for non-devbox projects
+    -- require("mason-tool-installer").setup {
+    --   ensure_installed = {
+    --     "stylua",      -- Lua formatter
+    --     "standardrb",  -- Ruby linter/formatter
+    --     "prettier",    -- JavaScript formatter
+    --     "eslint_d",    -- JavaScript linter
+    --   }
+    -- }
 
-    require("mason-lspconfig").setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
-      ensure_installed = { "ts_ls", "lua_ls" },
-      automatic_installation = true,
-    }
+    -- Setup LSPs with devbox auto-detection
+    for server_name, server_config in pairs(servers) do
+      setup_lsp_with_devbox(server_name, server_config, capabilities)
+    end
+
+    -- Enable all configured LSPs
+    -- They will auto-attach to buffers based on their configured filetypes
+    for server_name, _ in pairs(servers) do
+      vim.lsp.enable(server_name)
+    end
   end,
 }
