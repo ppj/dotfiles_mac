@@ -135,9 +135,6 @@ return { -- LSP Configuration & Plugins
         local original_on_new_config = config.on_new_config
 
         config.on_new_config = function(new_config, root_dir)
-          -- Debug logging
-          vim.notify(string.format("[DEBUG] on_new_config called for %s with root_dir: %s", server_name, root_dir or "nil"), vim.log.levels.INFO)
-
           -- First call original callback if it exists
           if original_on_new_config then
             original_on_new_config(new_config, root_dir)
@@ -295,13 +292,7 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      ts_ls = {
-        devbox_package = "typescript-language-server",
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
-      },
-
-      -- ruby_lsp and pylsp are configured separately below (can't use cmd as function with vim.lsp.config)
+      -- ts_ls, ruby_lsp, and pyright are configured separately below (can't use cmd as function with vim.lsp.config)
 
       lua_ls = {
         devbox_package = "lua-language-server",
@@ -358,16 +349,63 @@ return { -- LSP Configuration & Plugins
 
     -- Setup LSPs with devbox auto-detection
     for server_name, server_config in pairs(servers) do
-      vim.notify(string.format("[DEBUG] Setting up %s", server_name), vim.log.levels.INFO)
       setup_lsp_with_devbox(server_name, server_config, capabilities)
     end
 
     -- Enable all configured LSPs
     -- They will auto-attach to buffers based on their configured filetypes
     for server_name, _ in pairs(servers) do
-      vim.notify(string.format("[DEBUG] Enabling %s", server_name), vim.log.levels.INFO)
       vim.lsp.enable(server_name)
     end
+
+    -- Setup ts_ls separately (needs dynamic cmd based on project root)
+    -- TypeScript projects typically have typescript-language-server in node_modules
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+      callback = function(args)
+        local root_dir = vim.fs.root(args.buf, { "package.json", "tsconfig.json", "jsconfig.json", ".git" })
+        if not root_dir then
+          return
+        end
+
+        -- Build the command based on what's available
+        local cmd
+        -- Check for local node_modules installation first (most common for npm/pnpm/yarn projects)
+        local local_tsserver = root_dir .. "/node_modules/.bin/typescript-language-server"
+        if vim.fn.executable(local_tsserver) == 1 then
+          -- Use project's typescript-language-server directly
+          cmd = { local_tsserver, "--stdio" }
+        elseif vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
+          -- Devbox project without local installation: try within devbox shell environment
+          -- TypeScript LSP will be available if typescript-language-server is in package.json dev dependencies
+          cmd = {
+            "bash",
+            "-c",
+            string.format('cd "%s" && eval "$(devbox shellenv)" && typescript-language-server --stdio', root_dir),
+          }
+        else
+          -- Check Mason installation
+          local mason_tsserver = vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server"
+          if vim.fn.executable(mason_tsserver) == 1 then
+            -- Use Mason's typescript-language-server
+            cmd = { mason_tsserver, "--stdio" }
+          elseif vim.fn.executable("typescript-language-server") == 1 then
+            -- Use system installation if available
+            cmd = { "typescript-language-server", "--stdio" }
+          else
+            -- No typescript-language-server found - skip starting LSP
+            return
+          end
+        end
+
+        vim.lsp.start({
+          name = "ts_ls",
+          cmd = cmd,
+          root_dir = root_dir,
+          capabilities = capabilities,
+        })
+      end,
+    })
 
     -- Setup ruby_lsp separately (needs dynamic cmd based on project root)
     vim.api.nvim_create_autocmd("FileType", {
@@ -380,12 +418,29 @@ return { -- LSP Configuration & Plugins
 
         -- Build the command based on whether this is a devbox project
         local cmd
-        if vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
-          -- Devbox project: run bundle exec within devbox shell environment
-          cmd = { "bash", "-c", string.format('cd "%s" && eval "$(devbox shellenv)" && bundle exec ruby-lsp', root_dir) }
+        -- Check if ruby-lsp is in Gemfile (most common for Ruby projects)
+        local has_gemfile = vim.fn.filereadable(root_dir .. "/Gemfile") == 1
+        if has_gemfile then
+          if vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
+            -- Devbox project: run bundle exec within devbox shell environment
+            cmd = { "bash", "-c", string.format('cd "%s" && eval "$(devbox shellenv)" && bundle exec ruby-lsp', root_dir) }
+          else
+            -- Not a devbox project: use bundle exec directly
+            cmd = { "bundle", "exec", "ruby-lsp" }
+          end
         else
-          -- Not a devbox project: use bundle exec directly
-          cmd = { "bundle", "exec", "ruby-lsp" }
+          -- No Gemfile - check for Mason or system installation
+          local mason_ruby_lsp = vim.fn.stdpath("data") .. "/mason/bin/ruby-lsp"
+          if vim.fn.executable(mason_ruby_lsp) == 1 then
+            -- Use Mason's ruby-lsp
+            cmd = { mason_ruby_lsp }
+          elseif vim.fn.executable("ruby-lsp") == 1 then
+            -- Use system installation if available
+            cmd = { "ruby-lsp" }
+          else
+            -- No ruby-lsp found - skip starting LSP
+            return
+          end
         end
 
         vim.lsp.start({
@@ -422,8 +477,18 @@ return { -- LSP Configuration & Plugins
             string.format('cd "%s" && eval "$(devbox shellenv)" && pyright-langserver --stdio', root_dir),
           }
         else
-          -- Not a devbox project and no venv: use system pyright
-          cmd = { "pyright-langserver", "--stdio" }
+          -- Not a devbox project and no venv: check Mason or system
+          local mason_pyright = vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver"
+          if vim.fn.executable(mason_pyright) == 1 then
+            -- Use Mason's pyright
+            cmd = { mason_pyright, "--stdio" }
+          elseif vim.fn.executable("pyright-langserver") == 1 then
+            -- Use system installation if available
+            cmd = { "pyright-langserver", "--stdio" }
+          else
+            -- No pyright-langserver found - skip starting LSP
+            return
+          end
         end
 
         vim.lsp.start({
