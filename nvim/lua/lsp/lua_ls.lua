@@ -1,5 +1,8 @@
 -- Lua Language Server configuration
 -- https://luals.github.io/wiki/settings/
+--
+-- Note: Additional diagnostics globals are configured in nvim/.luarc.json
+-- for cross-editor compatibility (VS Code, other LSP clients, etc.)
 
 return function(capabilities)
   vim.api.nvim_create_autocmd("FileType", {
@@ -48,9 +51,6 @@ return function(capabilities)
         capabilities = capabilities,
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
             runtime = { version = "LuaJIT" },
             workspace = {
               checkThirdParty = false,
