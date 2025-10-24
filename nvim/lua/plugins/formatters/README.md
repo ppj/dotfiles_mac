@@ -178,7 +178,7 @@ end
 Add to `nvim/lua/plugins/format.lua`:
 
 ```lua
-local language_config = require("formatters.language")()
+local language_config = require("plugins.formatters.language")()
 
 -- Merge formatters_by_ft
 for ft, formatters in pairs(language_config.formatters_by_ft) do

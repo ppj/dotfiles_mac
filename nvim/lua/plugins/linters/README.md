@@ -211,7 +211,7 @@ end
 Add to `nvim/lua/plugins/lint.lua`:
 
 ```lua
-local language_config = require("linters.language")()
+local language_config = require("plugins.linters.language")()
 
 -- Merge linters_by_ft
 for ft, linters in pairs(language_config.linters_by_ft) do

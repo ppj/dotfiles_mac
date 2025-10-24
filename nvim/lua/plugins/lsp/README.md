@@ -79,17 +79,17 @@ return function(capabilities)
 end
 ```
 
-Then add `require("lsp.<filename>")(capabilities)` to `lua/plugins/lsp.lua`.
+Then add `require("plugins.lsp.<filename>")(capabilities)` to `lua/plugins/lsp.lua`.
 
 ## Usage
 
 These files are loaded from `lua/plugins/lsp.lua`:
 
 ```lua
-require("lsp.lua_ls")(capabilities)
-require("lsp.ts_ls")(capabilities)
-require("lsp.ruby_lsp")(capabilities)
-require("lsp.pyright")(capabilities)
+require("plugins.lsp.lua_ls")(capabilities)
+require("plugins.lsp.ts_ls")(capabilities)
+require("plugins.lsp.ruby_lsp")(capabilities)
+require("plugins.lsp.pyright")(capabilities)
 ```
 
 ## Benefits

@@ -1,5 +1,5 @@
 -- Formatting with conform.nvim
--- Loads modular formatter configurations from lua/formatters/
+-- Loads modular formatter configurations from lua/plugins/formatters/
 
 return {
   "stevearc/conform.nvim",

@@ -1,5 +1,5 @@
 -- Linting with nvim-lint
--- Loads modular linter configurations from lua/linters/
+-- Loads modular linter configurations from lua/plugins/linters/
 
 return {
   "mfussenegger/nvim-lint",
