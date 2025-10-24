@@ -1,14 +1,10 @@
 return { -- LSP Configuration & Plugins
-  "neovim/nvim-lspconfig",
+  -- Using Neovim 0.11+ native LSP configuration (vim.lsp.config)
+  -- No longer needs nvim-lspconfig or mason-lspconfig plugins
+  "williamboman/mason.nvim",
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for neovim
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-
     -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
-    { "j-hui/fidget.nvim", opts = {} },
+    { "j-hui/fidget.nvim", opts = {} }, -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
   },
   config = function()
     -- Brief Aside: **What is LSP?**
@@ -121,88 +117,61 @@ return { -- LSP Configuration & Plugins
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-    -- Enable the following language servers
-    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+    -- All LSPs are configured via FileType autocommands below
+    -- This approach allows dynamic cmd building based on project structure (devbox, node_modules, venv, etc.)
     --
-    --  Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+    -- Currently configured LSPs:
+    --  - lua_ls: Lua language server (for Neovim config and Lua projects)
+    --  - ts_ls: TypeScript/JavaScript language server
+    --  - ruby_lsp: Ruby language server
+    --  - pyright: Python language server (Pylance equivalent)
+    --
+    -- To add more LSPs, follow the same FileType autocommand pattern with priority order:
+    --  1. Project-specific installation (node_modules, .venv, Gemfile)
+    --  2. Devbox shell environment (if devbox.json exists)
+    --  3. Mason installation (~/.local/share/nvim/mason/bin/)
+    --  4. System PATH
+    --  5. Graceful skip if not found
+    --
+    -- Note: This approach provides maximum flexibility:
+    --  - Devbox projects: Uses project's devbox environment
+    --  - Non-devbox projects: Falls back to Mason or system installation
+    --  - Per-project isolation: Each project can use its own LSP version
     local servers = {
-      -- clangd = {},
-      -- gopls = {},
-      -- pyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-      --
-      -- Some languages (like typescript) have entire language plugins that can be useful:
-      --    https://github.com/pmizio/typescript-tools.nvim
-      --
-      -- But for many setups, the LSP (`tsserver`) will work just fine
-      ts_ls = {},
-      --
-      lua_ls = {
-        -- cmd = {...},
-        -- filetypes { ...},
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            workspace = {
-              checkThirdParty = false,
-              -- Tells lua_ls where to find all the Lua files that you have loaded
-              -- for your neovim configuration.
-              library = {
-                "${3rd}/luv/library",
-                unpack(vim.api.nvim_get_runtime_file("", true)),
-              },
-              -- If lua_ls is really slow on your computer, you can try this instead:
-              -- library = { vim.env.VIMRUNTIME },
-            },
-            completion = {
-              callSnippet = "Replace",
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { "missing-fields" } },
-          },
-        },
-      },
+      -- Empty table - all LSPs configured via FileType autocommands below
     }
 
-    -- Ensure the servers and tools above are installed
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
+    -- Mason is available for manual tool management
+    --  To manually install tools, run:
     --    :Mason
+    --  You can press `g?` for help in the Mason menu
     --
-    --  You can press `g?` for help in this menu
+    --  Mason provides LSPs as fallback for non-devbox projects.
+    --  Useful LSPs to install via Mason:
+    --    - lua-language-server (for Neovim config)
+    --    - typescript-language-server (for non-devbox TS projects)
+    --    - ruby-lsp (for non-Gemfile Ruby scripts)
+    --    - pyright (for non-venv Python projects)
     require("mason").setup()
 
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua", -- Lua linter and formatter
-      "standardrb", -- Ruby linter and formatter
-      "prettier", -- JavaScript formatter
-      "eslint_d", -- Javascript Linter
-    })
-    require("mason-tool-installer").setup { ensure_installed = ensure_installed }
+    -- Optional: Uncomment below to have Mason auto-install specific tools
+    -- require("mason-tool-installer").setup {
+    --   ensure_installed = {
+    --     "lua-language-server",
+    --     "stylua",      -- Lua formatter
+    --     "standardrb",  -- Ruby linter/formatter
+    --     "prettier",    -- JavaScript formatter
+    --     "eslint_d",    -- JavaScript linter
+    --   }
+    -- }
 
-    require("mason-lspconfig").setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
-      ensure_installed = { "ts_ls", "lua_ls" },
-      automatic_installation = true,
-    }
+    --------------------------------------------------------------------------------
+    -- Load individual LSP configurations
+    -- Each LSP is defined in its own file in lua/lsp/ directory
+    --------------------------------------------------------------------------------
+    require("lsp.lua_ls")(capabilities)
+    require("lsp.ts_ls")(capabilities)
+    require("lsp.ruby_lsp")(capabilities)
+    require("lsp.pyright")(capabilities)
   end,
 }
