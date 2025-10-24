@@ -92,7 +92,7 @@ This separation avoids duplicate diagnostics while providing comprehensive code 
 
 ### Step 1: Create a new file
 
-Create `nvim/lua/linters/<language>.lua`:
+Create `nvim/lua/plugins/linters/<language>.lua`:
 
 ```lua
 -- <Language> linter configuration

@@ -8,9 +8,9 @@ return {
     local lint = require "lint"
 
     -- Load individual linter configurations
-    local typescript_config = require "linters.typescript"()
-    local ruby_config = require "linters.ruby"()
-    local python_config = require "linters.python"()
+    local typescript_config = require "plugins.linters.typescript"()
+    local ruby_config = require "plugins.linters.ruby"()
+    local python_config = require "plugins.linters.python"()
 
     -- Merge all linters_by_ft
     local linters_by_ft = {}

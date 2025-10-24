@@ -77,7 +77,7 @@ Formatters automatically respect project-specific configuration files by running
 
 ### Step 1: Create a new file
 
-Create `nvim/lua/formatters/<language>.lua`:
+Create `nvim/lua/plugins/formatters/<language>.lua`:
 
 ```lua
 -- <Language> formatter configuration

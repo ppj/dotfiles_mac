@@ -17,10 +17,10 @@ return {
   },
   opts = function()
     -- Load individual formatter configurations
-    local typescript_config = require "formatters.typescript"()
-    local ruby_config = require "formatters.ruby"()
-    local python_config = require "formatters.python"()
-    local lua_config = require "formatters.lua"()
+    local typescript_config = require "plugins.formatters.typescript"()
+    local ruby_config = require "plugins.formatters.ruby"()
+    local python_config = require "plugins.formatters.python"()
+    local lua_config = require "plugins.formatters.lua"()
 
     -- Merge all formatters_by_ft
     local formatters_by_ft = {}
