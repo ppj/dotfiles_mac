@@ -1,5 +1,6 @@
 {
     "diagnostics.globals": [
+        "vim",
         "ensure_installed",
         "auto_install",
         "highlight",

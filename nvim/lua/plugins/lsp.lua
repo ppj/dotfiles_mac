@@ -167,11 +167,11 @@ return { -- LSP Configuration & Plugins
 
     --------------------------------------------------------------------------------
     -- Load individual LSP configurations
-    -- Each LSP is defined in its own file in lua/lsp/ directory
+    -- Each LSP is defined in its own file in lua/plugins/lsp/ directory
     --------------------------------------------------------------------------------
-    require("lsp.lua_ls")(capabilities)
-    require("lsp.ts_ls")(capabilities)
-    require("lsp.ruby_lsp")(capabilities)
-    require("lsp.pyright")(capabilities)
+    require "plugins.lsp.lua_ls"(capabilities)
+    require "plugins.lsp.ts_ls"(capabilities)
+    require "plugins.lsp.ruby_lsp"(capabilities)
+    require "plugins.lsp.pyright"(capabilities)
   end,
 }
