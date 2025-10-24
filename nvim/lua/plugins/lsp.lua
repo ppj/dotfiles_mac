@@ -127,16 +127,16 @@ return { -- LSP Configuration & Plugins
     --  - pyright: Python language server (Pylance equivalent)
     --
     -- To add more LSPs, follow the same FileType autocommand pattern with priority order:
-    --  1. Project-specific installation (node_modules, .venv, Gemfile)
-    --  2. Devbox shell environment (if devbox.json exists)
+    --  1. Project-specific installation (node_modules, .venv)
+    --  2. PATH (includes devbox tools via direnv, or system installation)
     --  3. Mason installation (~/.local/share/nvim/mason/bin/)
-    --  4. System PATH
-    --  5. Graceful skip if not found
+    --  4. Graceful skip if not found
     --
-    -- Note: This approach provides maximum flexibility:
-    --  - Devbox projects: Uses project's devbox environment
+    -- Note: With direnv automatically loading devbox environments, tools are already
+    -- in PATH, so no special devbox handling is needed. This approach provides:
+    --  - Project-specific tool versions (via devbox + direnv)
     --  - Non-devbox projects: Falls back to Mason or system installation
-    --  - Per-project isolation: Each project can use its own LSP version
+    --  - Simple, clean logic without complex wrappers
     local servers = {
       -- Empty table - all LSPs configured via FileType autocommands below
     }

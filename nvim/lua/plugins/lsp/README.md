@@ -24,20 +24,17 @@ All LSPs follow this priority order:
 1. **Project-specific installation**
    - TypeScript: `node_modules/.bin/typescript-language-server`
    - Python: `.venv/bin/pyright-langserver`
-   - Ruby: `bundle exec ruby-lsp` (from Gemfile)
 
-2. **Devbox shell environment** (if `devbox.json` exists)
-   - Wraps LSP with `eval "$(devbox shellenv)"`
-   - Provides access to devbox packages
+2. **PATH** (includes devbox tools via direnv, or system installation)
+   - With direnv, devbox environment is already loaded
+   - Tools are automatically available in PATH
+   - No special wrapper logic needed
 
 3. **Mason installation**
    - `~/.local/share/nvim/mason/bin/<lsp-name>`
    - Fallback for non-devbox projects
 
-4. **System PATH**
-   - Globally installed LSPs
-
-5. **Graceful skip**
+4. **Graceful skip**
    - If no LSP found, silently skips
 
 ## Adding a New LSP
@@ -58,12 +55,12 @@ return function(capabilities)
       end
 
       -- Build cmd based on priority order
+      -- With direnv, devbox environment is already loaded, so tools are in PATH
       local cmd
-      -- 1. Project-specific
-      -- 2. Devbox shell environment
-      -- 3. Mason
-      -- 4. System PATH
-      -- 5. Return if not found
+      -- 1. Check project-specific installation
+      -- 2. Check PATH (includes devbox via direnv, or system)
+      -- 3. Check Mason
+      -- 4. Return if not found
 
       vim.lsp.start({
         name = "<lsp_name>",

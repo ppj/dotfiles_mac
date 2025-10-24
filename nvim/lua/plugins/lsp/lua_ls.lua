@@ -23,21 +23,14 @@ return function(capabilities)
       end
 
       -- Build the command based on what's available
+      -- With direnv, devbox environment is already loaded, so tools are in PATH
       local cmd
       -- Check Mason installation first (most common for Neovim config)
       local mason_lua_ls = vim.fn.stdpath "data" .. "/mason/bin/lua-language-server"
       if vim.fn.executable(mason_lua_ls) == 1 then
-        -- Use Mason's lua-language-server
         cmd = { mason_lua_ls }
-      elseif vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
-        -- Devbox project: try within devbox shell environment
-        cmd = {
-          "bash",
-          "-c",
-          string.format('cd "%s" && eval "$(devbox shellenv)" && lua-language-server', root_dir),
-        }
       elseif vim.fn.executable "lua-language-server" == 1 then
-        -- Use system installation if available
+        -- Use from PATH (includes devbox tools via direnv, or system installation)
         cmd = { "lua-language-server" }
       else
         -- No lua-language-server found - skip starting LSP
