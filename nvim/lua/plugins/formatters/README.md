@@ -200,7 +200,7 @@ end
 
 1. Open a file of the target type
 2. Check formatter is found: `:ConformInfo`
-3. Format the file: `<leader>f` or `:w` (auto-format on save)
+3. Format the file: `<leader>fc` or `:w` (auto-format on save)
 4. Verify project config is respected by checking formatting matches project rules
 
 ## Troubleshooting
