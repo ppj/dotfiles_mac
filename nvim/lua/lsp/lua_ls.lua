@@ -22,7 +22,7 @@ return function(capabilities)
       -- Build the command based on what's available
       local cmd
       -- Check Mason installation first (most common for Neovim config)
-      local mason_lua_ls = vim.fn.stdpath("data") .. "/mason/bin/lua-language-server"
+      local mason_lua_ls = vim.fn.stdpath "data" .. "/mason/bin/lua-language-server"
       if vim.fn.executable(mason_lua_ls) == 1 then
         -- Use Mason's lua-language-server
         cmd = { mason_lua_ls }
@@ -33,7 +33,7 @@ return function(capabilities)
           "-c",
           string.format('cd "%s" && eval "$(devbox shellenv)" && lua-language-server', root_dir),
         }
-      elseif vim.fn.executable("lua-language-server") == 1 then
+      elseif vim.fn.executable "lua-language-server" == 1 then
         -- Use system installation if available
         cmd = { "lua-language-server" }
       else
@@ -41,7 +41,7 @@ return function(capabilities)
         return
       end
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "lua_ls",
         cmd = cmd,
         root_dir = root_dir,
@@ -70,7 +70,7 @@ return function(capabilities)
             -- diagnostics = { disable = { "missing-fields" } },
           },
         },
-      })
+      }
     end,
   })
 end

@@ -27,11 +27,11 @@ return function(capabilities)
         }
       else
         -- Check Mason installation
-        local mason_tsserver = vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server"
+        local mason_tsserver = vim.fn.stdpath "data" .. "/mason/bin/typescript-language-server"
         if vim.fn.executable(mason_tsserver) == 1 then
           -- Use Mason's typescript-language-server
           cmd = { mason_tsserver, "--stdio" }
-        elseif vim.fn.executable("typescript-language-server") == 1 then
+        elseif vim.fn.executable "typescript-language-server" == 1 then
           -- Use system installation if available
           cmd = { "typescript-language-server", "--stdio" }
         else
@@ -40,12 +40,12 @@ return function(capabilities)
         end
       end
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "ts_ls",
         cmd = cmd,
         root_dir = root_dir,
         capabilities = capabilities,
-      })
+      }
     end,
   })
 end

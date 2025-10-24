@@ -27,11 +27,11 @@ return function(capabilities)
         }
       else
         -- Not a devbox project and no venv: check Mason or system
-        local mason_pyright = vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver"
+        local mason_pyright = vim.fn.stdpath "data" .. "/mason/bin/pyright-langserver"
         if vim.fn.executable(mason_pyright) == 1 then
           -- Use Mason's pyright
           cmd = { mason_pyright, "--stdio" }
-        elseif vim.fn.executable("pyright-langserver") == 1 then
+        elseif vim.fn.executable "pyright-langserver" == 1 then
           -- Use system installation if available
           cmd = { "pyright-langserver", "--stdio" }
         else
@@ -40,7 +40,7 @@ return function(capabilities)
         end
       end
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "pyright",
         cmd = cmd,
         root_dir = root_dir,
@@ -54,7 +54,7 @@ return function(capabilities)
             },
           },
         },
-      })
+      }
     end,
   })
 end

@@ -28,11 +28,11 @@ return function(capabilities)
         end
       else
         -- No Gemfile - check for Mason or system installation
-        local mason_ruby_lsp = vim.fn.stdpath("data") .. "/mason/bin/ruby-lsp"
+        local mason_ruby_lsp = vim.fn.stdpath "data" .. "/mason/bin/ruby-lsp"
         if vim.fn.executable(mason_ruby_lsp) == 1 then
           -- Use Mason's ruby-lsp
           cmd = { mason_ruby_lsp }
-        elseif vim.fn.executable("ruby-lsp") == 1 then
+        elseif vim.fn.executable "ruby-lsp" == 1 then
           -- Use system installation if available
           cmd = { "ruby-lsp" }
         else
@@ -41,12 +41,12 @@ return function(capabilities)
         end
       end
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "ruby_lsp",
         cmd = cmd,
         root_dir = root_dir,
         capabilities = capabilities,
-      })
+      }
     end,
   })
 end
