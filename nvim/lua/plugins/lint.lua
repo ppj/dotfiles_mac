@@ -14,6 +14,7 @@ return {
         eslint = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.yml", ".eslintrc.yaml", "eslint.config.js" },
         rubocop = { ".rubocop.yml" },
         pylint = { "pyproject.toml", ".pylintrc", "pylintrc" },
+        ktlint = { ".editorconfig", ".ktlint.yml", "ktlint.yml" },
       }
 
       local files = config_files[linter_name]
@@ -52,6 +53,8 @@ return {
       ruby = { "rubocop" },
       -- Python
       python = { "pylint" },
+      -- Kotlin
+      kotlin = { "ktlint" },
     }
 
     -- Configure linters to find local/project-specific installations
@@ -100,6 +103,9 @@ return {
       return { "--format", "json", "--force-exclusion", "--stdin" }
     end
 
+    -- Ktlint uses built-in configuration from nvim-lint
+    -- It will automatically use .editorconfig from the project
+
     -- Helper to check if file should be linted
     local function should_lint_file(bufname)
       if not vim.bo.modifiable or bufname:match "/.git/" then
@@ -116,6 +122,8 @@ return {
         "^%.rubocop%.yml$", -- .rubocop.yml
         "^%.pylintrc$", -- .pylintrc
         "^pylintrc$", -- pylintrc
+        "^%.ktlint%.yml$", -- .ktlint.yml
+        "^ktlint%.yml$", -- ktlint.yml
       }
       for _, pattern in ipairs(skip_patterns) do
         if filename:match(pattern) then

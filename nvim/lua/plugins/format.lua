@@ -63,6 +63,8 @@ return {
       python = { "isort", "black" },
       -- Lua
       lua = { "stylua" },
+      -- Kotlin
+      kotlin = { "ktlint" },
     },
     -- Configure formatters to find local/project-specific installations
     -- This handles cases where subdirectories have their own package managers
@@ -121,6 +123,8 @@ return {
           return { "--fix", "--format", "quiet", "--stderr", "--stdin", "$FILENAME" }
         end,
       },
+      -- Ktlint uses built-in configuration from conform.nvim
+      -- It will automatically use .editorconfig from the project
     },
   },
   config = function(_, opts)
@@ -150,6 +154,7 @@ return {
         black = { "pyproject.toml", "black.toml" },
         isort = { "pyproject.toml", ".isort.cfg", "setup.cfg" },
         stylua = { "stylua.toml", ".stylua.toml" },
+        ktlint = { ".editorconfig", ".ktlint.yml", "ktlint.yml" },
       }
 
       local files = config_files[formatter_name]
