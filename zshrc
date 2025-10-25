@@ -107,6 +107,37 @@ alias gls='git status && git branch'
 alias use_latest_master='git fetch && git rebase origin/$(git_main_branch)'
 alias delete_merged_branches='git branch --merged $(git_main_branch) | grep -v "$(git_main_branch)" | xargs git branch -d'
 
+# Better way to delete merged branches (asks for confirmation)
+clean_merged_branches() {
+    echo "Fetching latest changes..."
+    git fetch --prune
+
+    echo "Finding merged branches to delete..."
+
+    # Get list of merged branches, excluding main/master and current branch
+    branches_to_delete=$(git branch --merged main | grep -v -E "(main|master|\*)" | xargs)
+
+    if [ -z "$branches_to_delete" ]; then
+        echo "No merged branches to delete."
+        return 0
+    fi
+
+    echo "The following merged branches will be deleted:"
+    echo "$branches_to_delete"
+
+    # Prompt for confirmation
+    read -p "Are you sure you want to delete these branches? (y/N): " -n 1 -r
+    echo
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Delete the branches
+        echo "$branches_to_delete" | xargs -n 1 git branch -d
+        echo "Merged branches deleted successfully!"
+    else
+        echo "Operation cancelled."
+    fi
+}
+
 # vim & nvim (Neovim)
 alias vime='vim -u essential.vim'
 alias nvim_reset='rm -rf ~/.local/state/nvim ~/.local/share/nvim ~/.config/nvim/lazy-lock.json'
