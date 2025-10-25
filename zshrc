@@ -177,8 +177,67 @@ eval "$(fzf --zsh)"
 
 # brew path
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+
+export NODE_ENV=development
+
+# Kafka
+export KAFKA_OPTS=-Djava.security.auth.login.config=/users/prasanna.joshi/kafka/users_jaas.conf
+export DEV_BROKERS=b-2.platform.0mgply.c11.kafka.us-west-2.amazonaws.com:9096,b-1.platform.0mgply.c11.kafka.us-west-2.amazonaws.com:9096
+export STAGING_US_BROKERS=b-2.platform.eyefok.c6.kafka.us-west-2.amazonaws.com:9096,b-1.platform.eyefok.c6.kafka.us-west-2.amazonaws.com:9096
+export PROD_US_BROKERS=b-2.platform.ydtozs.c8.kafka.us-west-2.amazonaws.com:9096,b-1.platform.ydtozs.c8.kafka.us-west-2.amazonaws.com:9096
+export PROD_EU_BROKERS=b-1.platform.yfis3v.c1.kafka.eu-west-1.amazonaws.com:9096,b-2.platform.yfis3v.c1.kafka.eu-west-1.amazonaws.com:9096
+
+export DEV_ZOOKEEPER=z-3.platform.0mgply.c11.kafka.us-west-2.amazonaws.com:2181,z-1.platform.0mgply.c11.kafka.us-west-2.amazonaws.com:2181,z-2.platform.0mgply.c11.kafka.us-west-2.amazonaws.com:2181
+export STAGING_US_ZOOKEEPER=z-1.platform.eyefok.c6.kafka.us-west-2.amazonaws.com:2181,z-2.platform.eyefok.c6.kafka.us-west-2.amazonaws.com:2181,z-3.platform.eyefok.c6.kafka.us-west-2.amazonaws.com:2181
+export PROD_US_ZOOKEEPER=z-2.platform.ydtozs.c8.kafka.us-west-2.amazonaws.com:2181,z-3.platform.ydtozs.c8.kafka.us-west-2.amazonaws.com:2181,z-1.platform.ydtozs.c8.kafka.us-west-2.amazonaws.com:2181
+export PROD_EU_ZOOKEEPER=z-2.platform.yfis3v.c1.kafka.eu-west-1.amazonaws.com:2181,z-1.platform.yfis3v.c1.kafka.eu-west-1.amazonaws.com:2181,z-3.platform.yfis3v.c1.kafka.eu-west-1.amazonaws.com:2181
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+
+fpath=(/Users/prasanna.joshi/.granted/zsh_autocomplete/assume/ $fpath)
+
+fpath=(/Users/prasanna.joshi/.granted/zsh_autocomplete/granted/ $fpath)
+
+export GRANTED_ENABLE_AUTO_REASSUME=true
+
+alias assume="source assume"
+
+# List EC2 instances and start an SSM session (Ref: https://cultureamp.slack.com/archives/CR5375Y3Z/p1729649030762239)
+start_aws_session() {
+  INSTANCE_ID=$(
+    aws ec2 describe-instances \
+      --query "Reservations[*].Instances[*].[InstanceId, State.Name, Tags[?Key=='Name'].Value | [0]]" \
+      --output table |
+      fzf --header "Select an EC2 Instance" |
+      awk '{print $2}' |
+      sed 's/|$//'
+  )
+  if [ -n "$INSTANCE_ID"  ]; then
+    echo "Starting SSM session with instance ID: $INSTANCE_ID"
+    aws ssm start-session --target "$INSTANCE_ID"
+  else
+    echo "No instance selected."
+  fi
+}
 
 # Setup starship prompt
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.starship.toml
 
+# asdf path takes precedence over system path (ensures asdf installed ruby is used by default)
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# direnv hook
+eval "$(direnv hook zsh)"
+
+# ensure that global devbox tools are configured
+eval "$(devbox global shellenv)"
+
+# use asdf installed ruby version as default global
+
+
+# The next line was added by hotel, leave it at the bottom of this file
+source /Users/prasanna.joshi/.config/hotel/config.zsh
+
+export PATH="$HOME/.local/bin:$PATH"
