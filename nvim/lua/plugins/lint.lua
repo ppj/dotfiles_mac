@@ -134,7 +134,25 @@ return {
       callback = function()
         local bufname = vim.api.nvim_buf_get_name(0)
         if should_lint_file(bufname) then
-          lint.try_lint()
+          -- Check if any configured linters are actually available
+          local ft = vim.bo.filetype
+          local linters = lint.linters_by_ft[ft]
+          if linters and #linters > 0 then
+            local available_linters = {}
+            for _, linter_name in ipairs(linters) do
+              local linter = lint.linters[linter_name]
+              if linter then
+                local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
+                if vim.fn.executable(cmd) == 1 then
+                  table.insert(available_linters, linter_name)
+                end
+              end
+            end
+            -- Only try to lint if at least one linter is available
+            if #available_linters > 0 then
+              lint.try_lint(available_linters)
+            end
+          end
         end
       end,
     })
@@ -149,23 +167,38 @@ return {
             local ft = vim.bo.filetype
             local linters = lint.linters_by_ft[ft]
             if linters and #linters > 0 then
-              -- Find root directory and config files
-              local root_dir = vim.fs.root(0, { "package.json", ".git", "pyproject.toml", "Gemfile" })
-              if root_dir then
-                -- Check for config files for each linter
-                local config_info = {}
-                for _, linter_name in ipairs(linters) do
-                  local config = find_config_file(linter_name, root_dir, 0)
-                  if config then
-                    table.insert(config_info, string.format("%s (≈ %s)", linter_name, config))
-                  else
-                    table.insert(config_info, linter_name)
+              -- Check which linters are actually available
+              local available_linters = {}
+              for _, linter_name in ipairs(linters) do
+                local linter = lint.linters[linter_name]
+                if linter then
+                  local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
+                  if vim.fn.executable(cmd) == 1 then
+                    table.insert(available_linters, linter_name)
                   end
                 end
+              end
 
-                local ok, fidget = pcall(require, "fidget")
-                if ok then
-                  fidget.notify(string.format("Linted with: %s", table.concat(config_info, ", ")), vim.log.levels.INFO, { annote = "Lint" })
+              local ok, fidget = pcall(require, "fidget")
+              if ok then
+                if #available_linters > 0 then
+                  -- Find root directory and config files for available linters
+                  local root_dir = vim.fs.root(0, { "package.json", ".git", "pyproject.toml", "Gemfile" })
+                  if root_dir then
+                    local config_info = {}
+                    for _, linter_name in ipairs(available_linters) do
+                      local config = find_config_file(linter_name, root_dir, 0)
+                      if config then
+                        table.insert(config_info, string.format("%s (≈ %s)", linter_name, config))
+                      else
+                        table.insert(config_info, linter_name)
+                      end
+                    end
+                    fidget.notify(string.format("Linted with: %s", table.concat(config_info, ", ")), vim.log.levels.INFO, { annote = "Lint" })
+                  end
+                else
+                  -- No linters found
+                  fidget.notify("Linting skipped (linter not found)", vim.log.levels.WARN, { annote = "Lint" })
                 end
               end
             end
