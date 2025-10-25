@@ -56,7 +56,7 @@ vim.cmd "autocmd VimResized * :wincmd =" -- Auto-resize splits if window is resi
 
 -- Use Ag for grep
 vim.opt.grepprg =
-  "ag --nogroup --smart-case --follow --vimgrep --hidden --skip-vcs-ignores --ignore={'**.git/*','**node_modules/*','**.devbox/*','**log/*','**__snapshots__/*'}"
+  "ag --nogroup --smart-case --follow --vimgrep --hidden --skip-vcs-ignores --ignore={'**.git/*','**node_modules/*','**.devbox/*','**log/*','**__snapshots__/*','pnpm-lock.yaml','**.next/*','**.turbo/*'}"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
 -------------------------------------------------------------------------------
