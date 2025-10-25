@@ -11,29 +11,22 @@ return function(capabilities)
         return
       end
 
-      -- Build the command based on whether this is a devbox project
+      -- Build the command based on what's available
+      -- With direnv, devbox environment is already loaded, so tools are in PATH
       local cmd
       -- Check for .venv/bin/pyright-langserver first (most common for Poetry projects)
       local venv_pyright = root_dir .. "/.venv/bin/pyright-langserver"
       if vim.fn.executable(venv_pyright) == 1 then
         -- Use .venv's pyright directly
         cmd = { venv_pyright, "--stdio" }
-      elseif vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
-        -- Devbox project without venv: try within devbox shell environment
-        cmd = {
-          "bash",
-          "-c",
-          string.format('cd "%s" && eval "$(devbox shellenv)" && pyright-langserver --stdio', root_dir),
-        }
+      elseif vim.fn.executable "pyright-langserver" == 1 then
+        -- Use from PATH (includes devbox tools via direnv, or system installation)
+        cmd = { "pyright-langserver", "--stdio" }
       else
-        -- Not a devbox project and no venv: check Mason or system
+        -- Check Mason installation as fallback
         local mason_pyright = vim.fn.stdpath "data" .. "/mason/bin/pyright-langserver"
         if vim.fn.executable(mason_pyright) == 1 then
-          -- Use Mason's pyright
           cmd = { mason_pyright, "--stdio" }
-        elseif vim.fn.executable "pyright-langserver" == 1 then
-          -- Use system installation if available
-          cmd = { "pyright-langserver", "--stdio" }
         else
           -- No pyright-langserver found - skip starting LSP
           return

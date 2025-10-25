@@ -10,31 +10,19 @@ return function(capabilities)
         return
       end
 
-      -- Build the command based on whether this is a devbox project
+      -- Build the command based on what's available
+      -- With direnv, devbox environment is already loaded, so tools are in PATH
+      -- Note: ruby-lsp automatically detects and works with bundler projects,
+      -- so we don't need to wrap it in "bundle exec"
       local cmd
-      -- Check if ruby-lsp is in Gemfile (most common for Ruby projects)
-      local has_gemfile = vim.fn.filereadable(root_dir .. "/Gemfile") == 1
-      if has_gemfile then
-        if vim.fn.filereadable(root_dir .. "/devbox.json") == 1 then
-          -- Devbox project: run bundle exec within devbox shell environment
-          cmd = {
-            "bash",
-            "-c",
-            string.format('cd "%s" && eval "$(devbox shellenv)" && bundle exec ruby-lsp', root_dir),
-          }
-        else
-          -- Not a devbox project: use bundle exec directly
-          cmd = { "bundle", "exec", "ruby-lsp" }
-        end
+      if vim.fn.executable "ruby-lsp" == 1 then
+        -- Use from PATH (includes devbox tools via direnv, or system installation)
+        cmd = { "ruby-lsp" }
       else
-        -- No Gemfile - check for Mason or system installation
+        -- Check Mason installation as fallback
         local mason_ruby_lsp = vim.fn.stdpath "data" .. "/mason/bin/ruby-lsp"
         if vim.fn.executable(mason_ruby_lsp) == 1 then
-          -- Use Mason's ruby-lsp
           cmd = { mason_ruby_lsp }
-        elseif vim.fn.executable "ruby-lsp" == 1 then
-          -- Use system installation if available
-          cmd = { "ruby-lsp" }
         else
           -- No ruby-lsp found - skip starting LSP
           return
