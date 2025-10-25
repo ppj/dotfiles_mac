@@ -100,6 +100,31 @@ return {
       return { "--format", "json", "--force-exclusion", "--stdin" }
     end
 
+    -- Helper to check if file should be linted
+    local function should_lint_file(bufname)
+      if not vim.bo.modifiable or bufname:match "/.git/" then
+        return false
+      end
+      -- Skip config files that are typically ignored by linters
+      local filename = vim.fn.fnamemodify(bufname, ":t")
+      local skip_patterns = {
+        "^%.eslintrc", -- .eslintrc, .eslintrc.js, .eslintrc.json, etc.
+        "^eslint%.config%.", -- eslint.config.js, eslint.config.mjs, etc.
+        "^%.prettierrc", -- .prettierrc, .prettierrc.js, etc.
+        "^prettier%.config%.", -- prettier.config.js, etc.
+        "^jest%.config%.", -- jest.config.js, etc.
+        "^%.rubocop%.yml$", -- .rubocop.yml
+        "^%.pylintrc$", -- .pylintrc
+        "^pylintrc$", -- pylintrc
+      }
+      for _, pattern in ipairs(skip_patterns) do
+        if filename:match(pattern) then
+          return false
+        end
+      end
+      return true
+    end
+
     -- Set up autocommands to trigger linting
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
@@ -107,9 +132,8 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
-        -- Only lint if the buffer is modifiable and not in .git directory
         local bufname = vim.api.nvim_buf_get_name(0)
-        if vim.bo.modifiable and not bufname:match "/.git/" then
+        if should_lint_file(bufname) then
           lint.try_lint()
         end
       end,
@@ -120,7 +144,7 @@ return {
       group = lint_augroup,
       callback = function()
         local bufname = vim.api.nvim_buf_get_name(0)
-        if vim.bo.modifiable and not bufname:match "/.git/" then
+        if should_lint_file(bufname) then
           vim.schedule(function()
             local ft = vim.bo.filetype
             local linters = lint.linters_by_ft[ft]

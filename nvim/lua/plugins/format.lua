@@ -11,11 +11,19 @@ return {
       "<leader>fc",
       function()
         local conform = require "conform"
+        -- Track if buffer was modified during formatting
+        local bufnr = vim.api.nvim_get_current_buf()
+        local before_changedtick = vim.api.nvim_buf_get_changedtick(bufnr)
+
         conform.format({ async = true, lsp_fallback = true }, function(err)
           if not err then
-            -- Show notification after manual formatting completes
+            -- Show notification only if buffer was actually modified
             vim.schedule(function()
-              require("plugins.format").notify_formatters()
+              local after_changedtick = vim.api.nvim_buf_get_changedtick(bufnr)
+              -- Note: buffer_was_modified helper is defined in config function, not accessible here
+              if before_changedtick and after_changedtick > before_changedtick then
+                require("plugins.format").notify_formatters()
+              end
             end)
           end
         end)
@@ -27,8 +35,9 @@ return {
   opts = {
     notify_on_error = true,
     format_on_save = function(bufnr)
-      -- Disable autoformat for files in .git directory
       local bufname = vim.api.nvim_buf_get_name(bufnr)
+      -- Will be validated by should_format_file() in the notification handler
+      -- But we check here to avoid unnecessary formatting attempts
       if bufname:match "/.git/" then
         return
       end
@@ -118,6 +127,21 @@ return {
     local conform = require "conform"
     conform.setup(opts)
 
+    -- Helper to check if file should be formatted
+    local function should_format_file(bufname)
+      -- Skip files in .git directory
+      if bufname:match "/.git/" then
+        return false
+      end
+      -- Could add more skip patterns here in the future if needed
+      return true
+    end
+
+    -- Helper to check if buffer was modified based on changedtick
+    local function buffer_was_modified(before_tick, after_tick)
+      return before_tick and after_tick > before_tick
+    end
+
     -- Helper to find config file for a formatter
     local function find_config_file(formatter_name, root_dir, bufnr)
       local config_files = {
@@ -182,17 +206,34 @@ return {
     -- Export for use in keymap
     _G.conform_notify_formatters = notify_formatters
 
+    -- Track buffer changes during format-on-save
+    local format_changedtick = {}
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("ConformTrackChanges", { clear = true }),
+      callback = function(args)
+        -- Record changedtick before formatting
+        format_changedtick[args.buf] = vim.api.nvim_buf_get_changedtick(args.buf)
+      end,
+    })
+
     -- Add notification after format-on-save
     vim.api.nvim_create_autocmd("BufWritePost", {
       group = vim.api.nvim_create_augroup("ConformNotify", { clear = true }),
       callback = function(args)
-        -- Only notify if file was actually formatted (not in .git)
+        -- Only notify if file should be formatted and buffer was actually changed
         local bufname = vim.api.nvim_buf_get_name(args.buf)
-        if not bufname:match "/.git/" then
+        local before_tick = format_changedtick[args.buf]
+        local after_tick = vim.api.nvim_buf_get_changedtick(args.buf)
+
+        if should_format_file(bufname) and buffer_was_modified(before_tick, after_tick) then
           vim.schedule(function()
             notify_formatters(args.buf)
           end)
         end
+
+        -- Clean up
+        format_changedtick[args.buf] = nil
       end,
     })
   end,
