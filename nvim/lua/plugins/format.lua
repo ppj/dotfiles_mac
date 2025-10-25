@@ -55,6 +55,64 @@ return {
       -- Lua
       lua = { "stylua" },
     },
+    -- Configure formatters to find local/project-specific installations
+    -- This handles cases where subdirectories have their own package managers
+    formatters = {
+      prettier = {
+        command = function(self, ctx)
+          local root_dir = vim.fs.root(ctx.buf, { "package.json", ".git" })
+          if root_dir then
+            local local_prettier = root_dir .. "/node_modules/.bin/prettier"
+            if vim.fn.executable(local_prettier) == 1 then
+              return local_prettier
+            end
+          end
+          return "prettier" -- fallback to PATH
+        end,
+      },
+      black = {
+        command = function(self, ctx)
+          local root_dir = vim.fs.root(ctx.buf, { "pyproject.toml", ".git" })
+          if root_dir then
+            local venv_black = root_dir .. "/.venv/bin/black"
+            if vim.fn.executable(venv_black) == 1 then
+              return venv_black
+            end
+          end
+          return "black" -- fallback to PATH
+        end,
+      },
+      isort = {
+        command = function(self, ctx)
+          local root_dir = vim.fs.root(ctx.buf, { "pyproject.toml", ".git" })
+          if root_dir then
+            local venv_isort = root_dir .. "/.venv/bin/isort"
+            if vim.fn.executable(venv_isort) == 1 then
+              return venv_isort
+            end
+          end
+          return "isort" -- fallback to PATH
+        end,
+      },
+      standardrb = {
+        command = function(self, ctx)
+          local root_dir = vim.fs.root(ctx.buf, { "Gemfile", ".git" })
+          if root_dir and vim.fn.filereadable(root_dir .. "/Gemfile") == 1 then
+            -- Use bundle exec if Gemfile exists
+            return "bundle"
+          end
+          return "standardrb" -- fallback to PATH
+        end,
+        args = function(self, ctx)
+          local root_dir = vim.fs.root(ctx.buf, { "Gemfile", ".git" })
+          if root_dir and vim.fn.filereadable(root_dir .. "/Gemfile") == 1 then
+            -- Add "exec standardrb" prefix for bundle exec
+            return { "exec", "standardrb", "--fix", "--format", "quiet", "--stderr", "--stdin", "$FILENAME" }
+          end
+          return { "--fix", "--format", "quiet", "--stderr", "--stdin", "$FILENAME" }
+        end,
+      },
+    },
   },
   config = function(_, opts)
     local conform = require "conform"
@@ -81,17 +139,15 @@ return {
       end
 
       -- Search upward from buffer directory for config files
+      -- Search for ALL config files at once to find the closest match
       local buf_dir = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":h")
-      for _, file in ipairs(files) do
-        -- Search upward, limiting to git root
-        local found = vim.fs.find(file, { upward = true, path = buf_dir })
-        if found and #found > 0 then
-          -- Only accept if within git root
-          if found[1]:find("^" .. vim.pesc(git_root)) then
-            -- Return relative path from git root
-            local rel_path = found[1]:gsub("^" .. vim.pesc(git_root) .. "/", "")
-            return rel_path
-          end
+      local found = vim.fs.find(files, { upward = true, path = buf_dir, limit = 1 })
+      if found and #found > 0 then
+        -- Only accept if within git root
+        if found[1]:find("^" .. vim.pesc(git_root)) then
+          -- Return relative path from git root
+          local rel_path = found[1]:gsub("^" .. vim.pesc(git_root) .. "/", "")
+          return rel_path
         end
       end
       return nil
@@ -109,7 +165,7 @@ return {
           for _, formatter in ipairs(formatters) do
             local config = find_config_file(formatter.name, root_dir, bufnr)
             if config then
-              table.insert(config_info, string.format("%s (%s)", formatter.name, config))
+              table.insert(config_info, string.format("%s (≈ %s)", formatter.name, config))
             else
               table.insert(config_info, formatter.name)
             end
