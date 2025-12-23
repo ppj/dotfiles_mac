@@ -35,4 +35,11 @@ create_deep_symlink "ghostty"
 cd $old_dir # cd back to the previous working directory
 
 ############################################################################################
+# Claude settings (goes to ~/.claude/, not ~/.config/)
+echo "  Creating ~/.claude directory if it doesn't exist"
+mkdir -p "$HOME/.claude"
+echo "  $source_dir_absolute/claude/settings.json to $HOME/.claude/settings.json"
+ln -sf "$source_dir_absolute/claude/settings.json" "$HOME/.claude/settings.json"
+
+############################################################################################
 echo "Run the vim_setup.sh script for setting up Vim"
