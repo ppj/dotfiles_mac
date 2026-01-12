@@ -102,7 +102,6 @@ alias et='vim ~/dotfiles_mac/tmux.conf'
 alias ez='vim ~/dotfiles_mac/zshrc'
 
 # git aliases
-alias git=hub
 alias gls='git status && git branch'
 alias use_latest_master='git fetch && git rebase origin/$(git_main_branch)'
 alias delete_merged_branches='git branch --merged $(git_main_branch) | grep -v "$(git_main_branch)" | xargs git branch -d'
@@ -163,9 +162,6 @@ bindkey -s ^a "nvims\n" # convenience shortcut to launch different distros of nv
 
 # emacs (https://superuser.com/a/317687)
 emacs() { /Applications/Emacs.app/Contents/MacOS/Emacs "$@" &  }
-
-# hub
-eval "$(hub alias -s)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

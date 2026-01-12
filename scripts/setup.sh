@@ -11,8 +11,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 display_banner "Installing tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-display_banner "Installing git and hub"
-brew install git hub 
+display_banner "Installing git and gh"
+brew install git gh
 
 display_banner "Installing editors (vim, neovim)"
 brew install vim nvim
