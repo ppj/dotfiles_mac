@@ -31,9 +31,13 @@ cd $source_dir_absolute # set the present working directory
 
 create_deep_symlink "nvim"
 create_deep_symlink "ghostty"
-create_deep_symlink "opencode"
 
 cd $old_dir # cd back to the previous working directory
+
+############################################################################################
+# OpenCode config (symlink entire directory to preserve internal symlinks)
+echo "  Symlinking opencode to ~/.config/opencode"
+ln -sfn "$source_dir_absolute/opencode" "$HOME/.config/opencode"
 
 ############################################################################################
 # Claude settings and commands (goes to ~/.claude/, not ~/.config/)
