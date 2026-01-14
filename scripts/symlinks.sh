@@ -31,15 +31,20 @@ cd $source_dir_absolute # set the present working directory
 
 create_deep_symlink "nvim"
 create_deep_symlink "ghostty"
+create_deep_symlink "opencode"
 
 cd $old_dir # cd back to the previous working directory
 
 ############################################################################################
-# Claude settings (goes to ~/.claude/, not ~/.config/)
+# Claude settings and commands (goes to ~/.claude/, not ~/.config/)
 echo "  Creating ~/.claude directory if it doesn't exist"
 mkdir -p "$HOME/.claude"
 echo "  $source_dir_absolute/claude/settings.json to $HOME/.claude/settings.json"
 ln -sf "$source_dir_absolute/claude/settings.json" "$HOME/.claude/settings.json"
+
+# Symlink Claude commands directory
+echo "  Symlinking claude/commands to ~/.claude/commands"
+ln -sfn "$source_dir_absolute/claude/commands" "$HOME/.claude/commands"
 
 ############################################################################################
 echo "Run the vim_setup.sh script for setting up Vim"
