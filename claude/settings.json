@@ -21,5 +21,7 @@
   "statusLine": {
     "type": "command",
     "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); BG_LIGHT_BLUE=\"69\"; BG_DARK_BLUE=\"60\"; BG_DARKEST_BLUE=\"236\"; FG_WHITE=\"231\"; FG_BLUE=\"111\"; FG_LIGHT_GRAY=\"146\"; output=\"\"; dir_name=$(basename \"$cwd\"); case \"$dir_name\" in Documents) dir_display=\"  \";; Downloads) dir_display=\"  \";; Music) dir_display=\"  \";; Pictures) dir_display=\"  \";; *) dir_display=\"$dir_name\";; esac; output+=$(printf '\\033[48;5;%sm\\033[38;5;%sm  %s \\033[0m' \"$BG_LIGHT_BLUE\" \"$FG_WHITE\" \"$dir_display\"); if [ -d \"$cwd/.git\" ] || git -C \"$cwd\" rev-parse --git-dir > /dev/null 2>&1; then cd \"$cwd\" 2>/dev/null || true; branch=$(git -c gc.autoDetach=false branch --show-current 2>/dev/null); if [ -n \"$branch\" ]; then git_status_text=\"\"; git -c gc.autoDetach=false diff-index --quiet HEAD -- 2>/dev/null || git_status_text=\"${git_status_text}*\"; [ -n \"$(git -c gc.autoDetach=false ls-files --others --exclude-standard 2>/dev/null)\" ] && git_status_text=\"${git_status_text}?\"; git -c gc.autoDetach=false diff-index --quiet --cached HEAD -- 2>/dev/null || git_status_text=\"${git_status_text}+\"; output+=$(printf '\\033[48;5;%sm\\033[38;5;%sm  %s' \"$BG_DARK_BLUE\" \"$FG_BLUE\" \"$branch\"); [ -n \"$git_status_text\" ] && output+=$(printf ' %s' \"$git_status_text\"); output+=$(printf ' \\033[0m'); fi; fi; time_str=$(date \"+%T, %a %d/%h\"); output+=$(printf '\\033[48;5;%sm\\033[38;5;%sm   %s \\033[0m' \"$BG_DARKEST_BLUE\" \"$FG_LIGHT_GRAY\" \"$time_str\"); printf '%s' \"$output\""
-  }
+  },
+  "includeCoAuthoredBy": false,
+  "gitAttribution": false
 }
