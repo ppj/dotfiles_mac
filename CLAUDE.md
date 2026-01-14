@@ -46,7 +46,8 @@ $HOME/dotfiles_mac/scripts/vim_setup.sh
 The `symlinks.sh` script **overwrites existing symlinks and files** without confirmation. It creates symlinks for:
 - Root config files: `gitconfig`, `vimrc`, `zshrc`, `tmux.conf`, `starship.toml` → `~/.*`
 - Deep directory structures: `nvim/` and `ghostty/` → `~/.config/`
-- Claude Code settings: `claude/settings.json` → `~/.claude/settings.json`
+- Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/commands/` → `~/.claude/commands/`
+- OpenCode: `opencode/opencode.jsonc` → `~/.config/opencode/`, commands shared via symlink to `~/.claude/commands`
 
 ## Architecture & Configuration
 
@@ -119,6 +120,24 @@ The `symlinks.sh` script **overwrites existing symlinks and files** without conf
 - `gls`: Combined status and branch list
 - `use_latest_master`: Fetch and rebase on origin's main branch
 - `delete_merged_branches`: Simple branch cleanup (prefer `clean_merged_branches` function)
+
+### AI Tools Configuration
+
+#### Claude Code (claude/)
+- **Settings**: `claude/settings.json` → `~/.claude/settings.json`
+  - Git attribution disabled (`includeCoAuthoredBy: false`, `gitAttribution: false`)
+  - Custom status line with git branch/status display
+- **Custom Commands**: `claude/commands/*.md` → `~/.claude/commands/`
+  - `/cleanup`: Analyze code for cleanup issues in current branch diff
+  - `/pr-description`: Generate/update PR description from commits
+  - `/updatedocs`: Identify documentation updates needed from code changes
+
+#### OpenCode (opencode/)
+- **Config**: `opencode/opencode.jsonc` → `~/.config/opencode/opencode.jsonc`
+  - References `CLAUDE.md` for instructions
+  - Watcher ignores: node_modules, .git, dist, .next, .turbo, coverage, __pycache__
+  - Bash permissions: read commands (git diff/status/log, gh view/list) auto-allowed; write commands (git add/commit/push, gh create/edit) require confirmation
+- **Commands**: Shared with Claude via symlink (`~/.config/opencode/command` → `~/.claude/commands`)
 
 ## Development Patterns
 
