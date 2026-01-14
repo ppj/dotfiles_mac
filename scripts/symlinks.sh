@@ -35,9 +35,14 @@ create_deep_symlink "ghostty"
 cd $old_dir # cd back to the previous working directory
 
 ############################################################################################
-# OpenCode config (symlink entire directory to preserve internal symlinks)
-echo "  Symlinking opencode to ~/.config/opencode"
-ln -sfn "$source_dir_absolute/opencode" "$HOME/.config/opencode"
+# OpenCode config (symlink config file and commands to shared Claude commands)
+echo "  Creating ~/.config/opencode directory if it doesn't exist"
+mkdir -p "$HOME/.config/opencode"
+echo "  $source_dir_absolute/opencode/opencode.jsonc to $HOME/.config/opencode/opencode.jsonc"
+ln -sf "$source_dir_absolute/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+echo "  Symlinking ~/.config/opencode/command to ~/.claude/commands (shared)"
+rm -rf "$HOME/.config/opencode/command"
+ln -s "../../.claude/commands" "$HOME/.config/opencode/command"
 
 ############################################################################################
 # Claude settings and commands (goes to ~/.claude/, not ~/.config/)
