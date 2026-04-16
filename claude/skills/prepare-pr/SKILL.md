@@ -1,6 +1,6 @@
 ---
 name: prepare-pr
-description: Prepare a branch for PR submission by running cleanup, documentation updates, and PR description generation in sequence. Use this skill when the user wants to create a PR, open a PR, submit a PR, ship a branch, wrap up a branch, finish a branch, merge their work, or says things like "ready to merge", "let's ship this", "prepare this for review", or "I'm done with this feature". Even if the user just says "create a PR" without mentioning cleanup or docs, use this skill — it ensures the branch is properly prepared before the PR is created.
+description: Use when the user wants to create, open, or submit a pull request. Also use when they say "ship this", "ready to merge", "prepare for review", "wrap up this branch", "finish this branch", "let's get this reviewed", "mark as ready for review", or indicate their feature work is done and they want to get it merged. This skill ensures the branch is clean and well-documented before the PR goes up — invoke it even if the user only says "create a PR" without mentioning cleanup or docs.
 ---
 
 # Prepare PR
