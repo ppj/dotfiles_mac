@@ -22,7 +22,7 @@ git diff main...HEAD  # Full diff
 
 **Strategy:**
 - **No PR:** Create new from overall diff (commits are implementation details)
-- **PR exists:** Compare SHAs in "## Commits" section vs current branch:
+- **PR exists:** Parse SHAs from `<!-- pr-commits ... -->` HTML comment in PR body:
   - SHAs changed (rebase/amend) → Regenerate from scratch
   - Only new commits → Update with new changes only (`git diff <last-SHA>..HEAD`)
   - No new commits → Exit (up to date)
@@ -43,8 +43,13 @@ Structure:
 ## Technical Details: Only if noteworthy architectural decisions (otherwise OMIT)
 ## Testing: One line (e.g., 'Unit tests added', 'Tested on Pixel 6')
 ## Related Issues: 'Fixes #123' or 'None'
-## Commits: List all as '- <full-SHA>: <message>'
 ## Checklist: Code conventions, tests, docs, device testing
+
+At the very end, emit ALL commits in a hidden HTML comment block (NOT a visible section):
+<!-- pr-commits
+<full-SHA>: <message>
+<full-SHA>: <message>
+-->
 
 Be concise, scannable, focus on WHAT/WHY not HOW."
 ```
@@ -56,7 +61,14 @@ Existing: [PR BODY]
 New commits: [LIST with SHA]
 New diff: [git diff <last-SHA>..HEAD]
 
-Keep Summary (update if fundamental change). APPEND to Changes (one-line bullets). Update Technical Details/Testing if needed. UPDATE Commits section (all commits). Keep Issues/Checklist. Mark new: '**Update:** <brief>'. Stay concise."
+Keep Summary (update if fundamental change). APPEND to Changes (one-line bullets). Update Technical Details/Testing if needed. Keep Issues/Checklist. Mark new: '**Update:** <brief>'.
+
+At the very end, replace the existing <!-- pr-commits --> block with an updated one containing ALL commits (old + new):
+<!-- pr-commits
+<full-SHA>: <message>
+-->
+
+Stay concise."
 ```
 
 ## Phase 3: Create/Update PR
@@ -85,7 +97,7 @@ gh pr view --web
 - On `main` → Ask which branch
 - Not authenticated → `gh auth login`
 - Unpushed commits → Push first with `git push -u origin <branch>`
-- PR missing Commits section → Regenerate from scratch
+- PR missing `<!-- pr-commits -->` block → Regenerate from scratch
 - No new commits → Exit (no change needed)
 
-**Notes:** Always include "## Commits" section (full SHA + message) for tracking rebases. Focus overall diff for new PRs. Detect rebases by SHA comparison. Keep descriptions scannable (short bullets, omit fluff).
+**Notes:** Always include `<!-- pr-commits -->` HTML comment block (full SHA + message) for tracking rebases — invisible in rendered PR. Focus overall diff for new PRs. Detect rebases by SHA comparison. Keep descriptions scannable (short bullets, omit fluff).
