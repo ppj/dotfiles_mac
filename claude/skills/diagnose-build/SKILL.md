@@ -7,6 +7,21 @@ description: Diagnose a failing Buildkite build by fetching build details, readi
 
 Investigate a failing Buildkite build and produce a structured plan to fix the errors.
 
+## Prerequisites
+
+This skill requires the **Buildkite MCP server** to be configured in `~/.claude/settings.json`:
+
+```json
+"mcpServers": {
+  "buildkite": {
+    "type": "http",
+    "url": "https://mcp.buildkite.com/mcp"
+  }
+}
+```
+
+This is already set up in the dotfiles `claude/settings.json`. If the tools are unavailable, verify the server is connected via `claude mcp list`.
+
 ## Arguments
 
 **Optional:**
@@ -15,10 +30,10 @@ Investigate a failing Buildkite build and produce a structured plan to fix the e
 If no build number is provided, automatically find the latest build for the current git branch:
 
 1. Get the current branch: `git branch --show-current`
-2. Use `mcp__plugin_renovate_buildkite__list_builds` to find the latest build for that branch:
+2. Use `mcp__buildkite__list_builds` to find the latest build for that branch:
 
 ```
-mcp__plugin_renovate_buildkite__list_builds(
+mcp__buildkite__list_builds(
   org_slug=<org>,
   pipeline_slug=<pipeline>,
   branch=<current-branch>,
@@ -45,10 +60,10 @@ Store these for use in all subsequent MCP calls:
 
 ### Phase 1: Fetch Build Overview
 
-Use `mcp__plugin_renovate_buildkite__get_build` to get the build details:
+Use `mcp__buildkite__get_build` to get the build details:
 
 ```
-mcp__plugin_renovate_buildkite__get_build(
+mcp__buildkite__get_build(
   org_slug=<org>,
   pipeline_slug=<pipeline>,
   build_number=<number>,
@@ -70,7 +85,7 @@ If the build has no failures at all, tell the user: "Build #<number> has no fail
 Buildkite annotations often contain pre-formatted error summaries. Fetch them in parallel with the logs:
 
 ```
-mcp__plugin_renovate_buildkite__list_annotations(
+mcp__buildkite__list_annotations(
   org_slug=<org>,
   pipeline_slug=<pipeline>,
   build_number=<number>
@@ -84,7 +99,7 @@ Annotations with `style: "error"` or `style: "warning"` are especially useful â€
 For each failed job, fetch the tail of the logs. Tail is best for failure diagnosis since errors appear at the end. Fetch logs for all failed jobs **in parallel** using multiple tool calls in a single message.
 
 ```
-mcp__plugin_renovate_buildkite__tail_logs(
+mcp__buildkite__tail_logs(
   org_slug=<org>,
   pipeline_slug=<pipeline>,
   build_number=<number>,
@@ -96,7 +111,7 @@ mcp__plugin_renovate_buildkite__tail_logs(
 If the tail doesn't contain enough context (e.g., the error references a line much earlier), use `search_logs` to find the relevant section:
 
 ```
-mcp__plugin_renovate_buildkite__search_logs(
+mcp__buildkite__search_logs(
   org_slug=<org>,
   pipeline_slug=<pipeline>,
   build_number=<number>,
