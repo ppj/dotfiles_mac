@@ -18,7 +18,16 @@ gh pr view --json number,title,body,baseRefName 2>/dev/null || echo "No PR"  # C
 git log main..HEAD --format="%H %s"  # All commits (SHA + message)
 git diff main...HEAD --stat  # Stats
 git diff main...HEAD  # Full diff
+
+# Check for PR template (search common locations)
+for tmpl in .github/PULL_REQUEST_TEMPLATE.md .github/pull_request_template.md PULL_REQUEST_TEMPLATE.md pull_request_template.md; do
+  [ -f "$tmpl" ] && echo "PR_TEMPLATE: $tmpl" && break
+done
+# Also check for template directory (multiple templates)
+ls .github/PULL_REQUEST_TEMPLATE/ 2>/dev/null
 ```
+
+**If a PR template is found**, use it as the structure for the description instead of the default structure below. Fill in each section of the template based on the diff and commit analysis. Preserve the template's headings, checkboxes, and formatting. Still append the `<!-- pr-commits -->` tracking block at the end.
 
 **Strategy:**
 - **No PR:** Create new from overall diff (commits are implementation details)
@@ -29,7 +38,21 @@ git diff main...HEAD  # Full diff
 
 ## Phase 2: Analyze with Gemini
 
-**For NEW PR:**
+**For NEW PR (with template):**
+If a PR template was found, use it as the structure:
+```bash
+gemini --prompt "Create PR description from git changes using the repo's PR template:
+Branch: [NAME], Base: main
+Files: [git diff --stat]
+Diff: [git diff]
+Commits: [git log] (reference only, focus on overall diff)
+PR Template: [TEMPLATE CONTENTS]
+
+Fill in each section of the template based on the changes. Preserve the template's headings, checkboxes, and formatting exactly. If a section is not applicable, write 'N/A' rather than removing it.
+```
+
+**For NEW PR (no template):**
+If no template was found, use this default structure:
 ```bash
 gemini --prompt "Create PR description from git changes:
 Branch: [NAME], Base: main
