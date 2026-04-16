@@ -46,7 +46,7 @@ $HOME/dotfiles_mac/scripts/vim_setup.sh
 The `symlinks.sh` script **overwrites existing symlinks and files** without confirmation. It creates symlinks for:
 - Root config files: `gitconfig`, `vimrc`, `zshrc`, `tmux.conf`, `starship.toml` → `~/.*`
 - Deep directory structures: `nvim/` and `ghostty/` → `~/.config/`
-- Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/commands/` → `~/.claude/commands/`
+- Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/commands/` → `~/.claude/commands/`, `claude/skills/` → `~/.claude/skills`
 - OpenCode: `opencode/opencode.jsonc` → `~/.config/opencode/`, commands shared via symlink to `~/.claude/commands`
 
 ## Architecture & Configuration
@@ -128,6 +128,8 @@ The `symlinks.sh` script **overwrites existing symlinks and files** without conf
   - Git attribution disabled (`includeCoAuthoredBy: false`, `gitAttribution: false`)
   - Custom status line with git branch/status display
 - **Custom Commands**: `claude/commands/*.md` → `~/.claude/commands/`
+- **Skills**: `claude/skills/` → `~/.claude/skills/`
+  - `/prepare-pr`: Orchestrates branch wrap-up (cleanup, docs update, PR creation)
   - `/cleanup`: Analyze code for cleanup issues in current branch diff
   - `/pr-description`: Generate/update PR description from commits
   - `/updatedocs`: Identify documentation updates needed from code changes
