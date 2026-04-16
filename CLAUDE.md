@@ -133,6 +133,7 @@ The `symlinks.sh` script **overwrites existing symlinks and files** without conf
   - `/cleanup`: Analyze code for cleanup issues in current branch diff
   - `/pr-description`: Generate/update PR description from commits
   - `/updatedocs`: Identify documentation updates needed from code changes
+  - `/diagnose-build`: Diagnose a failing Buildkite build — fetches logs, categorizes errors, and produces a fix plan
 
 #### OpenCode (opencode/)
 - **Config**: `opencode/opencode.jsonc` → `~/.config/opencode/opencode.jsonc`
