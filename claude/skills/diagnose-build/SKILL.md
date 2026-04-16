@@ -22,6 +22,8 @@ This skill requires the **Buildkite MCP server** to be configured in `~/.claude/
 
 This is already set up in the dotfiles `claude/settings.json`. If the tools are unavailable, verify the server is connected via `claude mcp list`.
 
+You also need to be **authenticated with Buildkite**. The MCP server uses OAuth — on first use, Claude Code will open a browser window to complete the Buildkite login flow. Once authenticated, the token is stored and reused automatically.
+
 ## Arguments
 
 **Optional:**
