@@ -9,20 +9,25 @@ Investigate a failing Buildkite build and produce a structured plan to fix the e
 
 ## Prerequisites
 
-This skill requires the **Buildkite MCP server** to be configured in `~/.claude/settings.json`:
+This skill requires the **Buildkite MCP server** (HTTP transport, URL: `https://mcp.buildkite.com/mcp`).
 
-```json
-"mcpServers": {
-  "buildkite": {
-    "type": "http",
-    "url": "https://mcp.buildkite.com/mcp"
-  }
+**Claude Code:**
+```bash
+claude mcp add --scope user --transport http buildkite https://mcp.buildkite.com/mcp
+```
+
+**OpenCode** — add to `mcp` in `opencode.jsonc`:
+```jsonc
+"buildkite": {
+  "type": "remote",
+  "url": "https://mcp.buildkite.com/mcp",
+  "enabled": true
 }
 ```
 
-If the tools are unavailable, verify the server is connected via `claude mcp list`.
+The server uses OAuth — on first use your tool will open a browser to complete the Buildkite login. Once authenticated, the token is reused automatically.
 
-You also need to be **authenticated with Buildkite**. The MCP server uses OAuth — on first use, Claude Code will open a browser window to complete the Buildkite login flow. Once authenticated, the token is stored and reused automatically.
+If the tools are unavailable, verify the server is connected via `/mcp` (Claude Code) or `opencode mcp list`.
 
 ## Arguments
 
