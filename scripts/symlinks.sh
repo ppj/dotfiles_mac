@@ -53,11 +53,13 @@ ln -sf "$source_dir_absolute/claude/settings.json" "$HOME/.claude/settings.json"
 
 # Symlink Claude commands directory
 echo "  Symlinking claude/commands to ~/.claude/commands"
-ln -sfn "$source_dir_absolute/claude/commands" "$HOME/.claude/commands"
+rm -rf "$HOME/.claude/commands"
+ln -s "$source_dir_absolute/claude/commands" "$HOME/.claude/commands"
 
 # Symlink Claude skills directory
 echo "  Symlinking claude/skills to ~/.claude/skills"
-ln -sfn "$source_dir_absolute/claude/skills" "$HOME/.claude/skills"
+rm -rf "$HOME/.claude/skills"
+ln -s "$source_dir_absolute/claude/skills" "$HOME/.claude/skills"
 
 ############################################################################################
 echo "Run the vim_setup.sh script for setting up Vim"
