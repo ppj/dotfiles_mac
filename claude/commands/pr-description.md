@@ -2,6 +2,14 @@
 
 Create or update PR description by analyzing commits in current branch.
 
+## Verbosity Guidelines
+
+- **Target length:** ~300 words max (excluding the hidden `<!-- pr-commits -->` block).
+- Use short bullet fragments, not full sentences. No sub-bullets.
+- Plain language — no jargon, filler phrases, or padding ("This PR", "In order to", etc.).
+- Never repeat information across sections. Omit any section that adds no real value.
+- A reviewer should absorb the entire description in under 30 seconds.
+
 ## Phase 1: Gather Info & Determine Strategy
 
 ```bash
@@ -48,7 +56,7 @@ Diff: [git diff]
 Commits: [git log] (reference only, focus on overall diff)
 PR Template: [TEMPLATE CONTENTS]
 
-Fill in each section of the template based on the changes. Preserve the template's headings, checkboxes, and formatting exactly. If a section is not applicable, write 'N/A' rather than removing it.
+Fill in each section of the template based on the changes. Preserve the template's headings, checkboxes, and formatting exactly. If a section is not applicable, write 'N/A' rather than removing it. Keep each section as brief as possible — do not pad sections with obvious or boilerplate information. For verification/testing sections, state WHAT was tested (e.g. 'Unit tests added for X'), not HOW it was run or pass/fail counts.
 ```
 
 **For NEW PR (no template):**
@@ -62,9 +70,9 @@ Commits: [git log] (reference only, focus on overall diff)
 
 Structure:
 ## Summary: 1-2 sentences
-## Changes: 5-7 bullets (one line each, group by area)
-## Technical Details: Only if noteworthy architectural decisions (otherwise OMIT)
-## Testing: One line (e.g., 'Unit tests added', 'Tested on Pixel 6')
+## Changes: 3-5 bullets max (short fragments, group by area)
+## Technical Details: Only if noteworthy architectural decisions (otherwise OMIT entirely)
+## Testing: One line — omit if obvious from context
 ## Related Issues: 'Fixes #123' or 'None'
 ## Checklist: Code conventions, tests, docs, device testing
 
@@ -74,7 +82,7 @@ At the very end, emit ALL commits in a hidden HTML comment block (NOT a visible 
 <full-SHA>: <message>
 -->
 
-Be concise, scannable, focus on WHAT/WHY not HOW."
+Be concise, scannable, focus on WHAT/WHY not HOW. Do NOT pad sections to fill space."
 ```
 
 **For UPDATE (new commits):**
@@ -84,7 +92,7 @@ Existing: [PR BODY]
 New commits: [LIST with SHA]
 New diff: [git diff <last-SHA>..HEAD]
 
-Keep Summary (update if fundamental change). APPEND to Changes (one-line bullets). Update Technical Details/Testing if needed. Keep Issues/Checklist. Mark new: '**Update:** <brief>'.
+Keep Summary (update if fundamental change). APPEND to Changes (short fragments). Update Technical Details/Testing only if needed. Keep Issues/Checklist. Mark new: '**Update:** <brief>'. Remove any previously redundant content — do not let the description grow bloated over updates.
 
 At the very end, replace the existing <!-- pr-commits --> block with an updated one containing ALL commits (old + new):
 <!-- pr-commits
@@ -123,4 +131,4 @@ gh pr view --web
 - PR missing `<!-- pr-commits -->` block → Regenerate from scratch
 - No new commits → Exit (no change needed)
 
-**Notes:** Always include `<!-- pr-commits -->` HTML comment block (full SHA + message) for tracking rebases — invisible in rendered PR. Focus overall diff for new PRs. Detect rebases by SHA comparison. Keep descriptions scannable (short bullets, omit fluff).
+**Notes:** Always include `<!-- pr-commits -->` HTML comment block (full SHA + message) for tracking rebases — invisible in rendered PR. Focus overall diff for new PRs. Detect rebases by SHA comparison. Keep descriptions scannable — short fragments, omit fluff, aim for under 30 seconds of reviewer reading time.
