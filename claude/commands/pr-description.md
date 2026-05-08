@@ -106,7 +106,7 @@ Stay concise."
 
 ```bash
 # Create new:
-gh pr create --title "[TITLE]" --body "$(cat <<'EOF'
+gh pr create --draft --title "[TITLE]" --body "$(cat <<'EOF'
 [DESCRIPTION]
 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
