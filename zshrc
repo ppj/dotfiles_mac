@@ -232,6 +232,9 @@ eval "$(devbox global shellenv)"
 
 # use asdf installed ruby version as default global
 
+# always use the global npm instead of the the nix or asdf or any other installation as that is the one managed by npm itself and is used to install global npm packages
+alias npm='/opt/homebrew/bin/npm'
+
 
 # The next line was added by hotel, leave it at the bottom of this file
 source /Users/prasanna.joshi/.config/hotel/config.zsh
