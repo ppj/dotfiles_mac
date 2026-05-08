@@ -18,9 +18,14 @@ gemini --prompt "Analyze this code diff for cleanup issues:
 [INSERT GIT DIFF]
 
 Identify in changed code only:
-1. Unused: imports, variables, functions, dead code
-2. Comment issues: redundant (just restates code), verbose (describes WHAT not WHY), candidates for better naming/extract method
-3. Quality: magic numbers/strings, TODOs, commented-out code, non-idiomatic patterns
+1. Unused: imports, variables, functions, dead code, commented-out code
+2. Comment issues:
+   - Redundant: restates what the code already says (e.g. '# increment counter' above 'counter += 1')
+   - Stale-risk: describes implementation details likely to drift from code over time (e.g. listing specific steps, values, or field names)
+   - Ticket references: JIRA/issue-tracker keys in code comments — these go stale quickly and belong in git history/PR descriptions, not code (flag unless the comment provides essential context that can't live elsewhere)
+   - Verbose/narrating: describes WHAT the code does rather than WHY — candidates for better naming or extract method
+   - Obvious annotations: comments that just restate type signatures or parameter names
+3. Quality: magic numbers/strings, TODOs, non-idiomatic patterns
 
 For each: file:line, severity (SAFE_TO_REMOVE/NEEDS_REVIEW/REFACTOR_SUGGESTION), brief explanation.
 Keep comments explaining algorithms/business logic/non-obvious decisions."
@@ -32,7 +37,10 @@ Run project-specific lint commands if available (check for lint scripts in packa
 
 **Organize findings:**
 1. **Unused Code (Safe to Remove):** List with file:line
-2. **Comment Issues:** Redundant to remove, refactoring suggestions
+2. **Comment Issues:**
+   - Safe to remove: redundant, obvious, ticket references
+   - Stale-risk: implementation-detail comments — suggest removing or rewriting to explain *why*
+   - Refactor candidates: verbose/narrating comments indicating need for better naming or extraction
 3. **Quality Issues:** Magic numbers, TODOs, commented code
 4. **Lint Issues:** Summarize key findings
 5. **Tool Recommendations:** Suggest linters if not configured
