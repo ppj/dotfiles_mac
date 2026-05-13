@@ -13,22 +13,27 @@ Revise your current task plan to incorporate the following execution discipline 
 - Each commit should represent one logical unit of change (e.g. one function, one refactor, one fix).
 - Do not bundle unrelated changes in a single commit.
 
-## 3. Avoid unnecessary comments
+## 3. Write clear commit messages
+- Follow the conventional commits format (e.g. `feat:`, `fix:`, `chore:`) if the repository enforces it.
+- Keep the message to a single line where possible.
+- If a description is needed, make it succinct and explain the *why*, not the *what*.
+
+## 4. Avoid unnecessary comments
 - Code should be self-documenting through clear naming and structure.
 - Only add a comment when the *why* is non-obvious: a hidden constraint, a subtle invariant, or a workaround for a specific external bug. If removing the comment wouldn't confuse a future reader, don't write it.
 
-## 4. Before committing, verify tests pass
+## 5. Before committing, verify tests pass
 - Identify and run the tests relevant to the changes (unit, integration, etc.).
 - Do not commit if any relevant tests are broken.
 
-## 5. Before committing, check if new tests are needed
+## 6. Before committing, check if new tests are needed
 - If the change adds new behavior, a new code path, or fixes a bug, determine whether a new test is required — only if it provides long-term value (would catch a real regression, covers non-obvious logic, or protects a critical code path). Skip tests for trivial getters, simple config, a one-off regression the change fixes, or one-off scripts.
 - Write the test before committing.
 
-## 6. Before committing, check for formatter/linter violations
+## 7. Before committing, check for formatter/linter violations
 - Detect the project's formatter and linter setup (e.g. package.json scripts, Makefile targets, pre-commit config, .rubocop.yml, ruff.toml, etc.).
 - Run the relevant formatter/linter and fix any violations before committing.
 
 ---
 
-**Apply instructions 1–3 as general guidance for your plan. Apply instructions 4–6 before every commit in your plan, then continue execution.**
+**Apply instructions 1–4 as general guidance for your plan. Apply instructions 5–7 before every commit in your plan, then continue execution.**
