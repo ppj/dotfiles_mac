@@ -18,7 +18,7 @@ Revise your current task plan to incorporate the following execution discipline 
 - Do not commit if any relevant tests are broken.
 
 ## 4. Before committing, check if new tests are needed
-- If the change adds new behavior, a new code path, or fixes a bug, determine whether a new test is required — only if it provides long-term value (would catch a real regression, covers non-obvious logic, or protects a critical code path). Skip tests for trivial getters, simple config, or one-off scripts.
+- If the change adds new behavior, a new code path, or fixes a bug, determine whether a new test is required — only if it provides long-term value (would catch a real regression, covers non-obvious logic, or protects a critical code path). Skip tests for trivial getters, simple config, a one-off regression the change fixes, or one-off scripts.
 - Write the test before committing.
 
 ## 5. Before committing, check for formatter/linter violations
@@ -27,4 +27,4 @@ Revise your current task plan to incorporate the following execution discipline 
 
 ---
 
-**Apply steps 1–2 as general guidance for your plan. Apply steps 3–5 before every commit in your plan, then continue execution.**
+**Apply instructions 1–2 as general guidance for your plan. Apply instructions 3–5 before every commit in your plan, then continue execution.**
