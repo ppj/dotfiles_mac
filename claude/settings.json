@@ -24,5 +24,6 @@
   },
   "includeCoAuthoredBy": false,
   "editorMode": "vim",
-  "gitAttribution": false
+  "gitAttribution": false,
+  "compactPrompt": "When compacting, you MUST preserve:\n1. All rules and constraints from CLAUDE.md and system prompt — copy them verbatim\n2. Current task context and progress\n3. File paths that were modified\n4. Specific error messages and their solutions\n5. User corrections and preferences stated during the session\n\nYou MAY summarize:\n- Tool call outputs (keep conclusions, drop raw output)\n- File contents that were read (keep what was learned, drop the text)\n- Exploratory steps that led nowhere"
 }
