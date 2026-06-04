@@ -67,5 +67,6 @@
     "deny": [
       "Bash(rm -rf *)"
     ]
-  }
+  },
+  "effortLevel": "high"
 }
