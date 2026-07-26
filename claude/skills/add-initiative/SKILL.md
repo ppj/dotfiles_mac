@@ -39,8 +39,10 @@ milestones it concerns in the initiative's description — don't silently drop t
 3. Create the initiative (`save_initiative`, `name: <name>`, and `description` covering
    the goal — include any specific milestones named in the request, per the constraint
    above).
-4. For each spanned project, attach the initiative (`save_project`,
-   `id`/`name: <project>`, `addInitiatives: [<initiative name>]`).
+4. For each spanned project, attach the initiative via `save_project`,
+   `addInitiatives: [<initiative name>]`. `save_project`'s `id` field only accepts an
+   actual project ID (UUID), not the project name — look the ID up first with
+   `list_projects` (`query: <project name>`) or `get_project`, then pass that as `id`.
 5. Confirm what was created: the initiative name/URL, the projects attached, and any
    milestones noted in its description.
 
