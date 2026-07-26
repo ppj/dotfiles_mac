@@ -21,7 +21,14 @@ allows one team). Each of these is a Linear **Project** in that team:
 
 ## Steps
 
-1. Identify the project name — must be one of the 5 above.
+1. Identify the project name.
+   - If the user names a project explicitly in the request, use that.
+   - Otherwise, infer it from the current git repo: run
+     `git rev-parse --show-toplevel` and take the basename of that path. Match it
+     (case-insensitive) against the 5 project names above and use it if it matches.
+   - In either case it must be one of the 5 above — if it doesn't match (including
+     when not run inside a git repo, or the repo's name isn't one of the 5), ask the
+     user to confirm or pick from the existing ones.
 2. List milestones in that project (`list_milestones`, `project: <name>`) and find the
    one matching the milestone name given, case-insensitively; a partial match is fine if
    unambiguous.

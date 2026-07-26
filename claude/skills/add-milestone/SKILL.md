@@ -21,9 +21,15 @@ allows one team). Each of these is a Linear **Project** in that team:
 
 ## Steps
 
-1. Identify the project name from the request. It must be one of the 5 above — if it
-   doesn't match, ask the user to confirm or pick from the existing ones. Don't invent a
-   new Linear project; use the `add-project` skill (in the journal vault) for that.
+1. Identify the project name.
+   - If the user names a project explicitly in the request, use that.
+   - Otherwise, infer it from the current git repo: run
+     `git rev-parse --show-toplevel` and take the basename of that path. Match it
+     (case-insensitive) against the 5 project names above and use it if it matches.
+   - In either case it must be one of the 5 above — if it doesn't match (including
+     when not run inside a git repo, or the repo's name isn't one of the 5), ask the
+     user to confirm or pick from the existing ones. Don't invent a new Linear
+     project; use the `add-project` skill (in the journal vault) for that.
 2. List existing milestones in that project (`list_milestones`, `project: <name>`) and
    check whether one with the same name (case-insensitive) already exists.
    - If it does, tell the user it already exists and stop — don't create a duplicate.

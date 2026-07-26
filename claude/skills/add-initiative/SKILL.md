@@ -30,10 +30,17 @@ milestones it concerns in the initiative's description — don't silently drop t
 ## Steps
 
 1. Identify the initiative's name/goal and which project(s) it spans from the request.
+   - If project(s) are named explicitly in the request, use those.
+   - Otherwise, infer a candidate from the current git repo: run
+     `git rev-parse --show-toplevel` and take the basename of that path, matched
+     (case-insensitive) against the 5 project names above. Since initiatives span
+     multiple projects, treat this only as a starting point — confirm with the user
+     which other project(s) it should also span rather than assuming it's just the one.
    - If it's unclear which of the 5 projects apply, ask rather than guessing.
-   - If only one project is named, confirm with the user that an initiative is actually
-     wanted (vs. just a milestone in that one project — see the `add-milestone` skill)
-     before creating one, since initiatives are for cross-project work.
+   - If only one project ends up named (whether from the request or git-root
+     inference), confirm with the user that an initiative is actually wanted (vs. just
+     a milestone in that one project — see the `add-milestone` skill) before creating
+     one, since initiatives are for cross-project work.
 2. Check `list_initiatives` for a name collision (case-insensitive). If one already
    exists, tell the user and stop rather than creating a duplicate.
 3. Create the initiative (`save_initiative`, `name: <name>`, and `description` covering
