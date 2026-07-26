@@ -12,35 +12,37 @@ whichever is connected).
 ## Linear structure
 
 All tracking lives under the single **Prasanna Joshi** Linear team (free tier only
-allows one team). Each of these is a Linear **Project** in that team:
-`iswarmandal`, `swarmandal`, `shruti`, `naadshala`, `geetkosh`.
+allows one team). Each tracked codebase is a Linear **Project** in that team — the
+current list is whatever `list_projects` returns, not a fixed set, since new projects
+get added over time via `add-project`.
 
-- Project = codebase (already created, one per name above).
+- Project = codebase (one per project returned by `list_projects`).
 - Milestone = epic.
 - Issue = task (see the `add-issue` skill).
 
 ## Steps
 
-1. Identify the project name.
+1. Call `list_projects` (team: "Prasanna Joshi") to get the current project names.
+2. Identify the project name.
    - If the user names a project explicitly in the request, use that.
    - Otherwise, infer it from the current git repo: run
      `git rev-parse --show-toplevel` and take the basename of that path. Match it
-     (case-insensitive) against the 5 project names above and use it if it matches.
-   - In either case it must be one of the 5 above — if it doesn't match (including
-     when not run inside a git repo, or the repo's name isn't one of the 5), ask the
-     user to confirm or pick from the existing ones. Don't invent a new Linear
-     project; use the `add-project` skill (in the journal vault) for that.
-2. List existing milestones in that project (`list_milestones`, `project: <name>`) and
+     (case-insensitive) against the names from `list_projects` and use it if it matches.
+   - In either case it must match one of the projects from `list_projects` — if it
+     doesn't (including when not run inside a git repo, or the repo's name doesn't
+     match), ask the user to confirm or pick from the existing ones. Don't invent a new
+     Linear project; use the `add-project` skill (in the journal vault) for that.
+3. List existing milestones in that project (`list_milestones`, `project: <name>`) and
    check whether one with the same name (case-insensitive) already exists.
    - If it does, tell the user it already exists and stop — don't create a duplicate.
-3. Create the milestone (`save_milestone`, `project: <name>`, `name: <milestone name>`,
+4. Create the milestone (`save_milestone`, `project: <name>`, `name: <milestone name>`,
    and `description` if the user gave one).
-4. If the user gave initial tasks, create each as an issue (`save_issue`,
+5. If the user gave initial tasks, create each as an issue (`save_issue`,
    `team: "Prasanna Joshi"`, `project: <name>`, `milestone: <milestone name>`,
    `title: <task>`).
-5. Confirm what was created, including the Linear URL/identifier the tool call returns.
+6. Confirm what was created, including the Linear URL/identifier the tool call returns.
 
 ## Notes
 
-- Never create a new Linear project from this skill — only add milestones to the 5
-  existing ones.
+- Never create a new Linear project from this skill — only add milestones to existing
+  ones returned by `list_projects`.

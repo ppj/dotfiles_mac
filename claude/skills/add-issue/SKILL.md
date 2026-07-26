@@ -12,32 +12,34 @@ whichever is connected).
 ## Linear structure
 
 All tracking lives under the single **Prasanna Joshi** Linear team (free tier only
-allows one team). Each of these is a Linear **Project** in that team:
-`iswarmandal`, `swarmandal`, `shruti`, `naadshala`, `geetkosh`.
+allows one team). Each tracked codebase is a Linear **Project** in that team — the
+current list is whatever `list_projects` returns, not a fixed set, since new projects
+get added over time via `add-project`.
 
-- Project = codebase.
+- Project = codebase (one per project returned by `list_projects`).
 - Milestone = epic.
 - Issue = task (what this skill creates).
 
 ## Steps
 
-1. Identify the project name.
+1. Call `list_projects` (team: "Prasanna Joshi") to get the current project names.
+2. Identify the project name.
    - If the user names a project explicitly in the request, use that.
    - Otherwise, infer it from the current git repo: run
      `git rev-parse --show-toplevel` and take the basename of that path. Match it
-     (case-insensitive) against the 5 project names above and use it if it matches.
-   - In either case it must be one of the 5 above — if it doesn't match (including
-     when not run inside a git repo, or the repo's name isn't one of the 5), ask the
-     user to confirm or pick from the existing ones.
-2. List milestones in that project (`list_milestones`, `project: <name>`) and find the
+     (case-insensitive) against the names from `list_projects` and use it if it matches.
+   - In either case it must match one of the projects from `list_projects` — if it
+     doesn't (including when not run inside a git repo, or the repo's name doesn't
+     match), ask the user to confirm or pick from the existing ones.
+3. List milestones in that project (`list_milestones`, `project: <name>`) and find the
    one matching the milestone name given, case-insensitively; a partial match is fine if
    unambiguous.
    - If no milestone matches, tell the user and ask whether to create it first (via the
      `add-milestone` skill) rather than creating an untracked/milestone-less issue.
    - If more than one could match, ask the user to disambiguate.
-3. Create the issue (`save_issue`, `team: "Prasanna Joshi"`, `project: <name>`,
+4. Create the issue (`save_issue`, `team: "Prasanna Joshi"`, `project: <name>`,
    `milestone: <matched milestone name>`, `title: <task text>`).
-4. Confirm what was created, including the issue identifier/URL the tool call returns.
+5. Confirm what was created, including the issue identifier/URL the tool call returns.
 
 ## Notes
 

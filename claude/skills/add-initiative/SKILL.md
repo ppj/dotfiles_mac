@@ -12,8 +12,9 @@ is connected).
 ## Linear structure
 
 All tracking lives under the single **Prasanna Joshi** Linear team (free tier only allows
-one team). Each of these is a Linear **Project** in that team: `iswarmandal`,
-`swarmandal`, `shruti`, `naadshala`, `geetkosh`.
+one team). Each tracked codebase is a Linear **Project** in that team — the current list
+is whatever `list_projects` returns, not a fixed set, since new projects get added over
+time via `add-project`.
 
 - **Initiative** = groups multiple **Projects** together (workspace-level, not
   team-scoped). This is what this skill creates.
@@ -29,31 +30,33 @@ milestones it concerns in the initiative's description — don't silently drop t
 
 ## Steps
 
-1. Identify the initiative's name/goal and which project(s) it spans from the request.
+1. Call `list_projects` (team: "Prasanna Joshi") to get the current project names (and
+   IDs, needed later).
+2. Identify the initiative's name/goal and which project(s) it spans from the request.
    - If project(s) are named explicitly in the request, use those.
    - Otherwise, infer a candidate from the current git repo: run
      `git rev-parse --show-toplevel` and take the basename of that path, matched
-     (case-insensitive) against the 5 project names above. Since initiatives span
+     (case-insensitive) against the names from `list_projects`. Since initiatives span
      multiple projects, treat this only as a starting point — confirm with the user
      which other project(s) it should also span rather than assuming it's just the one.
-   - If it's unclear which of the 5 projects apply, ask rather than guessing.
+   - If it's unclear which projects apply, ask rather than guessing.
    - If only one project ends up named (whether from the request or git-root
      inference), confirm with the user that an initiative is actually wanted (vs. just
      a milestone in that one project — see the `add-milestone` skill) before creating
      one, since initiatives are for cross-project work.
-2. Check `list_initiatives` for a name collision (case-insensitive). If one already
+3. Check `list_initiatives` for a name collision (case-insensitive). If one already
    exists, tell the user and stop rather than creating a duplicate.
-3. Create the initiative (`save_initiative`, `name: <name>`, and `description` covering
+4. Create the initiative (`save_initiative`, `name: <name>`, and `description` covering
    the goal — include any specific milestones named in the request, per the constraint
    above).
-4. For each spanned project, attach the initiative via `save_project`,
+5. For each spanned project, attach the initiative via `save_project`,
    `addInitiatives: [<initiative name>]`. `save_project`'s `id` field only accepts an
-   actual project ID (UUID), not the project name — look the ID up first with
-   `list_projects` (`query: <project name>`) or `get_project`, then pass that as `id`.
-5. Confirm what was created: the initiative name/URL, the projects attached, and any
+   actual project ID (UUID), not the project name — use the ID from the `list_projects`
+   call in step 1 (or look it up with `get_project` if it wasn't captured then).
+6. Confirm what was created: the initiative name/URL, the projects attached, and any
    milestones noted in its description.
 
 ## Notes
 
 - Don't create a new Linear project or milestone from this skill — only initiatives, and
-  only linking to the 5 existing projects.
+  only linking to projects returned by `list_projects`.
