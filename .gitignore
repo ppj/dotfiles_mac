@@ -6,3 +6,13 @@ claude/skills/hotel-skills-lock.json
 claude/skills/ca-fix-ci/
 claude/skills/jira-task-workflow/
 
+# Third-party skills installed to ~/.agents/skills and symlinked in — not tracked here
+claude/skills/code-review
+claude/skills/find-skills
+claude/skills/grill-me
+claude/skills/grill-with-docs
+claude/skills/improve-codebase-architecture
+claude/skills/obsidian-vault
+claude/skills/tdd
+claude/skills/ubiquitous-language
+
