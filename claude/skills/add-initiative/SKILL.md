@@ -11,10 +11,11 @@ is connected).
 
 ## Linear structure
 
-All tracking lives under the single **Prasanna Joshi** Linear team (free tier only allows
-one team). Each tracked codebase is a Linear **Project** in that team — the current list
-is whatever `list_projects` returns, not a fixed set, since new projects get added over
-time via `add-project`.
+Tracking spans two Linear teams (free tier caps a workspace at 2): **Code** for coding
+projects, **Other** for personal/non-code projects. Each tracked project is a Linear
+**Project** under whichever team fits — the current list is whatever `list_projects`
+returns (across both teams), not a fixed set, since new projects get added over time via
+`add-project`.
 
 - **Initiative** = groups multiple **Projects** together (workspace-level, not
   team-scoped). This is what this skill creates.
@@ -30,8 +31,8 @@ milestones it concerns in the initiative's description — don't silently drop t
 
 ## Steps
 
-1. Call `list_projects` (team: "Prasanna Joshi") to get the current project names (and
-   IDs, needed later).
+1. Call `list_projects` (no `team` filter, so results include both teams) to get the
+   current project names (and IDs, needed later).
 2. Identify the initiative's name/goal and which project(s) it spans from the request.
    - If project(s) are named explicitly in the request, use those.
    - Otherwise, infer a candidate from the current git repo: run

@@ -11,18 +11,20 @@ whichever is connected).
 
 ## Linear structure
 
-All tracking lives under the single **Prasanna Joshi** Linear team (free tier only
-allows one team). Each tracked codebase is a Linear **Project** in that team — the
-current list is whatever `list_projects` returns, not a fixed set, since new projects
-get added over time via `add-project`.
+Tracking spans two Linear teams (free tier caps a workspace at 2): **Code** for coding
+projects, **Other** for personal/non-code projects. Each tracked project is a Linear
+**Project** under whichever team fits — the current list is whatever `list_projects`
+returns (across both teams), not a fixed set, since new projects get added over time via
+`add-project`.
 
-- Project = codebase (one per project returned by `list_projects`).
+- Project = one per project returned by `list_projects`, under either team.
 - Milestone = epic.
 - Issue = task (see the `add-issue` skill).
 
 ## Steps
 
-1. Call `list_projects` (team: "Prasanna Joshi") to get the current project names.
+1. Call `list_projects` (no `team` filter, so results include both teams) to get the
+   current project names — each result's `teams` field gives its team.
 2. Identify the project name.
    - If the user names a project explicitly in the request, use that.
    - Otherwise, infer it from the current git repo: run
@@ -38,8 +40,8 @@ get added over time via `add-project`.
 4. Create the milestone (`save_milestone`, `project: <name>`, `name: <milestone name>`,
    and `description` if the user gave one).
 5. If the user gave initial tasks, create each as an issue (`save_issue`,
-   `team: "Prasanna Joshi"`, `project: <name>`, `milestone: <milestone name>`,
-   `title: <task>`).
+   `team: <the project's team from step 1's `teams` field>`, `project: <name>`,
+   `milestone: <milestone name>`, `title: <task>`).
 6. Confirm what was created, including the Linear URL/identifier the tool call returns.
 
 ## Notes
