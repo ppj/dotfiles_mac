@@ -41,10 +41,13 @@ returns (across both teams), not a fixed set, since new projects get added over 
    and `description` if the user gave one).
 5. If the user gave initial tasks, create each as an issue (`save_issue`,
    `team: <the project's team from step 1's `teams` field>`, `project: <name>`,
-   `milestone: <milestone name>`, `title: <task>`).
+   `milestone: <milestone name>`, `title: <task>`, `assignee: "me"` — assigns it to
+   the logged-in user running this skill).
 6. Confirm what was created, including the Linear URL/identifier the tool call returns.
 
 ## Notes
 
 - Never create a new Linear project from this skill — only add milestones to existing
   ones returned by `list_projects`.
+- Milestones themselves have no assignee/owner field in Linear — only the issues
+  created under one (step 5) can be assigned.

@@ -41,7 +41,8 @@ returns (across both teams), not a fixed set, since new projects get added over 
    - If more than one could match, ask the user to disambiguate.
 4. Create the issue (`save_issue`, `team: <the project's team from step 1's `teams`
    field>`, `project: <name>`, `milestone: <matched milestone name>`,
-   `title: <task text>`).
+   `title: <task text>`, `assignee: "me"` — assigns it to the logged-in user running
+   this skill).
 5. Confirm what was created, including the issue identifier/URL the tool call returns.
 
 ## Notes

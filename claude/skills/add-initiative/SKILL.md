@@ -47,9 +47,9 @@ milestones it concerns in the initiative's description — don't silently drop t
      one, since initiatives are for cross-project work.
 3. Check `list_initiatives` for a name collision (case-insensitive). If one already
    exists, tell the user and stop rather than creating a duplicate.
-4. Create the initiative (`save_initiative`, `name: <name>`, and `description` covering
+4. Create the initiative (`save_initiative`, `name: <name>`, `description` covering
    the goal — include any specific milestones named in the request, per the constraint
-   above).
+   above — and `owner: "me"` to assign it to the logged-in user running this skill).
 5. For each spanned project, attach the initiative via `save_project`,
    `addInitiatives: [<initiative name>]`. `save_project`'s `id` field only accepts an
    actual project ID (UUID), not the project name — use the ID from the `list_projects`
