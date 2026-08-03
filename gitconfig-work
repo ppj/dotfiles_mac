@@ -1,0 +1,7 @@
+; Work identity, included from gitconfig for repositories under ~/code/.
+;
+; Uses the GitHub noreply address because that is what merged commits on the
+; cultureamp default branches already record (GitHub rewrites the author on
+; squash-merge), so local commits and merged history agree.
+[user]
+  email = ppj@users.noreply.github.com

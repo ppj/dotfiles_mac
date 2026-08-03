@@ -44,7 +44,7 @@ $HOME/dotfiles_mac/scripts/vim_setup.sh
 
 ### Important: Symlink Behavior
 The `symlinks.sh` script **overwrites existing symlinks and files** without confirmation. It creates symlinks for:
-- Root config files: `gitconfig`, `vimrc`, `zshrc`, `tmux.conf`, `starship.toml` → `~/.*`
+- Root config files: `gitconfig`, `gitconfig-work`, `vimrc`, `zshrc`, `tmux.conf`, `starship.toml` → `~/.*`
 - Deep directory structures: `nvim/` and `ghostty/` → `~/.config/`
 - Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/commands/` → `~/.claude/commands/`, `claude/skills/` → `~/.claude/skills`
 - OpenCode: `opencode/opencode.jsonc` → `~/.config/opencode/`, commands shared via symlink to `~/.claude/commands`
@@ -115,6 +115,22 @@ The `symlinks.sh` script **overwrites existing symlinks and files** without conf
 - **Rerere**: Enabled for reuse of conflict resolutions
 - **Help**: Autocorrect with prompt
 - **Commit**: Verbose mode enabled
+
+#### Work vs Personal Identity
+`gitconfig` holds the personal identity in its `[user]` block as the default. Work identity lives in a separate `gitconfig-work` file, pulled in by `includeIf` conditions keyed on the repository's **remote org** rather than its path on disk — so the same dotfiles behave correctly on the work and personal machines even though both keep projects under `~/code/`:
+
+```gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:cultureamp/**"]
+  path = ~/.gitconfig-work
+```
+
+There is one entry per remote URL form (SSH and HTTPS). These blocks must stay **last** in the file, since git applies config in read order and they need to follow `[user]`.
+
+Two consequences to be aware of:
+- A repository with no remote yet gets the personal identity, so commits made after `git init` but before `git remote add` are attributed personally.
+- `remote.*.url` matches *any* remote (git does not allow narrowing it to `remote.origin.url`), so a personal fork that adds a `cultureamp` upstream also picks up the work identity.
+
+`gitconfig-work` uses the GitHub noreply address, matching what GitHub records when it rewrites the author on squash-merge.
 
 ### Important Git Aliases (in zshrc)
 - `gls`: Combined status and branch list

@@ -54,3 +54,16 @@
   autoSquash = true
   autoStash = true
   updateRefs = true
+
+# Work identity is selected by the repository's remote org, not by its location
+# on disk, so these same dotfiles work on both machines even though each keeps
+# its projects under ~/code/. The [user] block above is the personal default;
+# only a cultureamp remote overrides it. One entry per remote URL form.
+#
+# Keep last: git applies config in read order, so this must follow [user].
+# Note that `remote.*.url` matches any remote, so a personal fork with a
+# cultureamp upstream also picks up the work identity.
+[includeIf "hasconfig:remote.*.url:git@github.com:cultureamp/**"]
+  path = ~/.gitconfig-work
+[includeIf "hasconfig:remote.*.url:https://github.com/cultureamp/**"]
+  path = ~/.gitconfig-work
