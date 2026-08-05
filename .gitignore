@@ -7,12 +7,17 @@ claude/skills/ca-fix-ci/
 claude/skills/jira-task-workflow/
 
 # Third-party skills installed to ~/.agents/skills and symlinked in — not tracked here
+claude/skills/caveman
 claude/skills/code-review
+claude/skills/diagnose
 claude/skills/find-skills
 claude/skills/grill-me
 claude/skills/grill-with-docs
+claude/skills/handoff
 claude/skills/improve-codebase-architecture
 claude/skills/obsidian-vault
+claude/skills/setup-matt-pocock-skills
 claude/skills/tdd
+claude/skills/to-prd
 claude/skills/ubiquitous-language
-
+claude/skills/zoom-out
