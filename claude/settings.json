@@ -82,7 +82,13 @@
       "Edit(~/.npm/)",
       "Edit(~/.pnpm-store)",
       "Edit(~/Library/Preferences/pnpm)",
-      "Edit(~/.gradle/)"
+      "Edit(~/.gradle/)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:buildkite.com)",
+      "WebFetch(domain:docs.anthropic.com)"
     ],
     "deny": [
       "Bash(rm -rf *)"
