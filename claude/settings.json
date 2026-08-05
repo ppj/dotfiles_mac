@@ -70,7 +70,19 @@
       "Bash(make *)",
       "Bash(git status)",
       "Bash(git diff *)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "Edit(~/.local/state/mise/)",
+      "Edit(~/.local/share/direnv/)",
+      "Edit(~/.cache/)",
+      "Edit(~/Library/Caches/)",
+      "Edit(//Users/brew/Library/Caches/)",
+      "Edit(~/go/pkg)",
+      "Edit(~/Library/Caches/go-build)",
+      "Edit(~/Library/Caches/golangci-lint)",
+      "Edit(~/.npm/)",
+      "Edit(~/.pnpm-store)",
+      "Edit(~/Library/Preferences/pnpm)",
+      "Edit(~/.gradle/)"
     ],
     "deny": [
       "Bash(rm -rf *)"
