@@ -91,7 +91,15 @@
       "WebFetch(domain:docs.anthropic.com)"
     ],
     "deny": [
-      "Bash(rm -rf *)"
+      "Bash(rm -rf *)",
+      "Bash(aws *)",
+      "Bash(assume *)",
+      "Bash(assumego *)",
+      "Bash(granted *)",
+      "Bash(gh auth token)",
+      "Bash(gh auth token:*)",
+      "Bash(security find-generic-password:*)",
+      "Bash(security dump-keychain:*)"
     ]
   },
   "sandbox": {
