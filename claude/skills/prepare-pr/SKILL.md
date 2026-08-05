@@ -24,7 +24,7 @@ Run the `/cleanup` command. This analyzes the branch diff for unused code, redun
 
 After cleanup completes, present the findings to the user. If there are issues to fix, apply them after user approval. If cleanup finds nothing, report "No cleanup issues found" and move on.
 
-**Checkpoint:** Wait for the user to review and confirm before proceeding. Ask: "Cleanup done. Ready to move on to documentation updates?"
+**Checkpoint:** Only stop here if cleanup actually changed something. Wait for the user to review and confirm before proceeding, asking: "Cleanup done. Ready to move on to documentation updates?" If cleanup found nothing — or the user declined every suggested fix, leaving the working tree untouched — say so and continue straight to Step 2 without waiting.
 
 ## Step 2: Update Documentation
 
@@ -32,7 +32,7 @@ Run the `/updatedocs` command. This analyzes code changes and identifies which d
 
 After analysis completes, present the documentation changes needed. If there are updates to make, apply them after user approval. If no docs need updating, report "Documentation is already up to date" and move on.
 
-**Checkpoint:** Wait for the user to review and confirm before proceeding. Ask: "Documentation updates done. Ready to create the PR?"
+**Checkpoint:** Only stop here if documentation actually changed. Wait for the user to review and confirm before proceeding, asking: "Documentation updates done. Ready to create the PR?" If no docs needed updating — or the user declined every suggested update, leaving the working tree untouched — say so and continue straight to Step 3 without waiting.
 
 ## Step 3: PR Description
 
