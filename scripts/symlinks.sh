@@ -50,6 +50,8 @@ echo "  Creating ~/.claude directory if it doesn't exist"
 mkdir -p "$HOME/.claude"
 echo "  $source_dir_absolute/claude/settings.json to $HOME/.claude/settings.json"
 ln -sf "$source_dir_absolute/claude/settings.json" "$HOME/.claude/settings.json"
+echo "  $source_dir_absolute/claude/CLAUDE.md to $HOME/.claude/CLAUDE.md"
+ln -sf "$source_dir_absolute/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 # Symlink Claude commands directory
 echo "  Symlinking claude/commands to ~/.claude/commands"

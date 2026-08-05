@@ -46,7 +46,7 @@ $HOME/dotfiles_mac/scripts/vim_setup.sh
 The `symlinks.sh` script **overwrites existing symlinks and files** without confirmation. It creates symlinks for:
 - Root config files: `gitconfig`, `gitconfig-work`, `vimrc`, `zshrc`, `tmux.conf`, `starship.toml` → `~/.*`
 - Deep directory structures: `nvim/` and `ghostty/` → `~/.config/`
-- Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/commands/` → `~/.claude/commands/`, `claude/skills/` → `~/.claude/skills`
+- Claude Code: `claude/settings.json` → `~/.claude/settings.json`, `claude/CLAUDE.md` → `~/.claude/CLAUDE.md`, `claude/commands/` → `~/.claude/commands/`, `claude/skills/` → `~/.claude/skills`
 - OpenCode: `opencode/opencode.jsonc` → `~/.config/opencode/`, commands shared via symlink to `~/.claude/commands`
 
 ## Architecture & Configuration
@@ -143,6 +143,9 @@ Two consequences to be aware of:
 - **Settings**: `claude/settings.json` → `~/.claude/settings.json`
   - Git attribution disabled (`includeCoAuthoredBy: false`, `gitAttribution: false`)
   - Custom status line with git branch/status display
+- **User-level instructions**: `claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
+  - Machine-wide defaults (communication style, code conventions, git habits) applied
+    to every project; a project's own `CLAUDE.md` overrides them
 - **Custom Commands**: `claude/commands/*.md` → `~/.claude/commands/`
 - **Skills**: `claude/skills/` → `~/.claude/skills/`
   - `/prepare-pr`: Orchestrates branch wrap-up (cleanup, docs update, PR creation)
