@@ -1,27 +1,9 @@
 **/lazy-lock.json
 .DS_Store
 
-# Skills managed externally (hotel, other repos) — not tracked here
-claude/skills/hotel-skills-lock.json
-claude/skills/ca-fix-ci/
-claude/skills/jira-task-workflow/
-
-# Third-party skills installed to ~/.agents/skills and symlinked in — not tracked here
-claude/skills/caveman
-claude/skills/code-review
-claude/skills/diagnose
-claude/skills/find-skills
-claude/skills/grill-me
-claude/skills/grill-with-docs
-claude/skills/grilling
-claude/skills/handoff
-claude/skills/improve-codebase-architecture
-claude/skills/obsidian-vault
-claude/skills/setup-matt-pocock-skills
-claude/skills/tdd
-claude/skills/to-prd
-claude/skills/ubiquitous-language
-claude/skills/zoom-out
-
-# Anthropic's built-in skill bundle, auto-synced by Claude Code — not tracked here
-claude/skills/synced/
+# Only my own skills are tracked; anything installed by other tools is ignored
+claude/skills/*
+!claude/skills/add-initiative/
+!claude/skills/add-issue/
+!claude/skills/add-milestone/
+!claude/skills/prepare-pr/
