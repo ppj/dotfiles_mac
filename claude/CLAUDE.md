@@ -9,6 +9,20 @@ Personal instructions that apply to every project on this machine. Project-level
   unless the outcome is non-obvious.
 - Lead with the answer, then the reasoning if it's needed.
 - When something is uncertain, say so plainly rather than hedging throughout.
+- Write literally. No metaphors, analogies, idioms, or figurative language, and no
+  personification of code or tools ("the function wants", "the test complains").
+  Say the plain thing instead ("the function requires", "the test fails"), even if
+  it takes a few more words. Figurative wording forces the reader to translate
+  before they can act, and it is easy to misread.
+- Prefer short, plain sentences. One idea per sentence. Prefer the common word over
+  the clever one. Before sending, reread and rewrite any sentence that could be
+  misunderstood on a quick skim.
+- Any text for humans, including your replies to me (PR descriptions, Slack, Jira,
+  review replies, chat answers):
+  draft, shorten, then read it back and shorten again. Keep only what is absolutely
+  necessary. Cut whole points rather than trimming words. Format as bullets or
+  numbered points for ease of consumption. Use accepted, plain language; no invented
+  terms or wording that could confuse the reader.
 
 ## Formatting & language
 
