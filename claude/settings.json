@@ -16,7 +16,6 @@
     "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
-  "gitAttribution": false,
   "hooks": {
     "Notification": [
       {
@@ -70,7 +69,6 @@
       }
     ]
   },
-  "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
       "Read",

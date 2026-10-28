@@ -141,7 +141,6 @@ Two consequences to be aware of:
 
 #### Claude Code (claude/)
 - **Settings**: `claude/settings.json` → `~/.claude/settings.json`
-  - Git attribution disabled (`includeCoAuthoredBy: false`, `gitAttribution: false`)
   - Custom status line with git branch/status display
 - **User-level instructions**: `claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
   - Machine-wide defaults (communication style, code conventions, git habits) applied
