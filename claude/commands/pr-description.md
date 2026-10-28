@@ -332,6 +332,8 @@ EOF
 gh pr view --web
 ```
 
+**Title:** when a ticket key is known (Phase 1 references), end the title with ` [<KEY>]`, e.g. `feat: add usage metrics [TX-3456]`. Jira uses it to link the PR to the ticket. When updating an existing PR whose title lacks it, add it with `gh pr edit [NUM] --title`.
+
 **Error handling:**
 - No commits → "Make commits first"
 - On `main` → Ask which branch
